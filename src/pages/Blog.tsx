@@ -1,67 +1,22 @@
-
 import React from 'react';
 import { Button } from '@/components/ui/button';
 import { Search } from 'lucide-react';
 
 const Blog = () => {
-  // Sample blog posts data (in a real app, this would come from an API/database)
-  const blogPosts = [
-    {
-      id: 1,
-      title: 'Mental Health Awareness in African Communities',
-      excerpt: 'Breaking the stigma around mental health issues and providing resources for support...',
-      category: 'Mental Health',
-      date: 'May 15, 2023',
-      imageUrl: 'https://images.unsplash.com/photo-1527980965255-d3b416303d12?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80'
-    },
-    {
-      id: 2,
-      title: 'Gender Equality: Progress and Challenges in Africa',
-      excerpt: 'Examining the current state of gender equality across African nations and the work that remains...',
-      category: 'Social Equality',
-      date: 'April 23, 2023',
-      imageUrl: 'https://images.unsplash.com/photo-1573497620053-ea5300f94f21?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80'
-    },
-    {
-      id: 3,
-      title: 'Climate Change Effects on Rural African Communities',
-      excerpt: 'How climate change is disproportionately affecting rural communities across Africa...',
-      category: 'Climate Action',
-      date: 'March 10, 2023',
-      imageUrl: 'https://images.unsplash.com/photo-1618677366787-9360352d5118?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80'
-    },
-    {
-      id: 4,
-      title: 'Success Stories: Women Entrepreneurs in Africa',
-      excerpt: 'Highlighting inspiring stories of women entrepreneurs changing their communities...',
-      category: 'Inspirational',
-      date: 'February 28, 2023',
-      imageUrl: 'https://images.unsplash.com/photo-1544654803-b69140b285a1?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80'
-    },
-    {
-      id: 5,
-      title: 'Reforestation Initiatives Making a Difference',
-      excerpt: 'How community-led reforestation projects are combating climate change effects...',
-      category: 'Environmental Justice',
-      date: 'January 15, 2023',
-      imageUrl: 'https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80'
-    },
-    {
-      id: 6,
-      title: 'Youth Activism and Mental Health',
-      excerpt: 'The intersection of youth activism and mental health concerns in modern Africa...',
-      category: 'Mental Health',
-      date: 'December 7, 2022',
-      imageUrl: 'https://images.unsplash.com/photo-1529390079861-591de354faf5?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80'
-    },
-  ];
+  // Sample blog post data (in a real app, this would come from an API/database)
+  const blogPost = {
+    id: 1,
+    title: 'Mental Health Awareness in African Communities',
+    excerpt: 'Breaking the stigma around mental health issues and providing resources for support...',
+    category: 'Mental Health',
+    date: 'May 15, 2023',
+  };
 
   const categories = [
     'All Categories',
     'Mental Health',
     'Social Equality',
     'Climate Action',
-    'Environmental Justice',
     'Inspirational'
   ];
 
@@ -112,28 +67,27 @@ const Blog = () => {
       {/* Blog Posts */}
       <section className="section-container">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {blogPosts.map((post) => (
-            <article key={post.id} className="bg-white rounded-lg overflow-hidden shadow-md border hover:shadow-lg transition-shadow">
-              <img
-                src={post.imageUrl}
-                alt={post.title}
-                className="w-full h-48 object-cover"
-              />
-              <div className="p-6">
-                <div className="flex justify-between items-center mb-3">
-                  <span className="px-3 py-1 bg-african-beige/60 text-african-brown rounded-full text-sm">
-                    {post.category}
-                  </span>
-                  <span className="text-sm text-gray-500">{post.date}</span>
-                </div>
-                <h3 className="text-xl font-bold mb-2 text-african-dark">{post.title}</h3>
-                <p className="text-gray-600 mb-4">{post.excerpt}</p>
-                <Button variant="link" className="p-0 text-african-blue hover:text-african-blue/90">
-                  Read More
-                </Button>
+          {/* Example Blog Post - Keep only this one as reference */}
+          <article className="bg-white rounded-lg overflow-hidden shadow-md border hover:shadow-lg transition-shadow">
+            <div className="h-48 bg-emerald-100 flex items-center justify-center">
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-16 w-16 text-emerald-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+            </div>
+            <div className="p-6">
+              <div className="flex justify-between items-center mb-3">
+                <span className="px-3 py-1 bg-african-beige/60 text-african-brown rounded-full text-sm">
+                  {blogPost.category}
+                </span>
+                <span className="text-sm text-gray-500">{blogPost.date}</span>
               </div>
-            </article>
-          ))}
+              <h3 className="text-xl font-bold mb-2 text-african-dark">{blogPost.title}</h3>
+              <p className="text-gray-600 mb-4">{blogPost.excerpt}</p>
+              <Button variant="link" className="p-0 text-african-blue hover:text-african-blue/90">
+                Read More
+              </Button>
+            </div>
+          </article>
         </div>
 
         {/* Pagination */}
@@ -143,8 +97,6 @@ const Blog = () => {
             <Button variant="outline" className="border-l-0 border-r-0 bg-african-orange text-white hover:bg-african-orange/90">
               1
             </Button>
-            <Button variant="outline" className="border-r-0">2</Button>
-            <Button variant="outline" className="border-r-0">3</Button>
             <Button variant="outline" className="rounded-r-md">Next</Button>
           </nav>
         </div>

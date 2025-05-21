@@ -60,12 +60,6 @@ const About = () => {
                   connect with Africa's youth, who make up over 60% of the continent's population.
                 </p>
               </div>
-              
-              <div className="mt-8">
-                <Button asChild className="bg-secondary hover:bg-secondary/90 text-white">
-                  <Link to="/contact">Connect with Munya</Link>
-                </Button>
-              </div>
             </div>
             
             <div className="order-1 md:order-2 fade-in-element">
@@ -83,18 +77,13 @@ const About = () => {
       {/* Mission & Vision */}
       <section className="bg-gradient-to-br from-green-50 to-emerald-100 py-20">
         <div className="container mx-auto px-4">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 max-w-6xl mx-auto">
-            <div className="bg-white p-8 rounded-lg shadow-lg transition-transform duration-300 hover:shadow-xl hover:scale-[1.02] fade-in-element">
+          <div className="max-w-3xl mx-auto">
+            <div className="bg-white p-8 rounded-lg shadow-lg transition-transform duration-300 hover:shadow-xl hover:scale-[1.02] fade-in-element mb-8">
               <h3 className="text-2xl font-bold mb-6 text-primary">Our Mission</h3>
               <div className="w-16 h-1 bg-secondary mb-6"></div>
               <p className="text-lg">
                 "To empower African communities through education and advocacy, promoting mental health, social equity, and environmental justice."
               </p>
-              <img 
-                src="https://images.unsplash.com/photo-1593113598332-cd288d649433?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" 
-                alt="Our Mission" 
-                className="w-full h-auto rounded-lg mt-6"
-              />
             </div>
             
             <div className="bg-white p-8 rounded-lg shadow-lg transition-transform duration-300 hover:shadow-xl hover:scale-[1.02] fade-in-element">
@@ -103,11 +92,6 @@ const About = () => {
               <p className="text-lg">
                 "A future where all Africans are informed, supported, and empowered to thrive in a just and sustainable world."
               </p>
-              <img 
-                src="https://images.unsplash.com/photo-1516939884455-1445c8652f83?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" 
-                alt="Our Vision" 
-                className="w-full h-auto rounded-lg mt-6"
-              />
             </div>
           </div>
         </div>
@@ -125,6 +109,14 @@ const About = () => {
         
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
           <div className="bg-white p-6 rounded-lg shadow-md border-t-4 border-pink-500 transition-transform duration-300 hover:shadow-lg hover:translate-y-[-4px] staggered-item">
+            <div className="flex justify-center mb-4">
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-12 w-12 text-pink-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path>
+                <circle cx="9" cy="7" r="4"></circle>
+                <path d="M22 21v-2a4 4 0 0 0-3-3.87"></path>
+                <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+              </svg>
+            </div>
             <h3 className="text-xl font-bold mb-3">Goal 5: Gender Equality</h3>
             <p>
               Promoting gender equality and women's empowerment in African communities.
@@ -132,6 +124,12 @@ const About = () => {
           </div>
           
           <div className="bg-white p-6 rounded-lg shadow-md border-t-4 border-purple-500 transition-transform duration-300 hover:shadow-lg hover:translate-y-[-4px] staggered-item">
+            <div className="flex justify-center mb-4">
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-12 w-12 text-purple-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <line x1="18" y1="6" x2="6" y2="18"></line>
+                <line x1="6" y1="6" x2="18" y2="18"></line>
+              </svg>
+            </div>
             <h3 className="text-xl font-bold mb-3">Goal 10: Reduced Inequalities</h3>
             <p>
               Addressing social inequalities to create a more equitable society.
@@ -139,6 +137,12 @@ const About = () => {
           </div>
           
           <div className="bg-white p-6 rounded-lg shadow-md border-t-4 border-green-500 transition-transform duration-300 hover:shadow-lg hover:translate-y-[-4px] staggered-item">
+            <div className="flex justify-center mb-4">
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-12 w-12 text-green-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M23 6l-9.5 9.5-5-5L1 18"></path>
+                <path d="M17 6h6v6"></path>
+              </svg>
+            </div>
             <h3 className="text-xl font-bold mb-3">Goal 13: Climate Action</h3>
             <p>
               Advocating for urgent action to combat climate change and its impacts.
@@ -146,6 +150,16 @@ const About = () => {
           </div>
           
           <div className="bg-white p-6 rounded-lg shadow-md border-t-4 border-yellow-600 transition-transform duration-300 hover:shadow-lg hover:translate-y-[-4px] staggered-item">
+            <div className="flex justify-center mb-4">
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-12 w-12 text-yellow-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M8 16s1.5 2 4 2 4-2 4-2"></path>
+                <path d="M12 12a3 3 0 0 0 0 6"></path>
+                <path d="M8 9h8"></path>
+                <path d="M8 6h8"></path>
+                <path d="M9 3h6"></path>
+                <path d="M10 20s3 2 6 0"></path>
+              </svg>
+            </div>
             <h3 className="text-xl font-bold mb-3">Goal 15: Life on Land</h3>
             <p>
               Supporting efforts to protect and restore healthy ecosystems and mitigate climate change.

@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Facebook, Twitter, Instagram, Linkedin, Mail } from 'lucide-react';
+import { Facebook, Instagram, Linkedin, Mail, Phone } from 'lucide-react';
 
 const Footer = () => {
   return (
@@ -31,8 +31,17 @@ const Footer = () => {
           {/* Contact */}
           <div className="md:col-span-1">
             <h3 className="text-lg font-bold mb-4 text-white">Contact</h3>
-            <p className="text-gray-300 mb-2">Email: dear@africanchild.com</p>
-            <Link to="/contact" className="text-african-orange hover:underline transition-colors">
+            <div className="space-y-2">
+              <p className="text-gray-300 flex items-center">
+                <Mail className="mr-2 h-4 w-4" />
+                dear@africanchild.com
+              </p>
+              <p className="text-gray-300 flex items-center">
+                <Phone className="mr-2 h-4 w-4" />
+                +27 84 961 7485
+              </p>
+            </div>
+            <Link to="/contact" className="text-african-orange hover:underline transition-colors mt-2 block">
               Send us a message
             </Link>
           </div>
@@ -41,17 +50,11 @@ const Footer = () => {
           <div className="md:col-span-1">
             <h3 className="text-lg font-bold mb-4 text-white">Follow Us</h3>
             <div className="flex space-x-4">
-              <a href="#" className="text-white hover:text-african-orange" aria-label="Facebook">
+              <a href="https://www.facebook.com/theafricanloveaffair?mibextid=ZbWKwL" target="_blank" rel="noopener noreferrer" className="text-white hover:text-african-orange" aria-label="Facebook">
                 <Facebook size={24} />
               </a>
-              <a href="#" className="text-white hover:text-african-orange" aria-label="Twitter">
-                <Twitter size={24} />
-              </a>
-              <a href="#" className="text-white hover:text-african-orange" aria-label="Instagram">
+              <a href="https://www.instagram.com/dear_africanchild?igsh=dWJuNWo1bnhtdDZ0" target="_blank" rel="noopener noreferrer" className="text-white hover:text-african-orange" aria-label="Instagram">
                 <Instagram size={24} />
-              </a>
-              <a href="#" className="text-white hover:text-african-orange" aria-label="LinkedIn">
-                <Linkedin size={24} />
               </a>
               <a href="mailto:dear@africanchild.com" className="text-white hover:text-african-orange" aria-label="Email">
                 <Mail size={24} />
@@ -66,8 +69,7 @@ const Footer = () => {
         <div className="mt-12 pt-6 border-t border-gray-700 text-center text-sm text-gray-400">
           <p>© {new Date().getFullYear()} Dear African Child. All rights reserved.</p>
           <p className="mt-2">
-            Committed to UN Sustainable Development Goals: 
-            Gender Equality, Reduced Inequalities, Climate Action, and Life on Land.
+            Website by Elton Matanda
           </p>
         </div>
       </div>
