@@ -14,24 +14,24 @@
     --popover: 0 0% 100%;
     --popover-foreground: 0 0% 20%;
 
-    --primary: 25 70% 45%;
+    --primary: 120 40% 30%;
     --primary-foreground: 45 40% 98%;
 
-    --secondary: 120 39% 34%;
+    --secondary: 140 30% 50%;
     --secondary-foreground: 45 40% 98%;
 
     --muted: 45 30% 94%;
     --muted-foreground: 0 0% 45%;
 
-    --accent: 205 46% 50%;
+    --accent: 140 40% 40%;
     --accent-foreground: 45 40% 98%;
 
     --destructive: 0 84% 60%;
     --destructive-foreground: 45 40% 98%;
 
-    --border: 45 20% 85%;
-    --input: 45 20% 85%;
-    --ring: 25 70% 45%;
+    --border: 120 20% 85%;
+    --input: 120 20% 85%;
+    --ring: 120 40% 40%;
 
     --radius: 0.5rem;
 
@@ -55,16 +55,16 @@
     --popover: 0 0% 18%;
     --popover-foreground: 45 40% 98%;
 
-    --primary: 25 70% 45%;
+    --primary: 120 40% 30%;
     --primary-foreground: 45 40% 98%;
 
-    --secondary: 120 39% 34%;
+    --secondary: 140 30% 50%;
     --secondary-foreground: 45 40% 98%;
 
     --muted: 0 0% 25%;
     --muted-foreground: 0 0% 70%;
 
-    --accent: 205 46% 50%;
+    --accent: 140 40% 40%;
     --accent-foreground: 45 40% 98%;
 
     --destructive: 0 62.8% 30.6%;
@@ -72,7 +72,7 @@
 
     --border: 0 0% 25%;
     --input: 0 0% 25%;
-    --ring: 25 70% 45%;
+    --ring: 120 40% 40%;
 
     --sidebar-background: 240 5.9% 10%;
     --sidebar-foreground: 240 4.8% 95.9%;
@@ -117,7 +117,7 @@
   }
   
   .hero-overlay {
-    @apply absolute inset-0 bg-african-dark/50;
+    @apply absolute inset-0 bg-black/60;
   }
   
   .section-container {
@@ -127,4 +127,60 @@
   .card-hover {
     @apply transition-transform duration-300 hover:scale-105;
   }
+
+  .eco-card {
+    @apply bg-gradient-to-br from-emerald-50 to-green-100 p-8 rounded-lg shadow-md transition-all duration-300 hover:shadow-lg;
+  }
+
+  .eco-divider {
+    @apply w-20 h-1 bg-secondary mx-auto my-8;
+  }
+
+  .fade-in-element {
+    @apply opacity-0 translate-y-4 transition-all duration-700 ease-out;
+  }
+
+  .fade-in-element.visible {
+    @apply opacity-100 translate-y-0;
+  }
 }
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    transform: scale(0.95);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.8s ease-out forwards;
+}
+
+.animate-scale-in {
+  animation: scaleIn 0.6s ease-out forwards;
+}
+
+.staggered-item {
+  opacity: 0;
+}
+
+.staggered-item:nth-child(1) { animation: fadeIn 0.6s ease-out 0.1s forwards; }
+.staggered-item:nth-child(2) { animation: fadeIn 0.6s ease-out 0.2s forwards; }
+.staggered-item:nth-child(3) { animation: fadeIn 0.6s ease-out 0.3s forwards; }
+.staggered-item:nth-child(4) { animation: fadeIn 0.6s ease-out 0.4s forwards; }
+.staggered-item:nth-child(5) { animation: fadeIn 0.6s ease-out 0.5s forwards; }

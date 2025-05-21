@@ -1,15 +1,37 @@
 
-import React, { useState } from 'react';
-import { NavLink } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { NavLink, useLocation } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Menu, X } from 'lucide-react';
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
+  const location = useLocation();
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 50) {
+        setIsScrolled(true);
+      } else {
+        setIsScrolled(false);
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+
+  // Close mobile menu on route change
+  useEffect(() => {
+    setIsMenuOpen(false);
+  }, [location.pathname]);
 
   const navLinks = [
     { name: 'Home', path: '/' },
@@ -21,11 +43,17 @@ const Navbar = () => {
   ];
 
   return (
-    <header className="sticky top-0 w-full bg-white bg-opacity-90 backdrop-blur-sm z-50 shadow-sm">
+    <header 
+      className={`sticky top-0 w-full z-50 transition-all duration-300 ${
+        isScrolled 
+          ? 'bg-white/90 backdrop-blur-sm shadow-md' 
+          : 'bg-transparent'
+      }`}
+    >
       <div className="container mx-auto px-4 py-4">
         <div className="flex justify-between items-center">
           <NavLink to="/" className="flex items-center">
-            <span className="font-bold text-2xl text-african-brown">Dear African Child</span>
+            <span className="font-bold text-2xl text-primary transition-colors duration-300">Dear African Child</span>
           </NavLink>
 
           {/* Mobile menu button */}
@@ -42,15 +70,15 @@ const Navbar = () => {
                 key={link.name}
                 to={link.path}
                 className={({ isActive }) =>
-                  `font-medium transition-colors hover:text-african-orange ${
-                    isActive ? 'text-african-orange' : 'text-african-dark'
+                  `font-medium transition-colors hover:text-secondary ${
+                    isActive ? 'text-secondary' : 'text-primary'
                   }`
                 }
               >
                 {link.name}
               </NavLink>
             ))}
-            <Button className="bg-african-green hover:bg-african-green/90 text-white">
+            <Button className="bg-secondary hover:bg-secondary/90 text-white transition-transform duration-300 hover:scale-105">
               Subscribe
             </Button>
           </nav>
@@ -65,8 +93,8 @@ const Navbar = () => {
                   <NavLink
                     to={link.path}
                     className={({ isActive }) =>
-                      `block font-medium py-2 transition-colors hover:text-african-orange ${
-                        isActive ? 'text-african-orange' : 'text-african-dark'
+                      `block font-medium py-2 transition-colors hover:text-secondary ${
+                        isActive ? 'text-secondary' : 'text-primary'
                       }`
                     }
                     onClick={toggleMenu}
@@ -76,7 +104,7 @@ const Navbar = () => {
                 </li>
               ))}
               <li>
-                <Button className="w-full bg-african-green hover:bg-african-green/90 text-white">
+                <Button className="w-full bg-secondary hover:bg-secondary/90 text-white">
                   Subscribe
                 </Button>
               </li>
