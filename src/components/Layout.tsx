@@ -25,7 +25,7 @@ const Layout = () => {
     });
 
     // Add observer for staggered elements
-    document.querySelectorAll('.staggered-item').forEach((element, index) => {
+    document.querySelectorAll('.staggered-item').forEach((element) => {
       observer.observe(element);
     });
 

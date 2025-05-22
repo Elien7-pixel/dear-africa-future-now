@@ -2,7 +2,7 @@
 import React from 'react';
 import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
-import { BookUser, Leaf, Earth, Users } from 'lucide-react';
+import { HandHeart, Globe, Users, MessageSquare } from 'lucide-react';
 
 const Services = () => {
   return (
@@ -36,7 +36,7 @@ const Services = () => {
             <div className="md:flex">
               <div className="md:w-1/3 flex items-center justify-center p-12 bg-emerald-50">
                 <div className="w-32 h-32 rounded-full bg-emerald-100 flex items-center justify-center">
-                  <BookUser size={64} className="text-african-green" />
+                  <HandHeart size={64} className="text-african-green" />
                 </div>
               </div>
               <div className="md:w-2/3 p-8">
@@ -62,7 +62,7 @@ const Services = () => {
             <div className="md:flex flex-row-reverse">
               <div className="md:w-1/3 flex items-center justify-center p-12 bg-blue-50">
                 <div className="w-32 h-32 rounded-full bg-blue-100 flex items-center justify-center">
-                  <Earth size={64} className="text-african-blue" />
+                  <Globe size={64} className="text-african-blue" />
                 </div>
               </div>
               <div className="md:w-2/3 p-8">
@@ -114,7 +114,7 @@ const Services = () => {
             <div className="md:flex flex-row-reverse">
               <div className="md:w-1/3 flex items-center justify-center p-12 bg-amber-50">
                 <div className="w-32 h-32 rounded-full bg-amber-100 flex items-center justify-center">
-                  <Leaf size={64} className="text-african-brown" />
+                  <MessageSquare size={64} className="text-african-brown" />
                 </div>
               </div>
               <div className="md:w-2/3 p-8">

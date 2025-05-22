@@ -28,7 +28,7 @@ const About = () => {
               <div className="prose max-w-none">
                 <h3 className="text-2xl font-semibold mb-2 text-accent">Munya Touch</h3>
                 <p className="mb-4 text-lg">
-                  Born Munyaradzi Jeranyama, Munya is a 33-year-old African ShowBiz entrepreneur, 
+                  Born Munyaradzi Jeranyama. Munya is a 33-year-old African ShowBiz entrepreneur, 
                   social worker in training, journalist, and climate change social media advocate.
                 </p>
                 
@@ -51,13 +51,30 @@ const About = () => {
                 
                 <p className="mb-4">
                   Munya has hosted festivals, including the famous Joburg Shutdown, which aimed to combat xenophobia 
-                  in South Africa by bringing together artists from Zimbabwe and South Africa.
+                  in South Africa by bringing together artists from Zimbabwe and South Africa. Studies indicate that 
+                  Zimbabweans constitute one of the largest groups of immigrants in South Africa, largely due to the 
+                  geographical proximity. The festival also aimed to uplift upcoming African artists based in South Africa 
+                  by giving them a chance to share the stage with their idols. This festival featured artists like 
+                  Busiswa (South Africa), Winky D (Zimbabwe), DJ Tira (South Africa), Nox (Zimbabwe), ShaSha (SA/Zimbabwe), 
+                  and Buffalo Souljah (Zimbabwe).
+                </p>
+                
+                <p className="mb-4">
+                  Munya also collaborated with the City of Joburg's first Muslim Mayor, Thapelo Amad, to find ways to combat 
+                  climate change in Johannesburg, including reducing plastic pollution and making the city greener.
                 </p>
                 
                 <p>
-                  With a deep concern about increasing waste pollution, deforestation, and climate change-related issues 
-                  in low-income areas of Africa, Munya started "Dear African Child" to address these pressing issues and 
-                  connect with Africa's youth, who make up over 60% of the continent's population.
+                  Munya is concerned about increasing waste pollution, deforestation, and the rise of climate change-related 
+                  toxic gases in low-income areas of Africa. These issues have led to a surge in respiratory diseases like 
+                  tuberculosis and asthma, as well as high rates of social and gender inequalities in African communities. 
+                  These factors inspired him to start "Dear African Child," a blog aimed at addressing these pressing issues 
+                  and connecting with Africa's youth, who make up over 60% of the continent's population.
+                </p>
+                
+                <p className="mt-4">
+                  With the right partnerships and funding, he intends to collaborate with NGOs across Africa to initiate 
+                  programs that combat climate change and promote social and gender equality.
                 </p>
               </div>
             </div>
