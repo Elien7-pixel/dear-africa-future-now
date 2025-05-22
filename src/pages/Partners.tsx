@@ -40,13 +40,6 @@ const Partners = () => {
                   Our blog collaborates with VCIA on climate change activities, such as promoting waste segregation in public spaces 
                   like parks and schools by installing color-coded bins to reduce pollution.
                 </p>
-                <h3 className="text-xl font-semibold mb-3 text-african-brown">Joint Initiatives:</h3>
-                <ul className="list-disc pl-5 mb-6 space-y-2">
-                  <li>Community waste management programs</li>
-                  <li>Educational workshops on environmental sustainability</li>
-                  <li>Gender-based violence awareness campaigns</li>
-                  <li>Youth empowerment programs focused on climate action</li>
-                </ul>
               </div>
             </div>
           </div>

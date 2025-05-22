@@ -1,6 +1,8 @@
 
 import React from 'react';
 import { Button } from '@/components/ui/button';
+import { Link } from 'react-router-dom';
+import { BookUser, Leaf, Earth, Users } from 'lucide-react';
 
 const Services = () => {
   return (
@@ -32,12 +34,10 @@ const Services = () => {
           {/* Therapy Service */}
           <div className="bg-white rounded-lg shadow-lg overflow-hidden mb-16">
             <div className="md:flex">
-              <div className="md:w-1/3">
-                <img 
-                  src="https://images.unsplash.com/photo-1527613426441-4da17471b66d?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" 
-                  alt="Therapy Session" 
-                  className="w-full h-full object-cover"
-                />
+              <div className="md:w-1/3 flex items-center justify-center p-12 bg-emerald-50">
+                <div className="w-32 h-32 rounded-full bg-emerald-100 flex items-center justify-center">
+                  <BookUser size={64} className="text-african-green" />
+                </div>
               </div>
               <div className="md:w-2/3 p-8">
                 <h2 className="text-3xl font-bold mb-4 text-african-dark">Hello! I Need Therapy</h2>
@@ -53,12 +53,6 @@ const Services = () => {
                   <li>Group therapy sessions focusing on community healing</li>
                   <li>Virtual therapy options for those in remote areas</li>
                 </ul>
-                <div className="flex flex-wrap gap-4">
-                  <Button disabled className="bg-african-green/60 cursor-not-allowed">
-                    Coming Soon
-                  </Button>
-                  <Button variant="outline">Join Waitlist</Button>
-                </div>
               </div>
             </div>
           </div>
@@ -66,12 +60,10 @@ const Services = () => {
           {/* Documentary Service */}
           <div className="bg-white rounded-lg shadow-lg overflow-hidden mb-16">
             <div className="md:flex flex-row-reverse">
-              <div className="md:w-1/3">
-                <img 
-                  src="https://images.unsplash.com/photo-1601506521937-0121a7fc2a6b?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" 
-                  alt="Documentary Film Production" 
-                  className="w-full h-full object-cover"
-                />
+              <div className="md:w-1/3 flex items-center justify-center p-12 bg-blue-50">
+                <div className="w-32 h-32 rounded-full bg-blue-100 flex items-center justify-center">
+                  <Earth size={64} className="text-african-blue" />
+                </div>
               </div>
               <div className="md:w-2/3 p-8">
                 <h2 className="text-3xl font-bold mb-4 text-african-dark">Documentary Series</h2>
@@ -87,25 +79,17 @@ const Services = () => {
                   <li>Youth activism and involvement in climate action</li>
                   <li>The connection between environmental justice and social equality</li>
                 </ul>
-                <div className="flex flex-wrap gap-4">
-                  <Button disabled className="bg-african-blue/60 cursor-not-allowed">
-                    In Production
-                  </Button>
-                  <Button variant="outline">Support This Project</Button>
-                </div>
               </div>
             </div>
           </div>
 
           {/* Climate Refugee Support */}
-          <div className="bg-white rounded-lg shadow-lg overflow-hidden">
+          <div className="bg-white rounded-lg shadow-lg overflow-hidden mb-16">
             <div className="md:flex">
-              <div className="md:w-1/3">
-                <img 
-                  src="https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" 
-                  alt="Community Support" 
-                  className="w-full h-full object-cover"
-                />
+              <div className="md:w-1/3 flex items-center justify-center p-12 bg-green-50">
+                <div className="w-32 h-32 rounded-full bg-green-100 flex items-center justify-center">
+                  <Users size={64} className="text-african-green" />
+                </div>
               </div>
               <div className="md:w-2/3 p-8">
                 <h2 className="text-3xl font-bold mb-4 text-african-dark">Climate Refugee Support</h2>
@@ -121,12 +105,32 @@ const Services = () => {
                   <li>Community building among displaced populations</li>
                   <li>Advocacy for policy changes to better protect climate refugees</li>
                 </ul>
-                <div className="flex flex-wrap gap-4">
-                  <Button disabled className="bg-african-brown/60 cursor-not-allowed">
-                    In Development
-                  </Button>
-                  <Button variant="outline">Partner With Us</Button>
+              </div>
+            </div>
+          </div>
+
+          {/* Environmental Justice */}
+          <div className="bg-white rounded-lg shadow-lg overflow-hidden">
+            <div className="md:flex flex-row-reverse">
+              <div className="md:w-1/3 flex items-center justify-center p-12 bg-amber-50">
+                <div className="w-32 h-32 rounded-full bg-amber-100 flex items-center justify-center">
+                  <Leaf size={64} className="text-african-brown" />
                 </div>
+              </div>
+              <div className="md:w-2/3 p-8">
+                <h2 className="text-3xl font-bold mb-4 text-african-dark">Environmental Justice</h2>
+                <div className="w-16 h-1 bg-african-brown mb-6"></div>
+                <p className="mb-4 text-lg">
+                  We are developing initiatives focused on environmental justice in African communities, addressing the disproportionate 
+                  impacts of pollution and climate change on vulnerable populations.
+                </p>
+                <h3 className="text-xl font-semibold mb-2 text-african-brown">Key Initiatives:</h3>
+                <ul className="list-disc pl-5 mb-6 space-y-2">
+                  <li>Advocacy for equitable environmental policies</li>
+                  <li>Community-based waste management programs</li>
+                  <li>Educational campaigns on environmental rights</li>
+                  <li>Support for green initiatives in underserved communities</li>
+                </ul>
               </div>
             </div>
           </div>
@@ -140,16 +144,12 @@ const Services = () => {
           <p className="mb-8 max-w-2xl mx-auto text-lg">
             We welcome partnerships, volunteers, and support to help bring these services to life.
           </p>
-          <div className="flex flex-wrap justify-center gap-4">
-            <Button className="bg-african-green hover:bg-african-green/90">
-              Volunteer With Us
-            </Button>
-            <Button className="bg-african-blue hover:bg-african-blue/90">
-              Become a Partner
-            </Button>
-            <Button className="bg-african-orange hover:bg-african-orange/90">
-              Donate
-            </Button>
+          <div className="flex justify-center">
+            <Link to="/contact">
+              <Button className="bg-african-green hover:bg-african-green/90">
+                Become a Partner
+              </Button>
+            </Link>
           </div>
         </div>
       </section>
