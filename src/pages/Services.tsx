@@ -46,11 +46,6 @@ const Services = () => {
                   Our upcoming service aims to offer therapy sessions to Africans from low-income and marginalized communities 
                   who have been affected by climate change and other social challenges.
                 </p>
-                <h3 className="text-xl font-semibold mb-2 text-african-brown">Key Features:</h3>
-                <p className="mb-6">
-                  Free and low-cost therapy sessions with qualified professionals. Specialized support for climate refugees seeking safety.
-                  Group therapy sessions focusing on community healing. Virtual therapy options for those in remote areas.
-                </p>
               </div>
             </div>
           </div>
@@ -70,11 +65,6 @@ const Services = () => {
                   We're producing a series of documentaries that highlight the impacts of climate change in African countries, 
                   showcasing both the challenges faced by communities and the innovative solutions being developed.
                 </p>
-                <h3 className="text-xl font-semibold mb-2 text-african-brown">Focus Areas:</h3>
-                <p className="mb-6">
-                  Climate change effects on rural and urban communities. Community-led environmental initiatives.
-                  Youth activism and involvement in climate action. The connection between environmental justice and social equality.
-                </p>
               </div>
             </div>
           </div>
@@ -93,11 +83,6 @@ const Services = () => {
                 <p className="mb-4 text-lg">
                   In partnership with NGOs, we are developing a program to provide comprehensive support to climate refugees, 
                   including mental health services, resource connections, and advocacy efforts.
-                </p>
-                <h3 className="text-xl font-semibold mb-2 text-african-brown">Our Approach:</h3>
-                <p className="mb-6">
-                  Free therapy and mental health support for displaced individuals and families. Resource directories and connection to local services.
-                  Community building among displaced populations. Advocacy for policy changes to better protect climate refugees.
                 </p>
               </div>
             </div>

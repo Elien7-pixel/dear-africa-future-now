@@ -1,4 +1,3 @@
-
 import React, { useEffect, useRef } from 'react';
 import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
@@ -134,7 +133,7 @@ const Home = () => {
             <div className="p-6">
               <h3 className="text-xl font-bold mb-2 text-primary">Blog Post Title</h3>
               <p className="text-gray-600 mb-4">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent commodo cursus magna.
+                Missing Text
               </p>
               <Link 
                 to="/blog" 
@@ -154,7 +153,7 @@ const Home = () => {
             <div className="p-6">
               <h3 className="text-xl font-bold mb-2 text-primary">Blog Post Title</h3>
               <p className="text-gray-600 mb-4">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent commodo cursus magna.
+                Missing Text
               </p>
               <Link 
                 to="/blog" 
@@ -174,7 +173,7 @@ const Home = () => {
             <div className="p-6">
               <h3 className="text-xl font-bold mb-2 text-primary">Blog Post Title</h3>
               <p className="text-gray-600 mb-4">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent commodo cursus magna.
+                Missing Text
               </p>
               <Link 
                 to="/blog" 

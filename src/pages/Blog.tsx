@@ -8,7 +8,7 @@ const Blog = () => {
   const blogPost = {
     id: 1,
     title: 'Mental Health Awareness in African Communities',
-    excerpt: 'Missing text...',
+    excerpt: 'Missing Text',
     category: 'Mental Health',
     date: 'May 15, 2023',
   };
@@ -83,7 +83,7 @@ const Blog = () => {
                 <span className="text-sm text-gray-500">{blogPost.date}</span>
               </div>
               <h3 className="text-xl font-bold mb-2 text-african-dark">{blogPost.title}</h3>
-              <p className="text-gray-600 mb-4">{blogPost.excerpt}</p>
+              <p className="text-gray-600 mb-4">Missing Text</p>
               <Button variant="link" className="p-0 text-african-blue hover:text-african-blue/90">
                 Read More
               </Button>
