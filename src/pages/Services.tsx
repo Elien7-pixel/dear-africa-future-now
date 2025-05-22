@@ -2,7 +2,7 @@
 import React from 'react';
 import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
-import { HandHeart, Globe, Users, MessageSquare } from 'lucide-react';
+import { HandHeart, VideoCamera, Users } from 'lucide-react';
 
 const Services = () => {
   return (
@@ -47,12 +47,10 @@ const Services = () => {
                   who have been affected by climate change and other social challenges.
                 </p>
                 <h3 className="text-xl font-semibold mb-2 text-african-brown">Key Features:</h3>
-                <ul className="list-disc pl-5 mb-6 space-y-2">
-                  <li>Free and low-cost therapy sessions with qualified professionals</li>
-                  <li>Specialized support for climate refugees seeking safety</li>
-                  <li>Group therapy sessions focusing on community healing</li>
-                  <li>Virtual therapy options for those in remote areas</li>
-                </ul>
+                <p className="mb-6">
+                  Free and low-cost therapy sessions with qualified professionals. Specialized support for climate refugees seeking safety.
+                  Group therapy sessions focusing on community healing. Virtual therapy options for those in remote areas.
+                </p>
               </div>
             </div>
           </div>
@@ -62,7 +60,7 @@ const Services = () => {
             <div className="md:flex flex-row-reverse">
               <div className="md:w-1/3 flex items-center justify-center p-12 bg-blue-50">
                 <div className="w-32 h-32 rounded-full bg-blue-100 flex items-center justify-center">
-                  <Globe size={64} className="text-african-blue" />
+                  <VideoCamera size={64} className="text-african-blue" />
                 </div>
               </div>
               <div className="md:w-2/3 p-8">
@@ -73,12 +71,10 @@ const Services = () => {
                   showcasing both the challenges faced by communities and the innovative solutions being developed.
                 </p>
                 <h3 className="text-xl font-semibold mb-2 text-african-brown">Focus Areas:</h3>
-                <ul className="list-disc pl-5 mb-6 space-y-2">
-                  <li>Climate change effects on rural and urban communities</li>
-                  <li>Community-led environmental initiatives</li>
-                  <li>Youth activism and involvement in climate action</li>
-                  <li>The connection between environmental justice and social equality</li>
-                </ul>
+                <p className="mb-6">
+                  Climate change effects on rural and urban communities. Community-led environmental initiatives.
+                  Youth activism and involvement in climate action. The connection between environmental justice and social equality.
+                </p>
               </div>
             </div>
           </div>
@@ -99,38 +95,10 @@ const Services = () => {
                   including mental health services, resource connections, and advocacy efforts.
                 </p>
                 <h3 className="text-xl font-semibold mb-2 text-african-brown">Our Approach:</h3>
-                <ul className="list-disc pl-5 mb-6 space-y-2">
-                  <li>Free therapy and mental health support for displaced individuals and families</li>
-                  <li>Resource directories and connection to local services</li>
-                  <li>Community building among displaced populations</li>
-                  <li>Advocacy for policy changes to better protect climate refugees</li>
-                </ul>
-              </div>
-            </div>
-          </div>
-
-          {/* Environmental Justice */}
-          <div className="bg-white rounded-lg shadow-lg overflow-hidden">
-            <div className="md:flex flex-row-reverse">
-              <div className="md:w-1/3 flex items-center justify-center p-12 bg-amber-50">
-                <div className="w-32 h-32 rounded-full bg-amber-100 flex items-center justify-center">
-                  <MessageSquare size={64} className="text-african-brown" />
-                </div>
-              </div>
-              <div className="md:w-2/3 p-8">
-                <h2 className="text-3xl font-bold mb-4 text-african-dark">Environmental Justice</h2>
-                <div className="w-16 h-1 bg-african-brown mb-6"></div>
-                <p className="mb-4 text-lg">
-                  We are developing initiatives focused on environmental justice in African communities, addressing the disproportionate 
-                  impacts of pollution and climate change on vulnerable populations.
+                <p className="mb-6">
+                  Free therapy and mental health support for displaced individuals and families. Resource directories and connection to local services.
+                  Community building among displaced populations. Advocacy for policy changes to better protect climate refugees.
                 </p>
-                <h3 className="text-xl font-semibold mb-2 text-african-brown">Key Initiatives:</h3>
-                <ul className="list-disc pl-5 mb-6 space-y-2">
-                  <li>Advocacy for equitable environmental policies</li>
-                  <li>Community-based waste management programs</li>
-                  <li>Educational campaigns on environmental rights</li>
-                  <li>Support for green initiatives in underserved communities</li>
-                </ul>
               </div>
             </div>
           </div>

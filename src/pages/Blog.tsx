@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Button } from '@/components/ui/button';
 import { Search } from 'lucide-react';
@@ -7,7 +8,7 @@ const Blog = () => {
   const blogPost = {
     id: 1,
     title: 'Mental Health Awareness in African Communities',
-    excerpt: 'Breaking the stigma around mental health issues and providing resources for support...',
+    excerpt: 'Missing text...',
     category: 'Mental Health',
     date: 'May 15, 2023',
   };
