@@ -2,7 +2,7 @@
 import React from 'react';
 import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
-import { HandHeart, VideoCamera, Users } from 'lucide-react';
+import { HandHeart, Video, Users } from 'lucide-react';
 
 const Services = () => {
   return (
@@ -60,7 +60,7 @@ const Services = () => {
             <div className="md:flex flex-row-reverse">
               <div className="md:w-1/3 flex items-center justify-center p-12 bg-blue-50">
                 <div className="w-32 h-32 rounded-full bg-blue-100 flex items-center justify-center">
-                  <VideoCamera size={64} className="text-african-blue" />
+                  <Video size={64} className="text-african-blue" />
                 </div>
               </div>
               <div className="md:w-2/3 p-8">
