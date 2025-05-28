@@ -1,3 +1,4 @@
+
 import React, { useEffect, useRef } from 'react';
 import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
@@ -41,7 +42,7 @@ const Home = () => {
             Dear African Child
           </h1>
           <p className="text-xl md:text-2xl text-white mb-8 max-w-3xl mx-auto drop-shadow-lg">
-            Welcome to Dear African Child, a social media blog where we empower and uplift African communities through awareness and advocacy.
+            Welcome to Dear African Child—a blog dedicated to empowering and uplifting African communities through awareness and advocacy.
           </p>
           <Button asChild size="lg" className="bg-secondary hover:bg-secondary/90 text-white text-lg px-8 animate-scale-in">
             <Link to="/about">Learn More</Link>
@@ -103,7 +104,7 @@ const Home = () => {
         <div className="container mx-auto px-4 text-center">
           <h2 className="text-3xl md:text-4xl font-bold mb-6 text-primary fade-in-element">Join Our Movement</h2>
           <p className="text-xl mb-8 max-w-2xl mx-auto fade-in-element">
-            Join us in creating a brighter future for all Africans. Together we can make a difference.
+            Join us in creating a brighter future for all Africans.
           </p>
           <div className="flex flex-wrap justify-center gap-4">
             <Button asChild size="lg" className="bg-secondary hover:bg-secondary/90 text-white fade-in-element">
