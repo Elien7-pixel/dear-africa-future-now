@@ -2,7 +2,6 @@
 import React from 'react';
 import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
-import { HandHeart, Video, Users } from 'lucide-react';
 
 const Services = () => {
   return (
@@ -35,8 +34,12 @@ const Services = () => {
           <div className="bg-white rounded-lg shadow-lg overflow-hidden mb-16">
             <div className="md:flex">
               <div className="md:w-1/3 flex items-center justify-center p-12 bg-emerald-50">
-                <div className="w-32 h-32 rounded-full bg-emerald-100 flex items-center justify-center">
-                  <HandHeart size={64} className="text-african-green" />
+                <div className="w-32 h-32 rounded-lg bg-white shadow-lg overflow-hidden">
+                  <img 
+                    src="/lovable-uploads/c3a45e17-d891-4292-b018-33c6f675b6df.png" 
+                    alt="Hello! I Need Therapy" 
+                    className="w-full h-full object-cover"
+                  />
                 </div>
               </div>
               <div className="md:w-2/3 p-8">
@@ -54,8 +57,12 @@ const Services = () => {
           <div className="bg-white rounded-lg shadow-lg overflow-hidden mb-16">
             <div className="md:flex flex-row-reverse">
               <div className="md:w-1/3 flex items-center justify-center p-12 bg-blue-50">
-                <div className="w-32 h-32 rounded-full bg-blue-100 flex items-center justify-center">
-                  <Video size={64} className="text-african-blue" />
+                <div className="w-32 h-32 rounded-lg bg-white shadow-lg overflow-hidden">
+                  <img 
+                    src="https://images.unsplash.com/photo-1485846234645-a62644f84728?w=400&h=400&fit=crop" 
+                    alt="Documentary Production" 
+                    className="w-full h-full object-cover"
+                  />
                 </div>
               </div>
               <div className="md:w-2/3 p-8">
@@ -73,8 +80,12 @@ const Services = () => {
           <div className="bg-white rounded-lg shadow-lg overflow-hidden mb-16">
             <div className="md:flex">
               <div className="md:w-1/3 flex items-center justify-center p-12 bg-green-50">
-                <div className="w-32 h-32 rounded-full bg-green-100 flex items-center justify-center">
-                  <Users size={64} className="text-african-green" />
+                <div className="w-32 h-32 rounded-lg bg-white shadow-lg overflow-hidden">
+                  <img 
+                    src="https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=400&h=400&fit=crop" 
+                    alt="Climate Refugee Support" 
+                    className="w-full h-full object-cover"
+                  />
                 </div>
               </div>
               <div className="md:w-2/3 p-8">

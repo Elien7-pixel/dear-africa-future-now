@@ -62,10 +62,12 @@ const Home = () => {
         
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           <div className="eco-card staggered-item" ref={el => staggeredRefs.current[0] = el}>
-            <div className="w-16 h-16 bg-primary rounded-full flex items-center justify-center mb-6 mx-auto">
-              <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-              </svg>
+            <div className="w-32 h-32 bg-white rounded-lg shadow-lg flex items-center justify-center mb-6 mx-auto overflow-hidden">
+              <img 
+                src="/lovable-uploads/e76b280b-d0fe-4af4-ad2e-90fef1fa575b.png" 
+                alt="Mental Health Matters" 
+                className="w-full h-full object-cover"
+              />
             </div>
             <h3 className="text-xl font-semibold mb-3 text-center text-primary">Mental Health</h3>
             <p className="text-center text-gray-600">
@@ -74,10 +76,12 @@ const Home = () => {
           </div>
           
           <div className="eco-card staggered-item" ref={el => staggeredRefs.current[1] = el}>
-            <div className="w-16 h-16 bg-accent rounded-full flex items-center justify-center mb-6 mx-auto">
-              <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
-              </svg>
+            <div className="w-32 h-32 bg-white rounded-lg shadow-lg flex items-center justify-center mb-6 mx-auto overflow-hidden">
+              <img 
+                src="/lovable-uploads/ea1b91a7-6cb4-4d55-a2d2-5d32bc8bd8bb.png" 
+                alt="Social Equity - African Unity" 
+                className="w-full h-full object-cover"
+              />
             </div>
             <h3 className="text-xl font-semibold mb-3 text-center text-primary">Social Equity</h3>
             <p className="text-center text-gray-600">
@@ -86,10 +90,12 @@ const Home = () => {
           </div>
           
           <div className="eco-card staggered-item" ref={el => staggeredRefs.current[2] = el}>
-            <div className="w-16 h-16 bg-secondary rounded-full flex items-center justify-center mb-6 mx-auto">
-              <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-              </svg>
+            <div className="w-32 h-32 bg-white rounded-lg shadow-lg flex items-center justify-center mb-6 mx-auto overflow-hidden">
+              <img 
+                src="/lovable-uploads/0d6ba091-696f-447f-8119-0d626392bf06.png" 
+                alt="Climate Action - Keep It Green" 
+                className="w-full h-full object-cover"
+              />
             </div>
             <h3 className="text-xl font-semibold mb-3 text-center text-primary">Climate Action</h3>
             <p className="text-center text-gray-600">
@@ -132,9 +138,9 @@ const Home = () => {
               </svg>
             </div>
             <div className="p-6">
-              <h3 className="text-xl font-bold mb-2 text-primary">Blog Post Title</h3>
+              <h3 className="text-xl font-bold mb-2 text-primary">Climate Change and Mental Health</h3>
               <p className="text-gray-600 mb-4">
-                Missing Text
+                Exploring the psychological impacts of climate change on African communities and pathways to resilience.
               </p>
               <Link 
                 to="/blog" 
@@ -152,9 +158,9 @@ const Home = () => {
               </svg>
             </div>
             <div className="p-6">
-              <h3 className="text-xl font-bold mb-2 text-primary">Blog Post Title</h3>
+              <h3 className="text-xl font-bold mb-2 text-primary">Breaking Mental Health Stigmas</h3>
               <p className="text-gray-600 mb-4">
-                Missing Text
+                Addressing cultural barriers and promoting open conversations about mental health in African societies.
               </p>
               <Link 
                 to="/blog" 
@@ -172,9 +178,9 @@ const Home = () => {
               </svg>
             </div>
             <div className="p-6">
-              <h3 className="text-xl font-bold mb-2 text-primary">Blog Post Title</h3>
+              <h3 className="text-xl font-bold mb-2 text-primary">Ubuntu: African Philosophy for Modern Challenges</h3>
               <p className="text-gray-600 mb-4">
-                Missing Text
+                How traditional African values of Ubuntu can guide solutions to contemporary social and environmental issues.
               </p>
               <Link 
                 to="/blog" 

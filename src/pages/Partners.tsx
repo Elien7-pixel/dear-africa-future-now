@@ -22,10 +22,12 @@ const Partners = () => {
           <div className="bg-white rounded-lg shadow-lg overflow-hidden">
             <div className="md:flex">
               <div className="md:w-2/5 flex items-center justify-center p-8 bg-emerald-50">
-                <div className="w-32 h-32 bg-emerald-100 rounded-full flex items-center justify-center">
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-16 w-16 text-emerald-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
-                  </svg>
+                <div className="w-48 h-32 bg-white rounded-lg shadow-lg overflow-hidden">
+                  <img 
+                    src="/lovable-uploads/c310d3f2-3baf-4246-b942-1ef14edc7f54.png" 
+                    alt="VCIA - Vaal Community In Action" 
+                    className="w-full h-full object-contain p-2"
+                  />
                 </div>
               </div>
               <div className="md:w-3/5 p-8">
