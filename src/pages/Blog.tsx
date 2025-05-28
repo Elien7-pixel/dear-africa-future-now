@@ -2,13 +2,14 @@
 import React from 'react';
 import { Button } from '@/components/ui/button';
 import { Search } from 'lucide-react';
+import NewsletterSubscription from '@/components/NewsletterSubscription';
 
 const Blog = () => {
   // Sample blog post data (in a real app, this would come from an API/database)
   const blogPost = {
     id: 1,
     title: 'Mental Health Awareness in African Communities',
-    excerpt: 'Missing Text',
+    excerpt: 'Exploring the importance of mental health support and breaking stigmas in African communities...',
     category: 'Mental Health',
     date: 'May 15, 2023',
   };
@@ -68,7 +69,7 @@ const Blog = () => {
       {/* Blog Posts */}
       <section className="section-container">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {/* Example Blog Post - Keep only this one as reference */}
+          {/* Example Blog Post */}
           <article className="bg-white rounded-lg overflow-hidden shadow-md border hover:shadow-lg transition-shadow">
             <div className="h-48 bg-emerald-100 flex items-center justify-center">
               <svg xmlns="http://www.w3.org/2000/svg" className="h-16 w-16 text-emerald-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -83,7 +84,7 @@ const Blog = () => {
                 <span className="text-sm text-gray-500">{blogPost.date}</span>
               </div>
               <h3 className="text-xl font-bold mb-2 text-african-dark">{blogPost.title}</h3>
-              <p className="text-gray-600 mb-4">Missing Text</p>
+              <p className="text-gray-600 mb-4">{blogPost.excerpt}</p>
               <Button variant="link" className="p-0 text-african-blue hover:text-african-blue/90">
                 Read More
               </Button>
@@ -105,22 +106,20 @@ const Blog = () => {
 
       {/* Newsletter Sign Up */}
       <section className="bg-african-green/10 py-16">
-        <div className="container mx-auto px-4 text-center">
-          <h2 className="text-3xl font-bold mb-4 text-african-dark">Subscribe to Our Newsletter</h2>
-          <p className="mb-6 max-w-2xl mx-auto text-gray-700">
-            Get the latest articles, resources, and updates delivered directly to your inbox.
-          </p>
-          <form className="max-w-md mx-auto flex flex-col sm:flex-row gap-4">
-            <input
-              type="email"
-              placeholder="Your email address"
-              className="flex-grow px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-african-orange"
-              required
-            />
-            <Button className="bg-african-orange hover:bg-african-orange/90">
-              Subscribe
-            </Button>
-          </form>
+        <div className="container mx-auto px-4">
+          <div className="max-w-4xl mx-auto">
+            <div className="text-center mb-8">
+              <h2 className="text-3xl font-bold mb-4 text-african-dark">Subscribe to Our Newsletter</h2>
+              <p className="mb-6 max-w-2xl mx-auto text-gray-700">
+                Get the latest articles, resources, and updates delivered directly to your inbox.
+              </p>
+            </div>
+            <div className="flex justify-center">
+              <div className="w-full max-w-md">
+                <NewsletterSubscription />
+              </div>
+            </div>
+          </div>
         </div>
       </section>
     </div>

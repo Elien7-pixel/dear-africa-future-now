@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { useToast } from '@/components/ui/use-toast';
+import { useToast } from '@/hooks/use-toast';
 import { supabase } from '@/integrations/supabase/client';
 
 const NewsletterSubscription = () => {
@@ -51,8 +51,8 @@ const NewsletterSubscription = () => {
   };
 
   return (
-    <div className="bg-white p-6 rounded-lg shadow-lg">
-      <h3 className="text-xl font-bold mb-4 text-african-dark">Subscribe to Our Newsletter</h3>
+    <div className="bg-white p-6 rounded-lg shadow-lg border border-gray-100">
+      <h3 className="text-xl font-bold mb-4 text-african-dark text-center">Subscribe to Our Newsletter</h3>
       <form onSubmit={handleSubmit} className="space-y-4">
         <div>
           <Input
@@ -60,21 +60,23 @@ const NewsletterSubscription = () => {
             placeholder="Your Name"
             value={name}
             onChange={(e) => setName(e.target.value)}
+            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-african-orange"
             required
           />
         </div>
         <div>
           <Input
             type="email"
-            placeholder="Your Email"
+            placeholder="Your Email Address"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
+            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-african-orange"
             required
           />
         </div>
         <Button 
           type="submit" 
-          className="w-full bg-african-orange hover:bg-african-orange/90"
+          className="w-full bg-african-orange hover:bg-african-orange/90 text-white font-medium py-2 px-4 rounded-lg transition-colors"
           disabled={isLoading}
         >
           {isLoading ? 'Subscribing...' : 'Subscribe'}

@@ -3,6 +3,7 @@ import React, { useEffect, useRef } from 'react';
 import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
+import NewsletterSubscription from '@/components/NewsletterSubscription';
 
 const Home = () => {
   const staggeredRefs = useRef<(HTMLDivElement | null)[]>([]);
@@ -62,11 +63,11 @@ const Home = () => {
         
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           <div className="eco-card staggered-item" ref={el => staggeredRefs.current[0] = el}>
-            <div className="w-32 h-32 bg-white rounded-lg shadow-lg flex items-center justify-center mb-6 mx-auto overflow-hidden">
+            <div className="w-full h-48 bg-white rounded-lg shadow-lg flex items-center justify-center mb-6 mx-auto overflow-hidden">
               <img 
                 src="/lovable-uploads/e76b280b-d0fe-4af4-ad2e-90fef1fa575b.png" 
                 alt="Mental Health Matters" 
-                className="w-full h-full object-cover"
+                className="w-full h-full object-contain p-4"
               />
             </div>
             <h3 className="text-xl font-semibold mb-3 text-center text-primary">Mental Health</h3>
@@ -76,11 +77,11 @@ const Home = () => {
           </div>
           
           <div className="eco-card staggered-item" ref={el => staggeredRefs.current[1] = el}>
-            <div className="w-32 h-32 bg-white rounded-lg shadow-lg flex items-center justify-center mb-6 mx-auto overflow-hidden">
+            <div className="w-full h-48 bg-white rounded-lg shadow-lg flex items-center justify-center mb-6 mx-auto overflow-hidden">
               <img 
                 src="/lovable-uploads/ea1b91a7-6cb4-4d55-a2d2-5d32bc8bd8bb.png" 
                 alt="Social Equity - African Unity" 
-                className="w-full h-full object-cover"
+                className="w-full h-full object-contain p-4"
               />
             </div>
             <h3 className="text-xl font-semibold mb-3 text-center text-primary">Social Equity</h3>
@@ -90,17 +91,36 @@ const Home = () => {
           </div>
           
           <div className="eco-card staggered-item" ref={el => staggeredRefs.current[2] = el}>
-            <div className="w-32 h-32 bg-white rounded-lg shadow-lg flex items-center justify-center mb-6 mx-auto overflow-hidden">
+            <div className="w-full h-48 bg-white rounded-lg shadow-lg flex items-center justify-center mb-6 mx-auto overflow-hidden">
               <img 
                 src="/lovable-uploads/0d6ba091-696f-447f-8119-0d626392bf06.png" 
                 alt="Climate Action - Keep It Green" 
-                className="w-full h-full object-cover"
+                className="w-full h-full object-contain p-4"
               />
             </div>
             <h3 className="text-xl font-semibold mb-3 text-center text-primary">Climate Action</h3>
             <p className="text-center text-gray-600">
               Raising awareness about climate change and promoting environmental justice in Africa.
             </p>
+          </div>
+        </div>
+      </section>
+
+      {/* Newsletter Subscription Section */}
+      <section className="bg-african-beige/30 py-16">
+        <div className="container mx-auto px-4">
+          <div className="max-w-4xl mx-auto">
+            <div className="text-center mb-8">
+              <h2 className="text-3xl font-bold mb-4 text-african-dark">Stay Connected</h2>
+              <p className="text-lg text-gray-700">
+                Subscribe to our newsletter for the latest articles and updates on African community empowerment.
+              </p>
+            </div>
+            <div className="flex justify-center">
+              <div className="w-full max-w-md">
+                <NewsletterSubscription />
+              </div>
+            </div>
           </div>
         </div>
       </section>
