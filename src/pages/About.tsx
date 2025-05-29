@@ -1,8 +1,5 @@
 
 import React from 'react';
-import { Button } from '@/components/ui/button';
-import { Link } from 'react-router-dom';
-import { Mail, Phone, MapPin } from 'lucide-react';
 
 const About = () => {
   return (
@@ -24,14 +21,16 @@ const About = () => {
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 items-start">
             {/* Profile Image */}
             <div className="lg:col-span-1">
-              <div className="w-full h-96 bg-gradient-to-br from-african-orange/20 to-african-blue/20 rounded-lg flex items-center justify-center">
-                <div className="text-center">
-                  <div className="w-32 h-32 bg-african-orange/30 rounded-full mx-auto mb-4 flex items-center justify-center">
-                    <span className="text-4xl font-bold text-african-dark">MT</span>
-                  </div>
-                  <h3 className="text-xl font-bold text-african-dark">Munya Touch</h3>
-                  <p className="text-gray-600">Founder & Advocate</p>
-                </div>
+              <div className="w-full h-96 overflow-hidden rounded-lg shadow-lg hover:scale-105 transition-transform duration-300 cursor-pointer">
+                <img 
+                  src="/lovable-uploads/2d039ae0-ce71-4eee-8dc8-c42733018791.png" 
+                  alt="Munya Touch - Founder" 
+                  className="w-full h-full object-cover"
+                />
+              </div>
+              <div className="text-center mt-4">
+                <h3 className="text-xl font-bold text-african-dark">Munya Touch</h3>
+                <p className="text-gray-600">Founder</p>
               </div>
             </div>
 
@@ -75,12 +74,6 @@ const About = () => {
                 <p>
                   With the right partnerships and funding, he aims to collaborate with NGOs across Africa to initiate programs that combat climate change and promote social and gender equality.
                 </p>
-              </div>
-
-              <div className="mt-8">
-                <Button asChild className="bg-african-orange hover:bg-african-orange/90 text-white">
-                  <Link to="/contact">Get In Touch</Link>
-                </Button>
               </div>
             </div>
           </div>

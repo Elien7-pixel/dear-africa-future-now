@@ -66,7 +66,7 @@ const Home = () => {
         
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           <div className="eco-card staggered-item" ref={el => staggeredRefs.current[0] = el}>
-            <div className="w-full h-64 bg-white rounded-lg shadow-lg flex items-center justify-center mb-6 mx-auto overflow-hidden">
+            <div className="w-full h-64 bg-white rounded-lg shadow-lg flex items-center justify-center mb-6 mx-auto overflow-hidden hover:scale-110 transition-transform duration-300 cursor-pointer">
               <img 
                 src="/lovable-uploads/e76b280b-d0fe-4af4-ad2e-90fef1fa575b.png" 
                 alt="Mental Health Matters" 
@@ -80,7 +80,7 @@ const Home = () => {
           </div>
           
           <div className="eco-card staggered-item" ref={el => staggeredRefs.current[1] = el}>
-            <div className="w-full h-64 bg-white rounded-lg shadow-lg flex items-center justify-center mb-6 mx-auto overflow-hidden">
+            <div className="w-full h-64 bg-white rounded-lg shadow-lg flex items-center justify-center mb-6 mx-auto overflow-hidden hover:scale-110 transition-transform duration-300 cursor-pointer">
               <img 
                 src="/lovable-uploads/ea1b91a7-6cb4-4d55-a2d2-5d32bc8bd8bb.png" 
                 alt="Social Equity - African Unity" 
@@ -94,7 +94,7 @@ const Home = () => {
           </div>
           
           <div className="eco-card staggered-item" ref={el => staggeredRefs.current[2] = el}>
-            <div className="w-full h-64 bg-white rounded-lg shadow-lg flex items-center justify-center mb-6 mx-auto overflow-hidden">
+            <div className="w-full h-64 bg-white rounded-lg shadow-lg flex items-center justify-center mb-6 mx-auto overflow-hidden hover:scale-110 transition-transform duration-300 cursor-pointer">
               <img 
                 src="/lovable-uploads/0d6ba091-696f-447f-8119-0d626392bf06.png" 
                 alt="Climate Action - Keep It Green" 
@@ -135,6 +135,16 @@ const Home = () => {
           <Button asChild className="bg-secondary hover:bg-secondary/90 text-white fade-in-element">
             <Link to="/blog">View All Articles</Link>
           </Button>
+        </div>
+      </section>
+
+      {/* Call to Action Section */}
+      <section className="bg-african-green/10 py-16">
+        <div className="container mx-auto px-4 text-center">
+          <h2 className="text-3xl md:text-4xl font-bold mb-6 text-african-dark">Call to Action</h2>
+          <p className="text-xl mb-8 max-w-2xl mx-auto text-gray-700">
+            Join us in creating a brighter future for all Africans.
+          </p>
         </div>
       </section>
 
