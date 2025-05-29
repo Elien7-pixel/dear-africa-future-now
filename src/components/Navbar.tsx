@@ -42,6 +42,20 @@ const Navbar = () => {
     { name: 'Contact', path: '/contact' },
   ];
 
+  const scrollToNewsletter = () => {
+    // Check if we're on the home page
+    if (location.pathname === '/') {
+      // Scroll to newsletter section
+      const newsletterSection = document.querySelector('.bg-african-beige\\/30');
+      if (newsletterSection) {
+        newsletterSection.scrollIntoView({ behavior: 'smooth' });
+      }
+    } else {
+      // Navigate to home page first, then scroll
+      window.location.href = '/#newsletter';
+    }
+  };
+
   return (
     <header 
       className={`sticky top-0 w-full z-50 transition-all duration-300 ${
@@ -78,7 +92,10 @@ const Navbar = () => {
                 {link.name}
               </NavLink>
             ))}
-            <Button className="bg-secondary hover:bg-secondary/90 text-white transition-transform duration-300 hover:scale-105">
+            <Button 
+              onClick={scrollToNewsletter}
+              className="bg-secondary hover:bg-secondary/90 text-white transition-transform duration-300 hover:scale-105"
+            >
               Subscribe
             </Button>
           </nav>
@@ -104,7 +121,13 @@ const Navbar = () => {
                 </li>
               ))}
               <li>
-                <Button className="w-full bg-secondary hover:bg-secondary/90 text-white">
+                <Button 
+                  onClick={() => {
+                    toggleMenu();
+                    scrollToNewsletter();
+                  }}
+                  className="w-full bg-secondary hover:bg-secondary/90 text-white"
+                >
                   Subscribe
                 </Button>
               </li>

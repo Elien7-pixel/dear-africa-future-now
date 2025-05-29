@@ -1,125 +1,159 @@
 
 import React from 'react';
+import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
+import { ExternalLink, MapPin, Globe, Users } from 'lucide-react';
 
 const Partners = () => {
+  const partners = [
+    {
+      id: 1,
+      name: 'Vision Care International Africa (VCIA)',
+      description: 'Leading organization focused on providing comprehensive eye care services and vision health education across African communities.',
+      logo: '/lovable-uploads/c3a45e17-d891-4292-b018-33c6f675b6df.png',
+      website: '#',
+      location: 'Pan-African',
+      focus: 'Healthcare & Vision'
+    }
+  ];
+
+  const partnershipBenefits = [
+    {
+      icon: <Users className="h-12 w-12 text-african-orange" />,
+      title: 'Community Impact',
+      description: 'Together, we reach more communities and create lasting positive change across Africa.'
+    },
+    {
+      icon: <Globe className="h-12 w-12 text-african-blue" />,
+      title: 'Shared Resources',
+      description: 'Pooling our resources and expertise to maximize the impact of our programs and initiatives.'
+    },
+    {
+      icon: <MapPin className="h-12 w-12 text-african-green" />,
+      title: 'Local Presence',
+      description: 'Our partners help us maintain a strong local presence in communities across the continent.'
+    }
+  ];
+
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
-      <section className="bg-african-orange/10 py-16">
+      <section className="bg-african-blue/10 py-16">
         <div className="container mx-auto px-4 text-center">
           <h1 className="text-4xl md:text-5xl font-bold text-african-dark mb-6">Our Partners</h1>
-          <div className="w-20 h-1 bg-african-green mx-auto mb-8"></div>
+          <div className="w-20 h-1 bg-african-orange mx-auto mb-8"></div>
           <p className="text-xl max-w-3xl mx-auto">
-            We collaborate with dedicated organizations that share our vision for a more equitable, environmentally conscious Africa.
+            Collaborating with organizations across Africa to create meaningful change and empower communities together.
           </p>
         </div>
       </section>
 
-      {/* Main Partner */}
+      {/* Current Partners */}
       <section className="section-container">
-        <div className="max-w-6xl mx-auto">
-          <div className="bg-white rounded-lg shadow-lg overflow-hidden">
-            <div className="md:flex">
-              <div className="md:w-2/5 flex items-center justify-center p-8 bg-emerald-50">
-                <div className="w-48 h-32 bg-white rounded-lg shadow-lg overflow-hidden">
-                  <img 
-                    src="/lovable-uploads/c310d3f2-3baf-4246-b942-1ef14edc7f54.png" 
-                    alt="VCIA - Vaal Community In Action" 
-                    className="w-full h-full object-contain p-2"
-                  />
-                </div>
+        <div className="text-center mb-16">
+          <h2 className="text-3xl font-bold mb-4 text-african-dark">Current Partners</h2>
+          <p className="text-gray-600 max-w-2xl mx-auto">
+            We're proud to work alongside these incredible organizations who share our vision for a better Africa.
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {partners.map((partner) => (
+            <div key={partner.id} className="bg-white rounded-lg shadow-lg border overflow-hidden hover:shadow-xl transition-shadow">
+              <div className="h-64 bg-gray-50 flex items-center justify-center p-8">
+                <img 
+                  src={partner.logo} 
+                  alt={partner.name}
+                  className="max-w-full max-h-full object-contain"
+                />
               </div>
-              <div className="md:w-3/5 p-8">
-                <h2 className="text-3xl font-bold mb-4 text-african-dark">VCIA (Vaal Community In Action)</h2>
-                <div className="w-16 h-1 bg-african-orange mb-6"></div>
-                <p className="mb-4 text-lg">
-                  VCIA is a non-profit organization based in the Vaal area (south of Johannesburg) focusing on gender-based violence 
-                  and climate change initiatives.
-                </p>
-                <h3 className="text-xl font-semibold mb-3 text-african-brown">Our Collaboration:</h3>
-                <p className="mb-4">
-                  Our blog collaborates with VCIA on climate change activities, such as promoting waste segregation in public spaces 
-                  like parks and schools by installing color-coded bins to reduce pollution.
-                </p>
+              <div className="p-6">
+                <h3 className="text-xl font-bold mb-2 text-african-dark">{partner.name}</h3>
+                <p className="text-gray-600 mb-4">{partner.description}</p>
+                
+                <div className="space-y-2 mb-4">
+                  <div className="flex items-center text-sm text-gray-700">
+                    <MapPin className="h-4 w-4 text-african-orange mr-2" />
+                    {partner.location}
+                  </div>
+                  <div className="flex items-center text-sm text-gray-700">
+                    <Globe className="h-4 w-4 text-african-blue mr-2" />
+                    {partner.focus}
+                  </div>
+                </div>
+
+                <Button asChild className="w-full bg-african-orange hover:bg-african-orange/90 text-white">
+                  <a href={partner.website} target="_blank" rel="noopener noreferrer">
+                    Learn More <ExternalLink className="ml-2 h-4 w-4" />
+                  </a>
+                </Button>
               </div>
             </div>
+          ))}
+        </div>
+      </section>
+
+      {/* Partnership Benefits */}
+      <section className="bg-african-beige/20 py-16">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl font-bold mb-4 text-african-dark">Why Partner With Us?</h2>
+            <p className="text-gray-600 max-w-2xl mx-auto">
+              Our partnerships are built on shared values and a commitment to creating positive change across African communities.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {partnershipBenefits.map((benefit, index) => (
+              <div key={index} className="text-center p-6 bg-white rounded-lg shadow-md">
+                <div className="flex justify-center mb-4">
+                  {benefit.icon}
+                </div>
+                <h3 className="text-xl font-bold mb-3 text-african-dark">{benefit.title}</h3>
+                <p className="text-gray-600">{benefit.description}</p>
+              </div>
+            ))}
           </div>
         </div>
       </section>
 
-      {/* Future Partnerships */}
+      {/* Partnership Opportunities */}
       <section className="section-container">
-        <div className="max-w-5xl mx-auto">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold mb-4 text-african-dark">Future Partnerships</h2>
-            <div className="w-20 h-1 bg-african-green mx-auto mb-6"></div>
-            <p className="text-lg max-w-3xl mx-auto">
-              We are actively seeking partnerships with NGOs across Africa to initiate programs that combat climate change and 
-              promote social and gender equality.
-            </p>
-          </div>
+        <div className="max-w-4xl mx-auto text-center">
+          <h2 className="text-3xl font-bold mb-6 text-african-dark">Become a Partner</h2>
+          <p className="text-xl text-gray-600 mb-8">
+            Are you an organization committed to empowering African communities? We'd love to explore partnership opportunities with you.
+          </p>
           
-          <div className="bg-white p-8 rounded-lg shadow-lg border border-gray-100">
-            <h3 className="text-2xl font-bold mb-4 text-african-dark">Organizations We Hope To Partner With:</h3>
-            
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
-              <div className="flex items-start space-x-3">
-                <div className="min-w-6">
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-african-green" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                  </svg>
-                </div>
-                <p>Environmental conservation organizations</p>
-              </div>
-              <div className="flex items-start space-x-3">
-                <div className="min-w-6">
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-african-green" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                  </svg>
-                </div>
-                <p>Mental health advocacy groups</p>
-              </div>
-              <div className="flex items-start space-x-3">
-                <div className="min-w-6">
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-african-green" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                  </svg>
-                </div>
-                <p>Women's rights and gender equality organizations</p>
-              </div>
-              <div className="flex items-start space-x-3">
-                <div className="min-w-6">
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-african-green" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                  </svg>
-                </div>
-                <p>Youth development and education organizations</p>
-              </div>
-              <div className="flex items-start space-x-3">
-                <div className="min-w-6">
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-african-green" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                  </svg>
-                </div>
-                <p>Community development NGOs</p>
-              </div>
-              <div className="flex items-start space-x-3">
-                <div className="min-w-6">
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-african-green" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                  </svg>
-                </div>
-                <p>Government agencies focused on climate and social initiatives</p>
-              </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
+            <div className="p-6 bg-white rounded-lg border">
+              <h3 className="text-xl font-bold mb-3 text-african-dark">NGOs & Non-Profits</h3>
+              <p className="text-gray-600 mb-4">
+                Join forces with us to amplify your impact and reach more communities in need.
+              </p>
+              <ul className="text-left space-y-2 text-gray-600">
+                <li>• Shared program implementation</li>
+                <li>• Resource and expertise exchange</li>
+                <li>• Joint advocacy initiatives</li>
+              </ul>
             </div>
             
-            <div className="text-center">
-              <Link to="/contact" className="inline-flex items-center justify-center px-4 py-2 border border-transparent text-base font-medium rounded-md text-white bg-african-brown hover:bg-african-brown/90 transition-colors">
-                Propose a Partnership
-              </Link>
+            <div className="p-6 bg-white rounded-lg border">
+              <h3 className="text-xl font-bold mb-3 text-african-dark">Corporate Partners</h3>
+              <p className="text-gray-600 mb-4">
+                Support meaningful change while fulfilling your corporate social responsibility goals.
+              </p>
+              <ul className="text-left space-y-2 text-gray-600">
+                <li>• Funding and sponsorship opportunities</li>
+                <li>• Employee volunteer programs</li>
+                <li>• Brand alignment with social impact</li>
+              </ul>
             </div>
           </div>
+
+          <Button asChild size="lg" className="bg-african-orange hover:bg-african-orange/90 text-white">
+            <Link to="/contact">Start a Partnership</Link>
+          </Button>
         </div>
       </section>
     </div>
