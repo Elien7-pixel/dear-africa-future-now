@@ -21,7 +21,7 @@ const About = () => {
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 items-start">
             {/* Profile Image */}
             <div className="lg:col-span-1">
-              <div className="w-full h-96 overflow-hidden rounded-lg shadow-lg hover:scale-105 transition-transform duration-300 cursor-pointer">
+              <div className="w-80 h-80 mx-auto overflow-hidden rounded-full shadow-lg">
                 <img 
                   src="/lovable-uploads/2d039ae0-ce71-4eee-8dc8-c42733018791.png" 
                   alt="Munya Touch - Founder" 

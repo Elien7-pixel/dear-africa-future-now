@@ -1,5 +1,7 @@
 
 import React from 'react';
+import { Button } from '@/components/ui/button';
+import { Link } from 'react-router-dom';
 
 const Partners = () => {
   return (
@@ -19,11 +21,11 @@ const Partners = () => {
       <section className="section-container">
         <div className="max-w-4xl mx-auto">
           <div className="bg-white rounded-lg shadow-lg border overflow-hidden">
-            <div className="h-96 overflow-hidden hover:scale-105 transition-transform duration-300 cursor-pointer">
+            <div className="h-96 overflow-hidden">
               <img 
                 src="/lovable-uploads/8357f86d-2300-452c-9520-0b708d875d93.png" 
                 alt="VCIA - Vaal Community In Action"
-                className="w-full h-full object-cover"
+                className="w-full h-full object-cover md:object-cover object-contain"
               />
             </div>
             <div className="p-8">
@@ -32,6 +34,13 @@ const Partners = () => {
                 A non-profit organization based in the Vaal area (south of Johannesburg) focusing on gender-based violence and climate change. Our blog collaborates with VCIA on climate change activities, such as promoting waste segregation in public spaces like parks and schools by installing color-coded bins to reduce pollution.
               </p>
             </div>
+          </div>
+          
+          {/* Partner with us button */}
+          <div className="text-center mt-12">
+            <Button asChild className="bg-secondary hover:bg-secondary/90 text-white px-8 py-3 text-lg">
+              <Link to="/contact">Partner with us</Link>
+            </Button>
           </div>
         </div>
       </section>
