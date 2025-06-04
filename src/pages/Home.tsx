@@ -10,9 +10,9 @@ const Home = () => {
     <div className="min-h-screen">
       {/* Hero Section */}
       <section className="relative bg-gradient-to-br from-african-blue/20 via-african-green/10 to-african-beige/30 py-20 overflow-hidden">
-        <div className="absolute inset-0 bg-[url('/lovable-uploads/c310d3f2-3baf-4246-b942-1ef14edc7f54.png')] bg-cover bg-center opacity-10"></div>
+        <div className="absolute inset-0 bg-[url('/lovable-uploads/13af3390-8eef-4513-b440-e895683dde4f.png')] bg-cover bg-center opacity-30"></div>
         <div className="relative container mx-auto px-4 text-center">
-          <h1 className="text-5xl md:text-6xl font-bold mb-6 text-african-dark">
+          <h1 className="text-5xl md:text-6xl font-bold mb-6 text-african-dark" style={{ fontFamily: "'Brush Script MT', cursive, 'Comic Sans MS', sans-serif", textShadow: '2px 2px 4px rgba(0,0,0,0.3)' }}>
             Dear African Child
           </h1>
           <div className="w-24 h-1 bg-african-orange mx-auto mb-8"></div>
@@ -57,9 +57,13 @@ const Home = () => {
       {/* Features Grid */}
       <section className="section-container">
         <div className="grid md:grid-cols-3 gap-8">
-          <div className="text-center p-8 bg-white rounded-lg shadow-lg border hover:shadow-xl transition-shadow">
-            <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
-              <Globe className="h-8 w-8 text-green-600" />
+          <div className="text-center p-8 bg-white rounded-lg shadow-lg border transition-shadow">
+            <div className="w-32 h-32 mx-auto mb-6 overflow-hidden rounded-lg">
+              <img 
+                src="/lovable-uploads/4beebcca-0f9d-43c6-aab8-9458e05e54a7.png" 
+                alt="Climate Action"
+                className="w-full h-full object-cover"
+              />
             </div>
             <h3 className="text-2xl font-bold mb-4 text-african-dark">Climate Action</h3>
             <p className="text-gray-600 leading-relaxed">
@@ -67,9 +71,13 @@ const Home = () => {
             </p>
           </div>
           
-          <div className="text-center p-8 bg-white rounded-lg shadow-lg border hover:shadow-xl transition-shadow">
-            <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-6">
-              <Heart className="h-8 w-8 text-blue-600" />
+          <div className="text-center p-8 bg-white rounded-lg shadow-lg border transition-shadow">
+            <div className="w-32 h-32 mx-auto mb-6 overflow-hidden rounded-lg">
+              <img 
+                src="/lovable-uploads/2b0541c8-9ee8-420c-af46-779a21599afc.png" 
+                alt="Mental Health"
+                className="w-full h-full object-cover"
+              />
             </div>
             <h3 className="text-2xl font-bold mb-4 text-african-dark">Mental Health</h3>
             <p className="text-gray-600 leading-relaxed">
@@ -77,9 +85,13 @@ const Home = () => {
             </p>
           </div>
           
-          <div className="text-center p-8 bg-white rounded-lg shadow-lg border hover:shadow-xl transition-shadow">
-            <div className="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-6">
-              <Users className="h-8 w-8 text-purple-600" />
+          <div className="text-center p-8 bg-white rounded-lg shadow-lg border transition-shadow">
+            <div className="w-32 h-32 mx-auto mb-6 overflow-hidden rounded-lg">
+              <img 
+                src="/lovable-uploads/dbce2d24-6a96-453a-9739-e19f644a6c00.png" 
+                alt="Social Equality"
+                className="w-full h-full object-cover"
+              />
             </div>
             <h3 className="text-2xl font-bold mb-4 text-african-dark">Social Equality</h3>
             <p className="text-gray-600 leading-relaxed">

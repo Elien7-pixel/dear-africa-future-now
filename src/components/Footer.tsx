@@ -34,7 +34,7 @@ const Footer = () => {
             <div className="space-y-2">
               <p className="text-gray-300 flex items-center">
                 <Mail className="mr-2 h-4 w-4" />
-                dear@africanchild.com
+                dear@africanchild.org
               </p>
               <p className="text-gray-300 flex items-center">
                 <Phone className="mr-2 h-4 w-4" />
@@ -56,7 +56,7 @@ const Footer = () => {
               <a href="https://www.instagram.com/dear_africanchild?igsh=dWJuNWo1bnhtdDZ0" target="_blank" rel="noopener noreferrer" className="text-white hover:text-african-orange" aria-label="Instagram">
                 <Instagram size={24} />
               </a>
-              <a href="mailto:dear@africanchild.com" className="text-white hover:text-african-orange" aria-label="Email">
+              <a href="mailto:dear@africanchild.org" className="text-white hover:text-african-orange" aria-label="Email">
                 <Mail size={24} />
               </a>
             </div>

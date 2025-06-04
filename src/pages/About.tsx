@@ -1,5 +1,7 @@
 
 import React from 'react';
+import { Button } from '@/components/ui/button';
+import { Users, Globe, Heart, Leaf } from 'lucide-react';
 
 const About = () => {
   return (
@@ -90,31 +92,38 @@ const About = () => {
       {/* UN SDGs Section */}
       <section className="section-container bg-african-green/10">
         <div className="max-w-4xl mx-auto">
-          <h2 className="text-3xl font-bold mb-8 text-center text-african-dark">UN Sustainable Development Goals</h2>
+          <h2 className="text-3xl font-bold mb-8 text-center text-african-dark">Alignment with UN SDGs</h2>
           <p className="text-lg text-center mb-8 text-gray-700">
-            Our work aligns with the United Nations Sustainable Development Goals to create lasting positive change.
+            This blog is committed to raising awareness of the following UN Sustainable Development Goals:
           </p>
-          <div className="grid md:grid-cols-3 gap-6">
+          <div className="grid md:grid-cols-2 gap-6">
             <div className="bg-white p-6 rounded-lg shadow-md border text-center">
-              <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                <span className="text-2xl font-bold text-green-600">3</span>
+              <div className="w-16 h-16 bg-pink-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                <Users className="h-8 w-8 text-pink-600" />
               </div>
-              <h3 className="font-semibold mb-2 text-african-dark">Good Health and Well-being</h3>
-              <p className="text-sm text-gray-600">Promoting mental health awareness and support systems</p>
-            </div>
-            <div className="bg-white p-6 rounded-lg shadow-md border text-center">
-              <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                <span className="text-2xl font-bold text-blue-600">13</span>
-              </div>
-              <h3 className="font-semibold mb-2 text-african-dark">Climate Action</h3>
-              <p className="text-sm text-gray-600">Taking urgent action to combat climate change</p>
+              <h3 className="font-semibold mb-2 text-african-dark">Goal 5: Gender Equality</h3>
+              <p className="text-sm text-gray-600">Promoting gender equality and women's empowerment in African communities.</p>
             </div>
             <div className="bg-white p-6 rounded-lg shadow-md border text-center">
               <div className="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                <span className="text-2xl font-bold text-purple-600">10</span>
+                <Heart className="h-8 w-8 text-purple-600" />
               </div>
-              <h3 className="font-semibold mb-2 text-african-dark">Reduced Inequalities</h3>
-              <p className="text-sm text-gray-600">Promoting social equality and inclusion</p>
+              <h3 className="font-semibold mb-2 text-african-dark">Goal 10: Reduced Inequalities</h3>
+              <p className="text-sm text-gray-600">Addressing social inequalities to create a more equitable society.</p>
+            </div>
+            <div className="bg-white p-6 rounded-lg shadow-md border text-center">
+              <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                <Globe className="h-8 w-8 text-blue-600" />
+              </div>
+              <h3 className="font-semibold mb-2 text-african-dark">Goal 13: Climate Action</h3>
+              <p className="text-sm text-gray-600">Advocating for urgent action to combat climate change and its impacts.</p>
+            </div>
+            <div className="bg-white p-6 rounded-lg shadow-md border text-center">
+              <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                <Leaf className="h-8 w-8 text-green-600" />
+              </div>
+              <h3 className="font-semibold mb-2 text-african-dark">Goal 15: Life on Land</h3>
+              <p className="text-sm text-gray-600">Supporting efforts to protect and restore healthy ecosystems and mitigate climate change.</p>
             </div>
           </div>
         </div>
@@ -127,11 +136,11 @@ const About = () => {
           <p className="text-lg mb-6 text-gray-700">
             Have questions or want to collaborate? We'd love to hear from you.
           </p>
-          <div className="text-lg text-african-blue">
-            <a href="mailto:dear@africanchild.org" className="hover:underline">
-              dear@africanchild.org
+          <Button asChild className="bg-african-orange hover:bg-african-orange/90 text-white px-8 py-3">
+            <a href="mailto:dear@africanchild.org">
+              Contact Us
             </a>
-          </div>
+          </Button>
         </div>
       </section>
     </div>

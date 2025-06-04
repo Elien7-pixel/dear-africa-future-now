@@ -25,7 +25,7 @@ const Partners = () => {
               <img 
                 src="/lovable-uploads/8357f86d-2300-452c-9520-0b708d875d93.png" 
                 alt="VCIA - Vaal Community In Action"
-                className="w-full h-full object-cover md:object-cover object-contain"
+                className="w-full h-full md:object-cover object-contain"
               />
             </div>
             <div className="p-8">
