@@ -23,7 +23,7 @@ const Services = () => {
               <img 
                 src="/lovable-uploads/a7f730c4-c941-4879-a940-4ff30d41a754.png" 
                 alt="Hello! I Need Therapy" 
-                className="w-full h-full object-cover md:object-cover object-contain"
+                className="w-full h-full md:object-cover object-contain"
               />
             </div>
           </div>

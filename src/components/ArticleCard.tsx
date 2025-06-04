@@ -1,9 +1,10 @@
 
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
-import { ArrowRight, Calendar } from 'lucide-react';
+import { ArrowRight, Calendar, Heart } from 'lucide-react';
 import type { Article } from '@/hooks/useArticles';
+import { useLikeArticle, useUnlikeArticle } from '@/hooks/useArticles';
 import { format } from 'date-fns';
 
 interface ArticleCardProps {
@@ -11,6 +12,29 @@ interface ArticleCardProps {
 }
 
 const ArticleCard = ({ article }: ArticleCardProps) => {
+  const [hasLiked, setHasLiked] = useState(false);
+  const likeArticleMutation = useLikeArticle();
+  const unlikeArticleMutation = useUnlikeArticle();
+
+  const handleLike = (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    
+    if (hasLiked) {
+      unlikeArticleMutation.mutate({ 
+        articleId: article.id, 
+        currentLikes: article.likes 
+      });
+      setHasLiked(false);
+    } else {
+      likeArticleMutation.mutate({ 
+        articleId: article.id, 
+        currentLikes: article.likes 
+      });
+      setHasLiked(true);
+    }
+  };
+
   const getCategoryColor = (category: string) => {
     switch (category.toLowerCase()) {
       case 'mental health':
@@ -73,9 +97,23 @@ const ArticleCard = ({ article }: ArticleCardProps) => {
           <span className={`px-3 py-1 rounded-full text-sm font-medium ${getCategoryColor(article.category)}`}>
             {article.category}
           </span>
-          <div className="flex items-center text-sm text-gray-500">
-            <Calendar className="h-4 w-4 mr-1" />
-            {format(new Date(article.date), 'MMM dd, yyyy')}
+          <div className="flex items-center gap-3">
+            <div className="flex items-center text-sm text-gray-500">
+              <Calendar className="h-4 w-4 mr-1" />
+              {format(new Date(article.date), 'MMM dd, yyyy')}
+            </div>
+            <button
+              onClick={handleLike}
+              className={`flex items-center gap-1 text-sm transition-colors ${
+                hasLiked 
+                  ? 'text-red-600 hover:text-red-700' 
+                  : 'text-gray-600 hover:text-red-600'
+              }`}
+              disabled={likeArticleMutation.isPending || unlikeArticleMutation.isPending}
+            >
+              <Heart className={`h-4 w-4 ${hasLiked ? 'fill-current' : ''}`} />
+              <span>{article.likes}</span>
+            </button>
           </div>
         </div>
         <h3 className="text-xl font-bold mb-2 text-african-dark line-clamp-2">{article.title}</h3>

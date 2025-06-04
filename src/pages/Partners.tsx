@@ -35,6 +35,36 @@ const Partners = () => {
               </p>
             </div>
           </div>
+        </div>
+      </section>
+
+      {/* Partnership Opportunities */}
+      <section className="section-container bg-african-blue/5">
+        <div className="max-w-4xl mx-auto text-center">
+          <h2 className="text-3xl font-bold mb-6 text-african-dark">Join Our Partnership Network</h2>
+          <p className="text-lg text-gray-700 leading-relaxed mb-8">
+            We are actively seeking partnerships with NGOs, activists, municipalities, and corporates who share our vision of creating positive change across Africa. Together, we can amplify our impact and reach more communities in need.
+          </p>
+          <div className="space-y-4">
+            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4 text-center">
+              <div className="bg-white p-4 rounded-lg shadow-sm border">
+                <h3 className="font-semibold text-african-dark">NGOs</h3>
+                <p className="text-sm text-gray-600 mt-2">Non-profit organizations working on climate, health, and social issues</p>
+              </div>
+              <div className="bg-white p-4 rounded-lg shadow-sm border">
+                <h3 className="font-semibold text-african-dark">Activists</h3>
+                <p className="text-sm text-gray-600 mt-2">Individual advocates passionate about African development</p>
+              </div>
+              <div className="bg-white p-4 rounded-lg shadow-sm border">
+                <h3 className="font-semibold text-african-dark">Municipalities</h3>
+                <p className="text-sm text-gray-600 mt-2">Local governments committed to sustainable development</p>
+              </div>
+              <div className="bg-white p-4 rounded-lg shadow-sm border">
+                <h3 className="font-semibold text-african-dark">Corporates</h3>
+                <p className="text-sm text-gray-600 mt-2">Companies with social responsibility initiatives</p>
+              </div>
+            </div>
+          </div>
           
           {/* Partner with us button */}
           <div className="text-center mt-12">

@@ -7,75 +7,130 @@ const About = () => {
       {/* Hero Section */}
       <section className="bg-african-blue/10 py-16">
         <div className="container mx-auto px-4 text-center">
-          <h1 className="text-4xl md:text-5xl font-bold text-african-dark mb-6">About Dear African Child</h1>
+          <h1 className="text-4xl md:text-5xl font-bold text-african-dark mb-6">About Us</h1>
           <div className="w-20 h-1 bg-african-orange mx-auto mb-8"></div>
           <p className="text-xl max-w-3xl mx-auto">
-            Empowering African communities through advocacy, education, and awareness.
+            Learn about our founder and the mission driving Dear African Child forward.
           </p>
         </div>
       </section>
 
-      {/* About Content */}
+      {/* Founder Section */}
       <section className="section-container">
         <div className="max-w-4xl mx-auto">
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 items-start">
-            {/* Profile Image */}
-            <div className="lg:col-span-1">
-              <div className="w-80 h-80 mx-auto overflow-hidden rounded-full shadow-lg">
+          <div className="grid md:grid-cols-2 gap-12 items-start">
+            <div className="order-2 md:order-1">
+              <h2 className="text-3xl font-bold mb-6 text-african-dark">About</h2>
+              <div className="prose prose-lg text-gray-700 leading-relaxed space-y-4">
+                <p>
+                  Munya Touch (born Munya Jeranyama) is an accomplished music promoter, filmmaker, journalist, and climate change advocate. He possesses extensive experience in the South African entertainment industry, having worked at Kalawa Jazmee Records, one of Africa's largest black-owned record labels, under the mentorship of Bra Scotch. Munya has collaborated with a diverse array of artists, including Nokwazi, Professor, Busiswa, Uhuru, and DJ Maphorisa. His expertise encompasses festival organization, artist booking and management, and public relations.
+                </p>
+                <p>
+                  From 2013 to 2017, Munya served as an entertainment journalist at Starstudded Online Magazine, which reached a peak of 2 million daily visitors. He subsequently worked as a publicist and events manager for DJ Waxxy(Nigeria).
+                </p>
+                <p>
+                  Munya also made contributions at Azania Productions, a female-owned film production company, working on films featured on platforms such as Netflix, VIU, Showmax, and eTV's eVOD. Notable projects include Six In The City (VIU & Netflix), Mr. Johnson (Showmax), and ASHES of a Red Cow (eVOD).
+                </p>
+                <p>
+                  One of the key events he hosted is the Joburg Shutdown Concert, aimed at uniting Zimbabwean and South African communities through artivism. This festival highlighted the contributions of Zimbabweans, one of the largest immigrant groups in South Africa, and provided a platform for emerging African artists to perform alongside established stars like Busiswa (South Africa), Winky D (Zimbabwe), DJ Tira (South Africa), and Paddy Watts (Zimbabwe).
+                </p>
+                <p>
+                  During the COVID-19 pandemic, Munya initiated Acoustic Fridays, a virtual music show that showcased both upcoming and established Zimbabwean artists. This initiative garnered 100,000 views per show, aired on one of Zimbabwe's biggest entertainment and gossip social media blogs, Zimcelebs, promoting mental health and encouraging audiences to stay home during the lockdown.
+                </p>
+                <p>
+                  In 2021, he collaborated with the legendary DJ Qness to launch the inaugural South African Amapiano Awards, aired on SABC 1, which attracted 50 million viewers and celebrated outstanding Amapiano artists in South Africa, contributing to public health efforts during the pandemic.
+                </p>
+                <p>
+                  In 2023, Munya partnered with Thapelo Amad, the first Muslim Mayor of Johannesburg, to address climate change issues, focusing on reducing plastic pollution and promoting sustainability in Africa's busiest city.
+                </p>
+                <p>
+                  Munya's concerns about rising waste pollution, deforestation, and climate change-related health issues—particularly in low-income areas—motivated him to establish Dear African Child. This blog aims to tackle these urgent issues and engage Africa's youth, who represent over 60% of the continent's population.
+                </p>
+                <p>
+                  With the right partnerships and funding, he aspires to collaborate with NGOs across Africa to initiate programs that combat climate change and promote social and gender equality.
+                </p>
+              </div>
+            </div>
+            <div className="order-1 md:order-2 text-center">
+              <div className="w-80 h-80 mx-auto mb-4 overflow-hidden rounded-full border-4 border-african-orange shadow-lg">
                 <img 
                   src="/lovable-uploads/2d039ae0-ce71-4eee-8dc8-c42733018791.png" 
                   alt="Munya Touch - Founder" 
                   className="w-full h-full object-cover"
                 />
               </div>
-              <div className="text-center mt-4">
-                <h3 className="text-xl font-bold text-african-dark">Munya Touch</h3>
-                <p className="text-gray-600">Founder</p>
-              </div>
+              <p className="text-lg font-semibold text-african-dark">Founder</p>
             </div>
+          </div>
+        </div>
+      </section>
 
-            {/* Bio Content */}
-            <div className="lg:col-span-2">
-              <h2 className="text-3xl font-bold mb-6 text-african-dark">Meet Our Founder</h2>
-              
-              <div className="prose prose-lg max-w-none text-gray-700 space-y-6">
-                <p>
-                  Munya Touch (born Munyaradzi Jeranyama) is an accomplished African ShowBiz entrepreneur, social worker in training, journalist, and climate change advocate. He has significant experience in the South African entertainment industry, having worked at Kalawa Jazmee Records, one of Africa's largest black-owned record labels, under the mentorship of Bra Scotch. Munya has collaborated with various artists, including Nokwazi, Professor, Busiswa, Uhuru, and DJ Maphorisa. His expertise encompasses festival organization, artist booking and management, and public relations.
-                </p>
+      {/* Mission Section */}
+      <section className="section-container bg-african-blue/5">
+        <div className="max-w-4xl mx-auto text-center">
+          <h2 className="text-3xl font-bold mb-6 text-african-dark">Our Mission</h2>
+          <p className="text-lg text-gray-700 leading-relaxed">
+            To create awareness about climate change, promote mental health, and advocate for social equality 
+            across African communities through storytelling, education, and community engagement.
+          </p>
+        </div>
+      </section>
 
-                <p>
-                  From 2013 to 2017, Munya served as an entertainment journalist at Starstudded Online Magazine, which peaked at 2 million daily visitors. He later worked as a publicist for notable artists such as Buffalo Souljah (Zimbabwe) and DJ Waxxy (Nigeria).
-                </p>
+      {/* Vision Section */}
+      <section className="section-container">
+        <div className="max-w-4xl mx-auto text-center">
+          <h2 className="text-3xl font-bold mb-6 text-african-dark">Our Vision</h2>
+          <p className="text-lg text-gray-700 leading-relaxed">
+            A future where every African child has access to mental health resources, lives in a sustainable 
+            environment, and enjoys equal opportunities regardless of their background or circumstances.
+          </p>
+        </div>
+      </section>
 
-                <p>
-                  Munya has contributed to Azania Productions, a female-owned film production company, working on films featured on platforms like Netflix, VIU, Showmax, and eTV's eVOD, including <em>Six In The City</em> (VIU & Netflix), <em>Mr. Johnson</em> (Showmax), and <em>ASHES of a Red Cow</em> (eVOD).
-                </p>
-
-                <p>
-                  A key event he hosted is the Joburg Shutdown Concert, aimed at combating xenophobia in South Africa by uniting Zimbabwean and South African artists. This festival highlighted the contributions of Zimbabweans, one of the largest immigrant groups in South Africa, and provided a platform for emerging African artists to perform alongside established stars like Busiswa, Winky D, DJ Tira, and more.
-                </p>
-
-                <p>
-                  During the COVID-19 pandemic, Munya initiated Acoustic Fridays, a virtual music show that showcased both upcoming and established Zimbabwean artists. This initiative reached 100,000 views per show, promoting mental health and encouraging audiences to stay home during lockdowns.
-                </p>
-
-                <p>
-                  In 2021, he collaborated with legendary DJ Qness to launch the inaugural Amapiano Awards, aired on SABC 1, which attracted 50 million viewers and celebrated outstanding Amapiano artists in South Africa, contributing to public health efforts during the pandemic.
-                </p>
-
-                <p>
-                  In 2024, Munya partnered with Thapelo Amad, the first Muslim Mayor of Johannesburg, to address climate change issues, focusing on reducing plastic pollution and promoting sustainability in Africa's busiest city.
-                </p>
-
-                <p>
-                  Munya's concerns about rising waste pollution, deforestation, and climate change-related health issues, particularly in low-income areas, inspired him to establish Dear African Child. This blog aims to tackle these urgent issues and engage Africa's youth, who represent over 60% of the continent's population.
-                </p>
-
-                <p>
-                  With the right partnerships and funding, he aims to collaborate with NGOs across Africa to initiate programs that combat climate change and promote social and gender equality.
-                </p>
+      {/* UN SDGs Section */}
+      <section className="section-container bg-african-green/10">
+        <div className="max-w-4xl mx-auto">
+          <h2 className="text-3xl font-bold mb-8 text-center text-african-dark">UN Sustainable Development Goals</h2>
+          <p className="text-lg text-center mb-8 text-gray-700">
+            Our work aligns with the United Nations Sustainable Development Goals to create lasting positive change.
+          </p>
+          <div className="grid md:grid-cols-3 gap-6">
+            <div className="bg-white p-6 rounded-lg shadow-md border text-center">
+              <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                <span className="text-2xl font-bold text-green-600">3</span>
               </div>
+              <h3 className="font-semibold mb-2 text-african-dark">Good Health and Well-being</h3>
+              <p className="text-sm text-gray-600">Promoting mental health awareness and support systems</p>
             </div>
+            <div className="bg-white p-6 rounded-lg shadow-md border text-center">
+              <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                <span className="text-2xl font-bold text-blue-600">13</span>
+              </div>
+              <h3 className="font-semibold mb-2 text-african-dark">Climate Action</h3>
+              <p className="text-sm text-gray-600">Taking urgent action to combat climate change</p>
+            </div>
+            <div className="bg-white p-6 rounded-lg shadow-md border text-center">
+              <div className="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                <span className="text-2xl font-bold text-purple-600">10</span>
+              </div>
+              <h3 className="font-semibold mb-2 text-african-dark">Reduced Inequalities</h3>
+              <p className="text-sm text-gray-600">Promoting social equality and inclusion</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Contact Information */}
+      <section className="section-container bg-white">
+        <div className="max-w-2xl mx-auto text-center">
+          <h2 className="text-3xl font-bold mb-6 text-african-dark">Get In Touch</h2>
+          <p className="text-lg mb-6 text-gray-700">
+            Have questions or want to collaborate? We'd love to hear from you.
+          </p>
+          <div className="text-lg text-african-blue">
+            <a href="mailto:dear@africanchild.org" className="hover:underline">
+              dear@africanchild.org
+            </a>
           </div>
         </div>
       </section>

@@ -1,21 +1,42 @@
 
-import React from 'react';
+import React, { useState } from 'react';
 import { useParams, Navigate } from 'react-router-dom';
-import { Calendar, ArrowLeft } from 'lucide-react';
+import { Calendar, ArrowLeft, Heart } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
-import { useArticle } from '@/hooks/useArticles';
+import { useArticle, useLikeArticle, useUnlikeArticle } from '@/hooks/useArticles';
 import CommentSection from '@/components/CommentSection';
 import { format } from 'date-fns';
 
 const Article = () => {
   const { id } = useParams<{ id: string }>();
+  const [hasLiked, setHasLiked] = useState(false);
   
   if (!id) {
     return <Navigate to="/blog" replace />;
   }
 
   const { data: article, isLoading, error } = useArticle(id);
+  const likeArticleMutation = useLikeArticle();
+  const unlikeArticleMutation = useUnlikeArticle();
+
+  const handleLike = () => {
+    if (!article) return;
+    
+    if (hasLiked) {
+      unlikeArticleMutation.mutate({ 
+        articleId: article.id, 
+        currentLikes: article.likes 
+      });
+      setHasLiked(false);
+    } else {
+      likeArticleMutation.mutate({ 
+        articleId: article.id, 
+        currentLikes: article.likes 
+      });
+      setHasLiked(true);
+    }
+  };
 
   if (isLoading) {
     return (
@@ -76,6 +97,18 @@ const Article = () => {
                 <Calendar className="h-4 w-4 mr-2" />
                 {format(new Date(article.date), 'MMMM dd, yyyy')}
               </div>
+              <button
+                onClick={handleLike}
+                className={`flex items-center gap-1 px-3 py-1 rounded-full text-sm transition-colors ${
+                  hasLiked 
+                    ? 'bg-red-100 text-red-600 hover:bg-red-200' 
+                    : 'bg-gray-100 text-gray-600 hover:bg-red-100 hover:text-red-600'
+                }`}
+                disabled={likeArticleMutation.isPending || unlikeArticleMutation.isPending}
+              >
+                <Heart className={`h-4 w-4 ${hasLiked ? 'fill-current' : ''}`} />
+                <span>{article.likes}</span>
+              </button>
             </div>
             
             <h1 className="text-4xl md:text-5xl font-bold text-african-dark mb-6">{article.title}</h1>
