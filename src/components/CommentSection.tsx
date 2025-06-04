@@ -62,9 +62,10 @@ const CommentSection = ({ articleId }: CommentSectionProps) => {
     
     if (hasLiked) {
       // Unlike the comment
+      const newLikes = Math.max(0, currentLikes - 1);
       likeCommentMutation.mutate({ 
         commentId, 
-        currentLikes: Math.max(0, currentLikes - 1) 
+        currentLikes: newLikes 
       });
       setLikedComments(prev => {
         const newSet = new Set(prev);
@@ -73,9 +74,10 @@ const CommentSection = ({ articleId }: CommentSectionProps) => {
       });
     } else {
       // Like the comment
+      const newLikes = currentLikes + 1;
       likeCommentMutation.mutate({ 
         commentId, 
-        currentLikes: currentLikes + 1 
+        currentLikes: newLikes 
       });
       setLikedComments(prev => new Set(prev).add(commentId));
     }
@@ -128,6 +130,8 @@ const CommentSection = ({ articleId }: CommentSectionProps) => {
           <div className="max-h-96 overflow-y-auto space-y-4">
             {comments.map((comment) => {
               const hasLiked = likedComments.has(comment.id);
+              const displayLikes = hasLiked ? comment.likes + 1 : comment.likes;
+              
               return (
                 <div key={comment.id} className="p-4 bg-white rounded-lg border border-gray-200 shadow-sm">
                   <div className="flex justify-between items-start mb-2">
@@ -147,7 +151,7 @@ const CommentSection = ({ articleId }: CommentSectionProps) => {
                       disabled={likeCommentMutation.isPending}
                     >
                       <Heart className={`h-4 w-4 ${hasLiked ? 'fill-current' : ''}`} />
-                      <span>{comment.likes}</span>
+                      <span>{displayLikes}</span>
                     </button>
                   </div>
                   <p className="text-gray-700">{comment.comment}</p>

@@ -10,7 +10,7 @@ const Home = () => {
     <div className="min-h-screen">
       {/* Hero Section */}
       <section className="relative bg-gradient-to-br from-african-blue/20 via-african-green/10 to-african-beige/30 py-20 overflow-hidden min-h-[80vh] flex items-center">
-        <div className="absolute inset-0 bg-[url('/lovable-uploads/13af3390-8eef-4513-b440-e895683dde4f.png')] bg-cover bg-center opacity-30"></div>
+        <div className="absolute inset-0 bg-[url('/lovable-uploads/13af3390-8eef-4513-b440-e895683dde4f.png')] bg-cover bg-center"></div>
         <div className="relative container mx-auto px-4 text-center">
           <h1 className="text-5xl md:text-7xl font-bold mb-8 text-white drop-shadow-2xl" style={{ fontFamily: "'Impact', 'Arial Black', sans-serif", textShadow: '3px 3px 6px rgba(0,0,0,0.8)' }}>
             Dear African Child
@@ -52,8 +52,8 @@ const Home = () => {
       {/* Features Grid */}
       <section className="section-container bg-gradient-to-b from-african-blue/5 to-white">
         <div className="grid md:grid-cols-3 gap-8">
-          <div className="text-center p-8 bg-white rounded-lg shadow-lg border transition-shadow">
-            <div className="w-40 h-40 mx-auto mb-6 overflow-hidden rounded-lg">
+          <div className="text-center p-8 bg-gradient-to-br from-green-50 to-green-100 rounded-lg shadow-lg border transition-shadow">
+            <div className="w-48 h-48 mx-auto mb-6 overflow-hidden rounded-lg">
               <img 
                 src="/lovable-uploads/4beebcca-0f9d-43c6-aab8-9458e05e54a7.png" 
                 alt="Climate Action"
@@ -66,8 +66,8 @@ const Home = () => {
             </p>
           </div>
           
-          <div className="text-center p-8 bg-white rounded-lg shadow-lg border transition-shadow">
-            <div className="w-40 h-40 mx-auto mb-6 overflow-hidden rounded-lg">
+          <div className="text-center p-8 bg-gradient-to-br from-green-50 to-green-100 rounded-lg shadow-lg border transition-shadow">
+            <div className="w-48 h-48 mx-auto mb-6 overflow-hidden rounded-lg">
               <img 
                 src="/lovable-uploads/2b0541c8-9ee8-420c-af46-779a21599afc.png" 
                 alt="Mental Health"
@@ -80,8 +80,8 @@ const Home = () => {
             </p>
           </div>
           
-          <div className="text-center p-8 bg-white rounded-lg shadow-lg border transition-shadow">
-            <div className="w-40 h-40 mx-auto mb-6 overflow-hidden rounded-lg">
+          <div className="text-center p-8 bg-gradient-to-br from-green-50 to-green-100 rounded-lg shadow-lg border transition-shadow">
+            <div className="w-48 h-48 mx-auto mb-6 overflow-hidden rounded-lg">
               <img 
                 src="/lovable-uploads/dbce2d24-6a96-453a-9739-e19f644a6c00.png" 
                 alt="Equity and Equality"

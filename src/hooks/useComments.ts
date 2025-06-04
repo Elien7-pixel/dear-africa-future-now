@@ -62,7 +62,7 @@ export const useLikeComment = () => {
     mutationFn: async ({ commentId, currentLikes }: { commentId: string; currentLikes: number }) => {
       const { data, error } = await supabase
         .from('comments')
-        .update({ likes: currentLikes + 1 })
+        .update({ likes: currentLikes })
         .eq('id', commentId)
         .select()
         .single();
