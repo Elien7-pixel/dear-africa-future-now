@@ -15,6 +15,7 @@ interface CommentSectionProps {
 const CommentSection = ({ articleId }: CommentSectionProps) => {
   const [name, setName] = useState('');
   const [comment, setComment] = useState('');
+  const [likedComments, setLikedComments] = useState<Set<string>>(new Set());
   const { toast } = useToast();
   
   const { data: comments, isLoading } = useComments(articleId);
@@ -57,7 +58,27 @@ const CommentSection = ({ articleId }: CommentSectionProps) => {
   };
 
   const handleLike = (commentId: string, currentLikes: number) => {
-    likeCommentMutation.mutate({ commentId, currentLikes });
+    const hasLiked = likedComments.has(commentId);
+    
+    if (hasLiked) {
+      // Unlike the comment
+      likeCommentMutation.mutate({ 
+        commentId, 
+        currentLikes: Math.max(0, currentLikes - 1) 
+      });
+      setLikedComments(prev => {
+        const newSet = new Set(prev);
+        newSet.delete(commentId);
+        return newSet;
+      });
+    } else {
+      // Like the comment
+      likeCommentMutation.mutate({ 
+        commentId, 
+        currentLikes: currentLikes + 1 
+      });
+      setLikedComments(prev => new Set(prev).add(commentId));
+    }
   };
 
   return (
@@ -105,27 +126,34 @@ const CommentSection = ({ articleId }: CommentSectionProps) => {
           </div>
         ) : comments && comments.length > 0 ? (
           <div className="max-h-96 overflow-y-auto space-y-4">
-            {comments.map((comment) => (
-              <div key={comment.id} className="p-4 bg-white rounded-lg border border-gray-200 shadow-sm">
-                <div className="flex justify-between items-start mb-2">
-                  <div>
-                    <h5 className="font-semibold text-african-dark">{comment.name}</h5>
-                    <p className="text-sm text-gray-500">
-                      {formatDistanceToNow(new Date(comment.created_at), { addSuffix: true })}
-                    </p>
+            {comments.map((comment) => {
+              const hasLiked = likedComments.has(comment.id);
+              return (
+                <div key={comment.id} className="p-4 bg-white rounded-lg border border-gray-200 shadow-sm">
+                  <div className="flex justify-between items-start mb-2">
+                    <div>
+                      <h5 className="font-semibold text-african-dark">{comment.name}</h5>
+                      <p className="text-sm text-gray-500">
+                        {formatDistanceToNow(new Date(comment.created_at), { addSuffix: true })}
+                      </p>
+                    </div>
+                    <button
+                      onClick={() => handleLike(comment.id, comment.likes)}
+                      className={`flex items-center gap-1 text-sm transition-colors ${
+                        hasLiked 
+                          ? 'text-red-500 hover:text-red-600' 
+                          : 'text-gray-600 hover:text-red-500'
+                      }`}
+                      disabled={likeCommentMutation.isPending}
+                    >
+                      <Heart className={`h-4 w-4 ${hasLiked ? 'fill-current' : ''}`} />
+                      <span>{comment.likes}</span>
+                    </button>
                   </div>
-                  <button
-                    onClick={() => handleLike(comment.id, comment.likes)}
-                    className="flex items-center gap-1 text-sm text-gray-600 hover:text-red-500 transition-colors"
-                    disabled={likeCommentMutation.isPending}
-                  >
-                    <Heart className="h-4 w-4" />
-                    <span>{comment.likes}</span>
-                  </button>
+                  <p className="text-gray-700">{comment.comment}</p>
                 </div>
-                <p className="text-gray-700">{comment.comment}</p>
-              </div>
-            ))}
+              );
+            })}
           </div>
         ) : (
           <div className="text-center py-8 text-gray-600">

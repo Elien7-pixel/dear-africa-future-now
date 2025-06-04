@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useParams, Navigate } from 'react-router-dom';
 import { Calendar, ArrowLeft, Heart } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -11,6 +11,7 @@ import { format } from 'date-fns';
 const Article = () => {
   const { id } = useParams<{ id: string }>();
   const [hasLiked, setHasLiked] = useState(false);
+  const [currentLikes, setCurrentLikes] = useState(0);
   
   if (!id) {
     return <Navigate to="/blog" replace />;
@@ -20,21 +21,29 @@ const Article = () => {
   const likeArticleMutation = useLikeArticle();
   const unlikeArticleMutation = useUnlikeArticle();
 
+  useEffect(() => {
+    if (article) {
+      setCurrentLikes(article.likes);
+    }
+  }, [article]);
+
   const handleLike = () => {
     if (!article) return;
     
     if (hasLiked) {
       unlikeArticleMutation.mutate({ 
         articleId: article.id, 
-        currentLikes: article.likes 
+        currentLikes: currentLikes 
       });
       setHasLiked(false);
+      setCurrentLikes(prev => Math.max(0, prev - 1));
     } else {
       likeArticleMutation.mutate({ 
         articleId: article.id, 
-        currentLikes: article.likes 
+        currentLikes: currentLikes 
       });
       setHasLiked(true);
+      setCurrentLikes(prev => prev + 1);
     }
   };
 
@@ -69,6 +78,7 @@ const Article = () => {
         return 'bg-emerald-100 text-emerald-700';
       case 'climate action':
         return 'bg-green-100 text-green-700';
+      case 'equity and equality':
       case 'social equality':
         return 'bg-blue-100 text-blue-700';
       case 'inspirational':
@@ -107,7 +117,7 @@ const Article = () => {
                 disabled={likeArticleMutation.isPending || unlikeArticleMutation.isPending}
               >
                 <Heart className={`h-4 w-4 ${hasLiked ? 'fill-current' : ''}`} />
-                <span>{article.likes}</span>
+                <span>{currentLikes}</span>
               </button>
             </div>
             
