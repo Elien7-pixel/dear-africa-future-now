@@ -25,7 +25,7 @@ const Article = () => {
     
     likeArticleMutation.mutate({ 
       articleId: article.id, 
-      currentLikes: article.likes 
+      currentLikes: article.likes || 0
     });
   };
 
@@ -128,7 +128,7 @@ const Article = () => {
                 disabled={likeArticleMutation.isPending}
               >
                 <Heart className="h-4 w-4" />
-                <span>{article.likes}</span>
+                <span>{article.likes || 0}</span>
               </button>
               <button
                 onClick={handleShare}
