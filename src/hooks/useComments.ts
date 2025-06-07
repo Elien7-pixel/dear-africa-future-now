@@ -5,20 +5,15 @@ import type { Tables } from '@/integrations/supabase/types';
 
 export type Comment = Tables<'comments'>;
 
-export const useComments = (articleId?: string) => {
+export const useComments = (articleId: string) => {
   return useQuery({
     queryKey: ['comments', articleId],
     queryFn: async () => {
-      const query = supabase
+      const { data, error } = await supabase
         .from('comments')
         .select('*')
+        .eq('article_id', articleId)
         .order('created_at', { ascending: false });
-      
-      if (articleId) {
-        query.eq('article_id', articleId);
-      }
-      
-      const { data, error } = await query;
       
       if (error) {
         console.error('Error fetching comments:', error);
@@ -27,48 +22,28 @@ export const useComments = (articleId?: string) => {
       
       return data;
     },
-    enabled: !!articleId,
   });
 };
 
-export const useCreateComment = () => {
+export const useAddComment = () => {
   const queryClient = useQueryClient();
   
   return useMutation({
-    mutationFn: async ({ articleId, name, comment }: { articleId: string; name: string; comment: string }) => {
+    mutationFn: async ({ articleId, author, content }: { articleId: string; author: string; content: string }) => {
       const { data, error } = await supabase
         .from('comments')
-        .insert([{ article_id: articleId, name, comment }])
+        .insert([
+          {
+            article_id: articleId,
+            author,
+            content,
+          }
+        ])
         .select()
         .single();
       
       if (error) {
-        console.error('Error creating comment:', error);
-        throw error;
-      }
-      
-      return data;
-    },
-    onSuccess: (_, variables) => {
-      queryClient.invalidateQueries({ queryKey: ['comments', variables.articleId] });
-    },
-  });
-};
-
-export const useLikeComment = () => {
-  const queryClient = useQueryClient();
-  
-  return useMutation({
-    mutationFn: async ({ commentId, currentLikes }: { commentId: string; currentLikes: number }) => {
-      const { data, error } = await supabase
-        .from('comments')
-        .update({ likes: currentLikes + 1 })
-        .eq('id', commentId)
-        .select()
-        .single();
-      
-      if (error) {
-        console.error('Error updating comment likes:', error);
+        console.error('Error adding comment:', error);
         throw error;
       }
       

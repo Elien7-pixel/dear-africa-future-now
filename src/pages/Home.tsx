@@ -4,23 +4,28 @@ import { Button } from '@/components/ui/button';
 import { ArrowRight, Heart, Users, Globe, Mail } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import NewsletterSubscription from '@/components/NewsletterSubscription';
+import { useArticles } from '@/hooks/useArticles';
+import ArticleCard from '@/components/ArticleCard';
 
 const Home = () => {
+  const { data: articles, isLoading } = useArticles();
+  const featuredArticles = articles?.slice(0, 3) || [];
+
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
       <section className="relative bg-gradient-to-br from-african-blue/20 via-african-green/10 to-african-beige/30 py-20 overflow-hidden min-h-[80vh] flex items-center">
         <div className="absolute inset-0 bg-[url('/lovable-uploads/13af3390-8eef-4513-b440-e895683dde4f.png')] bg-cover bg-center"></div>
-        <div className="absolute inset-0 bg-black/50"></div>
+        <div className="absolute inset-0 bg-black/70"></div>
         <div className="relative container mx-auto px-4 text-center">
           <h1 className="text-5xl md:text-7xl font-bold mb-8 text-white drop-shadow-2xl" style={{ fontFamily: "'Impact', 'Arial Black', sans-serif", textShadow: '3px 3px 6px rgba(0,0,0,0.8)' }}>
             Dear African Child
           </h1>
-          <p className="text-lg md:text-xl max-w-3xl mx-auto leading-relaxed text-white mb-8 drop-shadow-lg" style={{ textShadow: '2px 2px 4px rgba(0,0,0,0.7)' }}>
+          <p className="text-lg md:text-xl max-w-3xl mx-auto leading-relaxed text-white mb-12 drop-shadow-lg" style={{ textShadow: '2px 2px 4px rgba(0,0,0,0.7)' }}>
             Welcome to Dear African Child—a blog dedicated to empowering and uplifting African communities through awareness and advocacy.
           </p>
           <div className="mt-6 flex flex-col sm:flex-row gap-4 justify-center">
-            <Button asChild size="lg" className="bg-african-green hover:bg-african-green/90 text-white px-8 py-3 shadow-lg">
+            <Button asChild size="lg" className="bg-african-green hover:bg-african-green/90 text-white px-8 py-3 shadow-lg md:bg-opacity-100 bg-transparent border-2 border-african-green">
               <Link to="/about">Learn More <ArrowRight className="ml-2 h-5 w-5" /></Link>
             </Button>
           </div>
@@ -81,12 +86,12 @@ const Home = () => {
             </p>
           </div>
           
-          <div className="text-center p-8 bg-gradient-to-br from-green-50 to-green-100 rounded-lg shadow-lg border transition-shadow">
-            <div className="w-56 h-56 mx-auto mb-6 overflow-hidden rounded-lg">
+          <div className="text-center p-8 bg-gradient-to-br from-green-50 to-green-100 rounded-lg shadow-lg border transition-shadow group">
+            <div className="w-56 h-56 mx-auto mb-6 overflow-hidden rounded-lg relative">
               <img 
                 src="/lovable-uploads/dbce2d24-6a96-453a-9739-e19f644a6c00.png" 
                 alt="Equity and Equality"
-                className="w-full h-full object-cover"
+                className="w-full h-full object-cover transition-all duration-500 group-hover:fixed group-hover:inset-0 group-hover:w-screen group-hover:h-screen group-hover:object-contain group-hover:z-50 group-hover:bg-black group-hover:bg-opacity-90"
               />
             </div>
             <h3 className="text-2xl font-bold mb-4 text-african-green">Equity and Equality</h3>
@@ -96,6 +101,29 @@ const Home = () => {
           </div>
         </div>
       </section>
+
+      {/* Featured Articles */}
+      {featuredArticles.length > 0 && (
+        <section className="section-container bg-gradient-to-b from-white to-african-green/5">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl md:text-5xl font-bold mb-6 text-african-green">Latest Articles</h2>
+            <div className="w-20 h-1 bg-african-orange mx-auto mb-8"></div>
+            <p className="text-xl max-w-3xl mx-auto text-gray-700">
+              Discover our latest insights and stories from the African community.
+            </p>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-8">
+            {featuredArticles.map((article) => (
+              <ArticleCard key={article.id} article={article} />
+            ))}
+          </div>
+          <div className="text-center">
+            <Button asChild className="bg-african-orange hover:bg-african-orange/90">
+              <Link to="/blog">View All Articles <ArrowRight className="ml-2 h-4 w-4" /></Link>
+            </Button>
+          </div>
+        </section>
+      )}
 
       {/* Call to Action Section */}
       <section className="section-container bg-gradient-to-b from-white to-african-green/10">

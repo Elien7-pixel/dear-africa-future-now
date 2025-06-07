@@ -2,64 +2,16 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
-import { ArrowRight, Calendar, Heart, Share2 } from 'lucide-react';
+import { ArrowRight, Calendar } from 'lucide-react';
 import type { Article } from '@/hooks/useArticles';
-import { useLikeArticle } from '@/hooks/useArticles';
 import { format } from 'date-fns';
-import { useToast } from '@/hooks/use-toast';
+import ShareButton from './ShareButton';
 
 interface ArticleCardProps {
   article: Article;
 }
 
 const ArticleCard = ({ article }: ArticleCardProps) => {
-  const likeArticleMutation = useLikeArticle();
-  const { toast } = useToast();
-
-  const handleLike = (e: React.MouseEvent) => {
-    e.preventDefault();
-    e.stopPropagation();
-    
-    likeArticleMutation.mutate({ 
-      articleId: article.id, 
-      currentLikes: article.likes || 0
-    });
-  };
-
-  const handleShare = (e: React.MouseEvent) => {
-    e.preventDefault();
-    e.stopPropagation();
-    
-    const url = `${window.location.origin}/article/${article.id}`;
-    
-    if (navigator.share) {
-      navigator.share({
-        title: article.title,
-        text: article.excerpt,
-        url: url,
-      }).catch((error) => {
-        console.log('Error sharing:', error);
-        fallbackShare(url);
-      });
-    } else {
-      fallbackShare(url);
-    }
-  };
-
-  const fallbackShare = (url: string) => {
-    navigator.clipboard.writeText(url).then(() => {
-      toast({
-        title: "Link Copied",
-        description: "Article link has been copied to your clipboard!",
-      });
-    }).catch(() => {
-      toast({
-        title: "Share",
-        description: `Share this article: ${url}`,
-      });
-    });
-  };
-
   const getCategoryColor = (category: string) => {
     switch (category.toLowerCase()) {
       case 'mental health':
@@ -106,6 +58,8 @@ const ArticleCard = ({ article }: ArticleCardProps) => {
     }
   };
 
+  const articleUrl = `${window.location.origin}/article/${article.id}`;
+
   return (
     <article className="bg-white rounded-lg overflow-hidden shadow-md border hover:shadow-lg transition-shadow">
       <div className="h-48 bg-gradient-to-br from-gray-50 to-gray-100 flex items-center justify-center">
@@ -129,20 +83,12 @@ const ArticleCard = ({ article }: ArticleCardProps) => {
               <Calendar className="h-4 w-4 mr-1" />
               {format(new Date(article.date), 'MMM dd, yyyy')}
             </div>
-            <button
-              onClick={handleLike}
-              className="flex items-center gap-1 text-sm text-gray-600 hover:text-red-600 transition-colors"
-              disabled={likeArticleMutation.isPending}
-            >
-              <Heart className="h-4 w-4" />
-              <span>{article.likes || 0}</span>
-            </button>
-            <button
-              onClick={handleShare}
-              className="flex items-center gap-1 text-sm text-gray-600 hover:text-blue-600 transition-colors"
-            >
-              <Share2 className="h-4 w-4" />
-            </button>
+            <ShareButton
+              title={article.title}
+              excerpt={article.excerpt}
+              url={articleUrl}
+              imageUrl={article.image_url}
+            />
           </div>
         </div>
         <h3 className="text-xl font-bold mb-2 text-african-dark line-clamp-2">{article.title}</h3>

@@ -43,29 +43,3 @@ export const useArticle = (id: string) => {
     },
   });
 };
-
-export const useLikeArticle = () => {
-  const queryClient = useQueryClient();
-  
-  return useMutation({
-    mutationFn: async ({ articleId, currentLikes }: { articleId: string; currentLikes: number }) => {
-      const { data, error } = await supabase
-        .from('articles')
-        .update({ likes: currentLikes + 1 })
-        .eq('id', articleId)
-        .select()
-        .single();
-      
-      if (error) {
-        console.error('Error updating article likes:', error);
-        throw error;
-      }
-      
-      return data;
-    },
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['articles'] });
-      queryClient.invalidateQueries({ queryKey: ['article'] });
-    },
-  });
-};

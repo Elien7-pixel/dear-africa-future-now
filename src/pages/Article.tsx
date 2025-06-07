@@ -1,66 +1,22 @@
 
 import React from 'react';
 import { useParams, Navigate } from 'react-router-dom';
-import { Calendar, ArrowLeft, Heart, Share2 } from 'lucide-react';
+import { Calendar, ArrowLeft } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
-import { useArticle, useLikeArticle } from '@/hooks/useArticles';
+import { useArticle } from '@/hooks/useArticles';
 import CommentSection from '@/components/CommentSection';
 import { format } from 'date-fns';
-import { useToast } from '@/hooks/use-toast';
+import ShareButton from '@/components/ShareButton';
 
 const Article = () => {
   const { id } = useParams<{ id: string }>();
-  const { toast } = useToast();
   
   if (!id) {
     return <Navigate to="/blog" replace />;
   }
 
   const { data: article, isLoading, error } = useArticle(id);
-  const likeArticleMutation = useLikeArticle();
-
-  const handleLike = () => {
-    if (!article) return;
-    
-    likeArticleMutation.mutate({ 
-      articleId: article.id, 
-      currentLikes: article.likes || 0
-    });
-  };
-
-  const handleShare = () => {
-    if (!article) return;
-    
-    const url = window.location.href;
-    
-    if (navigator.share) {
-      navigator.share({
-        title: article.title,
-        text: article.excerpt,
-        url: url,
-      }).catch((error) => {
-        console.log('Error sharing:', error);
-        fallbackShare(url);
-      });
-    } else {
-      fallbackShare(url);
-    }
-  };
-
-  const fallbackShare = (url: string) => {
-    navigator.clipboard.writeText(url).then(() => {
-      toast({
-        title: "Link Copied",
-        description: "Article link has been copied to your clipboard!",
-      });
-    }).catch(() => {
-      toast({
-        title: "Share",
-        description: `Share this article: ${url}`,
-      });
-    });
-  };
 
   if (isLoading) {
     return (
@@ -103,6 +59,8 @@ const Article = () => {
     }
   };
 
+  const articleUrl = `${window.location.origin}/article/${article.id}`;
+
   return (
     <div className="min-h-screen">
       {/* Article Header */}
@@ -122,21 +80,12 @@ const Article = () => {
                 <Calendar className="h-4 w-4 mr-2" />
                 {format(new Date(article.date), 'MMMM dd, yyyy')}
               </div>
-              <button
-                onClick={handleLike}
-                className="flex items-center gap-1 px-3 py-1 rounded-full text-sm bg-gray-100 text-gray-600 hover:bg-red-100 hover:text-red-600 transition-colors"
-                disabled={likeArticleMutation.isPending}
-              >
-                <Heart className="h-4 w-4" />
-                <span>{article.likes || 0}</span>
-              </button>
-              <button
-                onClick={handleShare}
-                className="flex items-center gap-1 px-3 py-1 rounded-full text-sm bg-gray-100 text-gray-600 hover:bg-blue-100 hover:text-blue-600 transition-colors"
-              >
-                <Share2 className="h-4 w-4" />
-                <span>Share</span>
-              </button>
+              <ShareButton
+                title={article.title}
+                excerpt={article.excerpt}
+                url={articleUrl}
+                imageUrl={article.image_url}
+              />
             </div>
             
             <h1 className="text-4xl md:text-5xl font-bold text-african-green mb-6">{article.title}</h1>
