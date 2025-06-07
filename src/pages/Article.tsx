@@ -1,17 +1,17 @@
 
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { useParams, Navigate } from 'react-router-dom';
-import { Calendar, ArrowLeft, Heart } from 'lucide-react';
+import { Calendar, ArrowLeft, Heart, Share2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
-import { useArticle, useLikeArticle, useUnlikeArticle } from '@/hooks/useArticles';
+import { useArticle, useLikeArticle } from '@/hooks/useArticles';
 import CommentSection from '@/components/CommentSection';
 import { format } from 'date-fns';
+import { useToast } from '@/hooks/use-toast';
 
 const Article = () => {
   const { id } = useParams<{ id: string }>();
-  const [hasLiked, setHasLiked] = useState(false);
-  const [currentLikes, setCurrentLikes] = useState(0);
+  const { toast } = useToast();
   
   if (!id) {
     return <Navigate to="/blog" replace />;
@@ -19,32 +19,47 @@ const Article = () => {
 
   const { data: article, isLoading, error } = useArticle(id);
   const likeArticleMutation = useLikeArticle();
-  const unlikeArticleMutation = useUnlikeArticle();
-
-  useEffect(() => {
-    if (article) {
-      setCurrentLikes(article.likes);
-    }
-  }, [article]);
 
   const handleLike = () => {
     if (!article) return;
     
-    if (hasLiked) {
-      unlikeArticleMutation.mutate({ 
-        articleId: article.id, 
-        currentLikes: currentLikes 
+    likeArticleMutation.mutate({ 
+      articleId: article.id, 
+      currentLikes: article.likes 
+    });
+  };
+
+  const handleShare = () => {
+    if (!article) return;
+    
+    const url = window.location.href;
+    
+    if (navigator.share) {
+      navigator.share({
+        title: article.title,
+        text: article.excerpt,
+        url: url,
+      }).catch((error) => {
+        console.log('Error sharing:', error);
+        fallbackShare(url);
       });
-      setHasLiked(false);
-      setCurrentLikes(prev => Math.max(0, prev - 1));
     } else {
-      likeArticleMutation.mutate({ 
-        articleId: article.id, 
-        currentLikes: currentLikes 
-      });
-      setHasLiked(true);
-      setCurrentLikes(prev => prev + 1);
+      fallbackShare(url);
     }
+  };
+
+  const fallbackShare = (url: string) => {
+    navigator.clipboard.writeText(url).then(() => {
+      toast({
+        title: "Link Copied",
+        description: "Article link has been copied to your clipboard!",
+      });
+    }).catch(() => {
+      toast({
+        title: "Share",
+        description: `Share this article: ${url}`,
+      });
+    });
   };
 
   if (isLoading) {
@@ -109,19 +124,22 @@ const Article = () => {
               </div>
               <button
                 onClick={handleLike}
-                className={`flex items-center gap-1 px-3 py-1 rounded-full text-sm transition-colors ${
-                  hasLiked 
-                    ? 'bg-red-100 text-red-600 hover:bg-red-200' 
-                    : 'bg-gray-100 text-gray-600 hover:bg-red-100 hover:text-red-600'
-                }`}
-                disabled={likeArticleMutation.isPending || unlikeArticleMutation.isPending}
+                className="flex items-center gap-1 px-3 py-1 rounded-full text-sm bg-gray-100 text-gray-600 hover:bg-red-100 hover:text-red-600 transition-colors"
+                disabled={likeArticleMutation.isPending}
               >
-                <Heart className={`h-4 w-4 ${hasLiked ? 'fill-current' : ''}`} />
-                <span>{currentLikes}</span>
+                <Heart className="h-4 w-4" />
+                <span>{article.likes}</span>
+              </button>
+              <button
+                onClick={handleShare}
+                className="flex items-center gap-1 px-3 py-1 rounded-full text-sm bg-gray-100 text-gray-600 hover:bg-blue-100 hover:text-blue-600 transition-colors"
+              >
+                <Share2 className="h-4 w-4" />
+                <span>Share</span>
               </button>
             </div>
             
-            <h1 className="text-4xl md:text-5xl font-bold text-african-dark mb-6">{article.title}</h1>
+            <h1 className="text-4xl md:text-5xl font-bold text-african-green mb-6">{article.title}</h1>
             <p className="text-xl text-gray-700">{article.excerpt}</p>
           </div>
         </div>

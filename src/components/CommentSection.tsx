@@ -15,7 +15,6 @@ interface CommentSectionProps {
 const CommentSection = ({ articleId }: CommentSectionProps) => {
   const [name, setName] = useState('');
   const [comment, setComment] = useState('');
-  const [likedComments, setLikedComments] = useState<Set<string>>(new Set());
   const { toast } = useToast();
   
   const { data: comments, isLoading } = useComments(articleId);
@@ -58,36 +57,17 @@ const CommentSection = ({ articleId }: CommentSectionProps) => {
   };
 
   const handleLike = (commentId: string, currentLikes: number) => {
-    const hasLiked = likedComments.has(commentId);
-    
-    if (hasLiked) {
-      // Unlike the comment
-      const newLikes = Math.max(0, currentLikes - 1);
-      likeCommentMutation.mutate({ 
-        commentId, 
-        currentLikes: newLikes 
-      });
-      setLikedComments(prev => {
-        const newSet = new Set(prev);
-        newSet.delete(commentId);
-        return newSet;
-      });
-    } else {
-      // Like the comment
-      const newLikes = currentLikes + 1;
-      likeCommentMutation.mutate({ 
-        commentId, 
-        currentLikes: newLikes 
-      });
-      setLikedComments(prev => new Set(prev).add(commentId));
-    }
+    likeCommentMutation.mutate({ 
+      commentId, 
+      currentLikes 
+    });
   };
 
   return (
     <div className="mt-12 border-t pt-8">
       <div className="flex items-center gap-2 mb-6">
         <MessageCircle className="h-5 w-5 text-african-orange" />
-        <h3 className="text-2xl font-bold text-african-dark">Comments</h3>
+        <h3 className="text-2xl font-bold text-african-green">Comments</h3>
       </div>
 
       {/* Comment Form */}
@@ -128,36 +108,27 @@ const CommentSection = ({ articleId }: CommentSectionProps) => {
           </div>
         ) : comments && comments.length > 0 ? (
           <div className="max-h-96 overflow-y-auto space-y-4">
-            {comments.map((comment) => {
-              const hasLiked = likedComments.has(comment.id);
-              const displayLikes = hasLiked ? comment.likes + 1 : comment.likes;
-              
-              return (
-                <div key={comment.id} className="p-4 bg-white rounded-lg border border-gray-200 shadow-sm">
-                  <div className="flex justify-between items-start mb-2">
-                    <div>
-                      <h5 className="font-semibold text-african-dark">{comment.name}</h5>
-                      <p className="text-sm text-gray-500">
-                        {formatDistanceToNow(new Date(comment.created_at), { addSuffix: true })}
-                      </p>
-                    </div>
-                    <button
-                      onClick={() => handleLike(comment.id, comment.likes)}
-                      className={`flex items-center gap-1 text-sm transition-colors ${
-                        hasLiked 
-                          ? 'text-red-500 hover:text-red-600' 
-                          : 'text-gray-600 hover:text-red-500'
-                      }`}
-                      disabled={likeCommentMutation.isPending}
-                    >
-                      <Heart className={`h-4 w-4 ${hasLiked ? 'fill-current' : ''}`} />
-                      <span>{displayLikes}</span>
-                    </button>
+            {comments.map((comment) => (
+              <div key={comment.id} className="p-4 bg-white rounded-lg border border-gray-200 shadow-sm">
+                <div className="flex justify-between items-start mb-2">
+                  <div>
+                    <h5 className="font-semibold text-african-dark">{comment.name}</h5>
+                    <p className="text-sm text-gray-500">
+                      {formatDistanceToNow(new Date(comment.created_at), { addSuffix: true })}
+                    </p>
                   </div>
-                  <p className="text-gray-700">{comment.comment}</p>
+                  <button
+                    onClick={() => handleLike(comment.id, comment.likes)}
+                    className="flex items-center gap-1 text-sm text-gray-600 hover:text-red-500 transition-colors"
+                    disabled={likeCommentMutation.isPending}
+                  >
+                    <Heart className="h-4 w-4" />
+                    <span>{comment.likes}</span>
+                  </button>
                 </div>
-              );
-            })}
+                <p className="text-gray-700">{comment.comment}</p>
+              </div>
+            ))}
           </div>
         ) : (
           <div className="text-center py-8 text-gray-600">

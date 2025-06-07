@@ -1,45 +1,63 @@
 
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
-import { ArrowRight, Calendar, Heart } from 'lucide-react';
+import { ArrowRight, Calendar, Heart, Share2 } from 'lucide-react';
 import type { Article } from '@/hooks/useArticles';
-import { useLikeArticle, useUnlikeArticle } from '@/hooks/useArticles';
+import { useLikeArticle } from '@/hooks/useArticles';
 import { format } from 'date-fns';
+import { useToast } from '@/hooks/use-toast';
 
 interface ArticleCardProps {
   article: Article;
 }
 
 const ArticleCard = ({ article }: ArticleCardProps) => {
-  const [hasLiked, setHasLiked] = useState(false);
-  const [currentLikes, setCurrentLikes] = useState(article.likes);
   const likeArticleMutation = useLikeArticle();
-  const unlikeArticleMutation = useUnlikeArticle();
-
-  useEffect(() => {
-    setCurrentLikes(article.likes);
-  }, [article.likes]);
+  const { toast } = useToast();
 
   const handleLike = (e: React.MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
     
-    if (hasLiked) {
-      unlikeArticleMutation.mutate({ 
-        articleId: article.id, 
-        currentLikes: currentLikes 
+    likeArticleMutation.mutate({ 
+      articleId: article.id, 
+      currentLikes: article.likes 
+    });
+  };
+
+  const handleShare = (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    
+    const url = `${window.location.origin}/article/${article.id}`;
+    
+    if (navigator.share) {
+      navigator.share({
+        title: article.title,
+        text: article.excerpt,
+        url: url,
+      }).catch((error) => {
+        console.log('Error sharing:', error);
+        fallbackShare(url);
       });
-      setHasLiked(false);
-      setCurrentLikes(prev => Math.max(0, prev - 1));
     } else {
-      likeArticleMutation.mutate({ 
-        articleId: article.id, 
-        currentLikes: currentLikes 
-      });
-      setHasLiked(true);
-      setCurrentLikes(prev => prev + 1);
+      fallbackShare(url);
     }
+  };
+
+  const fallbackShare = (url: string) => {
+    navigator.clipboard.writeText(url).then(() => {
+      toast({
+        title: "Link Copied",
+        description: "Article link has been copied to your clipboard!",
+      });
+    }).catch(() => {
+      toast({
+        title: "Share",
+        description: `Share this article: ${url}`,
+      });
+    });
   };
 
   const getCategoryColor = (category: string) => {
@@ -113,15 +131,17 @@ const ArticleCard = ({ article }: ArticleCardProps) => {
             </div>
             <button
               onClick={handleLike}
-              className={`flex items-center gap-1 text-sm transition-colors ${
-                hasLiked 
-                  ? 'text-red-600 hover:text-red-700' 
-                  : 'text-gray-600 hover:text-red-600'
-              }`}
-              disabled={likeArticleMutation.isPending || unlikeArticleMutation.isPending}
+              className="flex items-center gap-1 text-sm text-gray-600 hover:text-red-600 transition-colors"
+              disabled={likeArticleMutation.isPending}
             >
-              <Heart className={`h-4 w-4 ${hasLiked ? 'fill-current' : ''}`} />
-              <span>{currentLikes}</span>
+              <Heart className="h-4 w-4" />
+              <span>{article.likes}</span>
+            </button>
+            <button
+              onClick={handleShare}
+              className="flex items-center gap-1 text-sm text-gray-600 hover:text-blue-600 transition-colors"
+            >
+              <Share2 className="h-4 w-4" />
             </button>
           </div>
         </div>
