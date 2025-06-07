@@ -1,15 +1,17 @@
 
-import React from 'react';
+import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
-import { ArrowRight, Heart, Users, Globe, Mail } from 'lucide-react';
+import { ArrowRight, Heart, Users, Globe, Mail, ZoomIn } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import NewsletterSubscription from '@/components/NewsletterSubscription';
 import { useArticles } from '@/hooks/useArticles';
 import ArticleCard from '@/components/ArticleCard';
+import ImageModal from '@/components/ImageModal';
 
 const Home = () => {
   const { data: articles, isLoading } = useArticles();
   const featuredArticles = articles?.slice(0, 3) || [];
+  const [isImageModalOpen, setIsImageModalOpen] = useState(false);
 
   return (
     <div className="min-h-screen">
@@ -25,8 +27,8 @@ const Home = () => {
             Welcome to Dear African Child—a blog dedicated to empowering and uplifting African communities through awareness and advocacy.
           </p>
           <div className="mt-6 flex flex-col sm:flex-row gap-4 justify-center">
-            <Button asChild size="lg" className="bg-african-green hover:bg-african-green/90 text-white px-8 py-3 shadow-lg md:bg-opacity-100 bg-transparent border-2 border-african-green">
-              <Link to="/about">Learn More <ArrowRight className="ml-2 h-5 w-5" /></Link>
+            <Button asChild size="lg" className="bg-transparent hover:bg-african-green/20 text-white px-4 py-2 md:px-8 md:py-3 shadow-lg border-2 border-african-green text-sm md:text-base">
+              <Link to="/about">Learn More <ArrowRight className="ml-2 h-4 w-4 md:h-5 md:w-5" /></Link>
             </Button>
           </div>
         </div>
@@ -91,8 +93,18 @@ const Home = () => {
               <img 
                 src="/lovable-uploads/dbce2d24-6a96-453a-9739-e19f644a6c00.png" 
                 alt="Equity and Equality"
-                className="w-full h-full object-cover transition-all duration-500 group-hover:fixed group-hover:inset-0 group-hover:w-screen group-hover:h-screen group-hover:object-contain group-hover:z-50 group-hover:bg-black group-hover:bg-opacity-90"
+                className="w-full h-full object-cover"
               />
+              <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-50 transition-all duration-300 flex items-center justify-center">
+                <Button
+                  onClick={() => setIsImageModalOpen(true)}
+                  className="opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-white/20 hover:bg-white/30 text-white border border-white/20"
+                  size="sm"
+                >
+                  <ZoomIn className="mr-2 h-4 w-4" />
+                  Enlarge
+                </Button>
+              </div>
             </div>
             <h3 className="text-2xl font-bold mb-4 text-african-green">Equity and Equality</h3>
             <p className="text-gray-600 leading-relaxed">
@@ -153,6 +165,13 @@ const Home = () => {
           </div>
         </div>
       </section>
+
+      <ImageModal
+        src="/lovable-uploads/dbce2d24-6a96-453a-9739-e19f644a6c00.png"
+        alt="Equity and Equality"
+        isOpen={isImageModalOpen}
+        onClose={() => setIsImageModalOpen(false)}
+      />
     </div>
   );
 };

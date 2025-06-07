@@ -25,6 +25,17 @@ const ShareButton = ({ title, excerpt, url, imageUrl }: ShareButtonProps) => {
     window.open(facebookUrl, '_blank', 'width=600,height=400');
   };
 
+  const shareToInstagram = () => {
+    // Instagram doesn't have a direct share URL, so we'll copy the content for users to paste
+    const content = `${title}\n\n${excerpt || ''}\n\n${url}`;
+    navigator.clipboard.writeText(content).then(() => {
+      toast({
+        title: "Content Copied for Instagram",
+        description: "Content has been copied. You can now paste it in Instagram.",
+      });
+    });
+  };
+
   const shareToX = () => {
     const text = `${title} ${url}`;
     const xUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}`;
@@ -68,6 +79,10 @@ const ShareButton = ({ title, excerpt, url, imageUrl }: ShareButtonProps) => {
         <DropdownMenuItem onClick={shareToFacebook}>
           <Facebook className="mr-2 h-4 w-4" />
           Facebook
+        </DropdownMenuItem>
+        <DropdownMenuItem onClick={shareToInstagram}>
+          <Instagram className="mr-2 h-4 w-4" />
+          Instagram
         </DropdownMenuItem>
         <DropdownMenuItem onClick={shareToX}>
           <X className="mr-2 h-4 w-4" />
