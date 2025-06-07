@@ -35,8 +35,8 @@ export const useAddComment = () => {
         .insert([
           {
             article_id: articleId,
-            author,
-            content,
+            name: author,
+            comment: content,
           }
         ])
         .select()

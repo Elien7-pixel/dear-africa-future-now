@@ -105,13 +105,13 @@ const CommentSection = ({ articleId }: CommentSectionProps) => {
                   <User className="h-5 w-5 text-african-blue" />
                 </div>
                 <div>
-                  <h5 className="font-semibold text-african-green">{comment.author}</h5>
+                  <h5 className="font-semibold text-african-green">{comment.name}</h5>
                   <p className="text-sm text-gray-500">
                     {format(new Date(comment.created_at), 'MMM dd, yyyy at h:mm a')}
                   </p>
                 </div>
               </div>
-              <p className="text-gray-700 leading-relaxed">{comment.content}</p>
+              <p className="text-gray-700 leading-relaxed">{comment.comment}</p>
             </div>
           ))}
         </div>
