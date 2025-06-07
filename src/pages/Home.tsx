@@ -27,7 +27,7 @@ const Home = () => {
             Welcome to Dear African Child—a blog dedicated to empowering and uplifting African communities through awareness and advocacy.
           </p>
           <div className="mt-6 flex flex-col sm:flex-row gap-4 justify-center">
-            <Button asChild size="lg" className="bg-transparent hover:bg-african-green/20 text-white px-4 py-2 md:px-8 md:py-3 shadow-lg border-2 border-african-green text-sm md:text-base">
+            <Button asChild size="lg" className="bg-transparent hover:bg-african-green/20 text-white px-3 py-2 md:px-8 md:py-3 shadow-lg text-sm md:text-base">
               <Link to="/about">Learn More <ArrowRight className="ml-2 h-4 w-4 md:h-5 md:w-5" /></Link>
             </Button>
           </div>

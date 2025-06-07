@@ -19,6 +19,28 @@ export const useArticles = () => {
         throw error;
       }
       
+      // Add a random image to one of the articles if they don't have images
+      if (data && data.length > 0) {
+        const randomImages = [
+          '/lovable-uploads/4beebcca-0f9d-43c6-aab8-9458e05e54a7.png',
+          '/lovable-uploads/2b0541c8-9ee8-420c-af46-779a21599afc.png',
+          '/lovable-uploads/dbce2d24-6a96-453a-9739-e19f644a6c00.png'
+        ];
+        
+        // Add random image to the first article that doesn't have one
+        const articlesWithImages = data.map((article, index) => {
+          if (!article.image_url && index === 0) {
+            return {
+              ...article,
+              image_url: randomImages[Math.floor(Math.random() * randomImages.length)]
+            };
+          }
+          return article;
+        });
+        
+        return articlesWithImages;
+      }
+      
       return data;
     },
   });
@@ -37,6 +59,20 @@ export const useArticle = (id: string) => {
       if (error) {
         console.error('Error fetching article:', error);
         throw error;
+      }
+      
+      // Add random image if article doesn't have one
+      if (data && !data.image_url) {
+        const randomImages = [
+          '/lovable-uploads/4beebcca-0f9d-43c6-aab8-9458e05e54a7.png',
+          '/lovable-uploads/2b0541c8-9ee8-420c-af46-779a21599afc.png',
+          '/lovable-uploads/dbce2d24-6a96-453a-9739-e19f644a6c00.png'
+        ];
+        
+        return {
+          ...data,
+          image_url: randomImages[Math.floor(Math.random() * randomImages.length)]
+        };
       }
       
       return data;
