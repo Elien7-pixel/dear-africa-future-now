@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Search } from 'lucide-react';
 import { useArticles } from '@/hooks/useArticles';
@@ -9,6 +9,11 @@ import NewsletterSubscription from '@/components/NewsletterSubscription';
 const Blog = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('All Categories');
+  
+  // Scroll to top when component mounts
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   
   const { data: articles, isLoading, error } = useArticles();
 

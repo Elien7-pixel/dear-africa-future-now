@@ -1,5 +1,5 @@
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useParams, Navigate } from 'react-router-dom';
 import { Calendar, ArrowLeft } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -8,9 +8,15 @@ import { useArticle } from '@/hooks/useArticles';
 import CommentSection from '@/components/CommentSection';
 import { format } from 'date-fns';
 import ShareButton from '@/components/ShareButton';
+import LikeButton from '@/components/LikeButton';
 
 const Article = () => {
   const { id } = useParams<{ id: string }>();
+  
+  // Scroll to top when component mounts
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   
   if (!id) {
     return <Navigate to="/blog" replace />;
@@ -85,6 +91,11 @@ const Article = () => {
                 excerpt={article.excerpt}
                 url={articleUrl}
                 imageUrl={article.image_url}
+              />
+              <LikeButton
+                itemId={article.id}
+                itemType="article"
+                initialLikes={article.likes}
               />
             </div>
             

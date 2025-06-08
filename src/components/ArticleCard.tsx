@@ -6,6 +6,7 @@ import { ArrowRight, Calendar } from 'lucide-react';
 import type { Article } from '@/hooks/useArticles';
 import { format } from 'date-fns';
 import ShareButton from './ShareButton';
+import LikeButton from './LikeButton';
 
 interface ArticleCardProps {
   article: Article;
@@ -83,6 +84,11 @@ const ArticleCard = ({ article }: ArticleCardProps) => {
               <Calendar className="h-4 w-4 mr-1" />
               {format(new Date(article.date), 'MMM dd, yyyy')}
             </div>
+            <LikeButton
+              itemId={article.id}
+              itemType="article"
+              initialLikes={article.likes}
+            />
             <ShareButton
               title={article.title}
               excerpt={article.excerpt}
@@ -96,6 +102,7 @@ const ArticleCard = ({ article }: ArticleCardProps) => {
         <Link 
           to={`/article/${article.id}`}
           className="inline-flex items-center text-african-blue hover:text-african-blue/90 transition-colors"
+          onClick={() => window.scrollTo(0, 0)}
         >
           Read More <ArrowRight className="ml-2 h-4 w-4" />
         </Link>

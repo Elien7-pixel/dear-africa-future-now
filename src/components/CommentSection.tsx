@@ -1,10 +1,11 @@
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { MessageCircle, User } from 'lucide-react';
 import { useComments, useAddComment } from '@/hooks/useComments';
 import { format } from 'date-fns';
 import { useToast } from '@/hooks/use-toast';
+import LikeButton from '@/components/LikeButton';
 
 interface CommentSectionProps {
   articleId: string;
@@ -17,6 +18,11 @@ const CommentSection = ({ articleId }: CommentSectionProps) => {
   
   const { data: comments, isLoading } = useComments(articleId);
   const addCommentMutation = useAddComment();
+
+  // Scroll to top when navigating to this component
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -100,16 +106,23 @@ const CommentSection = ({ articleId }: CommentSectionProps) => {
         <div className="space-y-6">
           {comments.map((comment) => (
             <div key={comment.id} className="bg-white p-6 rounded-lg border shadow-sm">
-              <div className="flex items-center mb-3">
-                <div className="w-10 h-10 bg-african-blue/20 rounded-full flex items-center justify-center mr-3">
-                  <User className="h-5 w-5 text-african-blue" />
+              <div className="flex items-center justify-between mb-3">
+                <div className="flex items-center">
+                  <div className="w-10 h-10 bg-african-blue/20 rounded-full flex items-center justify-center mr-3">
+                    <User className="h-5 w-5 text-african-blue" />
+                  </div>
+                  <div>
+                    <h5 className="font-semibold text-african-green">{comment.name}</h5>
+                    <p className="text-sm text-gray-500">
+                      {format(new Date(comment.created_at), 'MMM dd, yyyy')}
+                    </p>
+                  </div>
                 </div>
-                <div>
-                  <h5 className="font-semibold text-african-green">{comment.name}</h5>
-                  <p className="text-sm text-gray-500">
-                    {format(new Date(comment.created_at), 'MMM dd, yyyy at h:mm a')}
-                  </p>
-                </div>
+                <LikeButton
+                  itemId={comment.id}
+                  itemType="comment"
+                  initialLikes={comment.likes}
+                />
               </div>
               <p className="text-gray-700 leading-relaxed">{comment.comment}</p>
             </div>

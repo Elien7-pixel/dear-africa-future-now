@@ -1,7 +1,7 @@
 
 import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
-import { Share2, Facebook, Instagram, X, Mail, Link, Copy } from 'lucide-react';
+import { Share2, Facebook, Instagram, X, Mail, Link, Copy, Heart } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import {
   DropdownMenu,
@@ -25,15 +25,9 @@ const ShareButton = ({ title, excerpt, url, imageUrl }: ShareButtonProps) => {
     window.open(facebookUrl, '_blank', 'width=600,height=400');
   };
 
-  const shareToInstagramStories = () => {
-    // Instagram Stories sharing - copy content for users to paste
-    const content = `${title}\n\n${excerpt || ''}\n\nRead more: ${url}`;
-    navigator.clipboard.writeText(content).then(() => {
-      toast({
-        title: "Content Copied for Instagram Stories",
-        description: "Content has been copied. You can now paste it in Instagram Stories.",
-      });
-    });
+  const shareToInstagram = () => {
+    // Redirect to Instagram
+    window.open('https://www.instagram.com/', '_blank');
   };
 
   const shareToWhatsApp = () => {
@@ -86,9 +80,9 @@ const ShareButton = ({ title, excerpt, url, imageUrl }: ShareButtonProps) => {
           <Facebook className="mr-2 h-4 w-4" />
           Facebook
         </DropdownMenuItem>
-        <DropdownMenuItem onClick={shareToInstagramStories}>
+        <DropdownMenuItem onClick={shareToInstagram}>
           <Instagram className="mr-2 h-4 w-4" />
-          Instagram Stories
+          Instagram
         </DropdownMenuItem>
         <DropdownMenuItem onClick={shareToWhatsApp}>
           <svg className="mr-2 h-4 w-4" viewBox="0 0 24 24" fill="currentColor">
