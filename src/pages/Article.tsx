@@ -114,7 +114,7 @@ const Article = () => {
                 <img 
                   src={article.image_url} 
                   alt={article.title}
-                  className="w-full h-64 object-cover rounded-lg shadow-md"
+                  className="w-full h-96 object-contain rounded-lg shadow-md"
                 />
               </div>
             )}

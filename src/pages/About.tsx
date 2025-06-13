@@ -25,10 +25,10 @@ const About = () => {
               <h2 className="text-3xl font-bold mb-6 text-african-dark">About</h2>
               <div className="prose prose-lg text-gray-700 leading-relaxed space-y-4">
                 <p>
-                  Munya Touch (born Munya Jeranyama) is an accomplished music promoter, filmmaker, journalist, and climate change advocate. He possesses extensive experience in the South African entertainment industry, having worked at Kalawa Jazmee Records, one of Africa's largest black-owned record labels, under the mentorship of Bra Scotch. Munya has collaborated with a diverse array of artists, including Nokwazi, Professor, Busiswa, Uhuru, and DJ Maphorisa. His expertise encompasses festival organization, artist booking and management, and public relations.
+                  Munya Touch (born Munya Jeranyama) is an accomplished music promoter, filmmaker, journalist, and climate change advocate. He possesses extensive experience in the South African entertainment industry, having worked under the mentorship of Bra Scotch, at Kamvalethu Entertainment which does artist management and Public Relations for Kalawa Jazmee Records - one of Africa's largest black-owned record labels. Munya has collaborated with a diverse array of artists, including Nokwazi, Professor, Busiswa, Uhuru, and DJ Maphorisa. His expertise encompasses festival organization, artist booking and management, and public relations.
                 </p>
                 <p>
-                  From 2013 to 2017, Munya served as an entertainment journalist at Starstudded Online Magazine, which reached a peak of 2 million daily visitors. He subsequently worked as a publicist and events manager for DJ Waxxy(Nigeria).
+                  From 2013 to 2017, Munya served as an entertainment journalist at Starstudded Online Magazine, which reached a peak of 2 million daily visitors. He subsequently worked as a publicist and events manager for DJ Waxxy (Nigeria).
                 </p>
                 <p>
                   Munya also made contributions at Azania Productions, a female-owned film production company, working on films featured on platforms such as Netflix, VIU, Showmax, and eTV's eVOD. Notable projects include Six In The City (VIU & Netflix), Mr. Johnson (Showmax), and ASHES of a Red Cow (eVOD).
@@ -137,7 +137,7 @@ const About = () => {
             Have questions or want to collaborate? We'd love to hear from you.
           </p>
           <Button asChild className="bg-african-orange hover:bg-african-orange/90 text-white px-8 py-3">
-            <a href="mailto:dear@africanchild.org">
+            <a href="mailto:hello@dearafricanchild.org">
               Contact Us
             </a>
           </Button>

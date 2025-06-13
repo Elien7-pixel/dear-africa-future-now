@@ -26,8 +26,16 @@ const ShareButton = ({ title, excerpt, url, imageUrl }: ShareButtonProps) => {
   };
 
   const shareToInstagram = () => {
-    // Redirect to Instagram
-    window.open('https://www.instagram.com/', '_blank');
+    // Copy link to clipboard and redirect to Instagram
+    navigator.clipboard.writeText(`${title}\n\n${excerpt || ''}\n\nRead more: ${url}`).then(() => {
+      toast({
+        title: "Link Copied",
+        description: "Article content has been copied. Opening Instagram...",
+      });
+      window.open('https://www.instagram.com/', '_blank');
+    }).catch(() => {
+      window.open('https://www.instagram.com/', '_blank');
+    });
   };
 
   const shareToWhatsApp = () => {

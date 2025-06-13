@@ -3,9 +3,16 @@ import React, { useEffect } from 'react';
 import Navbar from './Navbar';
 import Footer from './Footer';
 import FloatingButtons from './FloatingButtons';
-import { Outlet } from 'react-router-dom';
+import { Outlet, useLocation } from 'react-router-dom';
 
 const Layout = () => {
+  const location = useLocation();
+
+  useEffect(() => {
+    // Scroll to top when route changes
+    window.scrollTo(0, 0);
+  }, [location.pathname]);
+
   useEffect(() => {
     // Animation observer for fade-in elements
     const observer = new IntersectionObserver(
