@@ -2,7 +2,7 @@
 -- Remove all existing articles
 DELETE FROM articles;
 
--- Insert the new article
+-- Insert the new article with the correct image
 INSERT INTO articles (
   id,
   title,
@@ -29,7 +29,7 @@ Together, we can honour the wisdom of our ancestors, promote solutions born from
 To the young dreamers, determined activists, and guardians of our planet—this is your home to voice your thoughts, expand your understanding, and drive action. The future is not simply a legacy; it is a creation, built with intention and courage.',
   'Climate Action',
   CURRENT_DATE,
-  '/lovable-uploads/cfb5b72f-cc42-4159-aadb-9b8b9fedecf6.png',
+  '/lovable-uploads/b03e9718-4732-470a-905b-16f0509d8699.png',
   0
 );
 

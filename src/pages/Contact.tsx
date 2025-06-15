@@ -1,63 +1,17 @@
 
 import React, { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
-import { Mail, Phone, MapPin, Send } from 'lucide-react';
+import { Mail, Phone, MapPin } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
-import { supabase } from '@/integrations/supabase/client';
+import NewsletterSubscription from '@/components/NewsletterSubscription';
 
 const Contact = () => {
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    subject: '',
-    message: ''
-  });
-  const [isLoading, setIsLoading] = useState(false);
   const { toast } = useToast();
 
   // Scroll to top when component mounts
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
-
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const { name, value } = e.target;
-    setFormData(prev => ({
-      ...prev,
-      [name]: value
-    }));
-  };
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsLoading(true);
-
-    try {
-      // Here you would typically send the form data to your backend
-      // For now, we'll just show a success message
-      await new Promise(resolve => setTimeout(resolve, 1000)); // Simulate API call
-
-      toast({
-        title: "Message Sent!",
-        description: "Thank you for reaching out. We'll get back to you soon.",
-      });
-
-      // Reset form
-      setFormData({
-        name: '',
-        email: '',
-        subject: '',
-        message: ''
-      });
-    } catch (error) {
-      toast({
-        title: "Error",
-        description: "Failed to send message. Please try again.",
-      });
-    } finally {
-      setIsLoading(false);
-    }
-  };
 
   return (
     <div className="min-h-screen">
@@ -72,7 +26,7 @@ const Contact = () => {
         </div>
       </section>
 
-      {/* Contact Information & Form */}
+      {/* Contact Information & Newsletter */}
       <section className="section-container">
         <div className="grid md:grid-cols-2 gap-12">
           {/* Contact Information */}
@@ -98,7 +52,6 @@ const Contact = () => {
                 <div>
                   <h3 className="font-semibold text-lg mb-1">Phone</h3>
                   <p className="text-gray-600">+27 84 961 7485</p>
-                  <p className="text-sm text-gray-500 mt-1">Mon-Fri 9AM-5PM (SAST)</p>
                 </div>
               </div>
 
@@ -116,105 +69,15 @@ const Contact = () => {
                 </div>
               </div>
             </div>
-
-            <div className="mt-8 p-6 bg-african-green/10 rounded-lg">
-              <h3 className="font-semibold text-lg mb-2 text-african-green">Office Hours</h3>
-              <div className="space-y-1 text-sm text-gray-600">
-                <p>Monday - Friday: 9:00 AM - 5:00 PM</p>
-                <p>Saturday: 10:00 AM - 2:00 PM</p>
-                <p>Sunday: Closed</p>
-              </div>
-            </div>
           </div>
 
-          {/* Contact Form */}
+          {/* Newsletter Subscription */}
           <div>
-            <h2 className="text-3xl font-bold mb-8 text-african-green">Send a Message</h2>
-            
-            <form onSubmit={handleSubmit} className="space-y-6">
-              <div className="grid md:grid-cols-2 gap-4">
-                <div>
-                  <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-2">
-                    Name *
-                  </label>
-                  <input
-                    type="text"
-                    id="name"
-                    name="name"
-                    value={formData.name}
-                    onChange={handleInputChange}
-                    required
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-african-orange focus:border-transparent"
-                    placeholder="Your full name"
-                  />
-                </div>
-                <div>
-                  <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
-                    Email *
-                  </label>
-                  <input
-                    type="email"
-                    id="email"
-                    name="email"
-                    value={formData.email}
-                    onChange={handleInputChange}
-                    required
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-african-orange focus:border-transparent"
-                    placeholder="your.email@example.com"
-                  />
-                </div>
-              </div>
-
-              <div>
-                <label htmlFor="subject" className="block text-sm font-medium text-gray-700 mb-2">
-                  Subject *
-                </label>
-                <input
-                  type="text"
-                  id="subject"
-                  name="subject"
-                  value={formData.subject}
-                  onChange={handleInputChange}
-                  required
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-african-orange focus:border-transparent"
-                  placeholder="What's this about?"
-                />
-              </div>
-
-              <div>
-                <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-2">
-                  Message *
-                </label>
-                <textarea
-                  id="message"
-                  name="message"
-                  value={formData.message}
-                  onChange={handleInputChange}
-                  required
-                  rows={6}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-african-orange focus:border-transparent resize-none"
-                  placeholder="Tell us more about your inquiry..."
-                />
-              </div>
-
-              <Button
-                type="submit"
-                disabled={isLoading}
-                className="w-full bg-african-orange hover:bg-african-orange/90 py-3 text-lg"
-              >
-                {isLoading ? (
-                  <div className="flex items-center">
-                    <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white mr-2"></div>
-                    Sending...
-                  </div>
-                ) : (
-                  <div className="flex items-center justify-center">
-                    <Send className="mr-2 h-5 w-5" />
-                    Send Message
-                  </div>
-                )}
-              </Button>
-            </form>
+            <h2 className="text-3xl font-bold mb-8 text-african-green">Stay Connected</h2>
+            <p className="text-gray-600 mb-6">
+              Subscribe to our newsletter and be the first to know about new articles, events, and initiatives.
+            </p>
+            <NewsletterSubscription />
           </div>
         </div>
       </section>
@@ -228,12 +91,17 @@ const Contact = () => {
           </div>
           
           <div className="bg-white rounded-lg shadow-md p-4">
-            <div className="h-96 bg-gray-200 rounded-lg flex items-center justify-center">
-              <div className="text-center text-gray-500">
-                <MapPin className="h-12 w-12 mx-auto mb-4" />
-                <p>Interactive map would be integrated here</p>
-                <p className="text-sm">180 Katherine Street, Barlow Park, Sandton</p>
-              </div>
+            <div className="h-96 rounded-lg overflow-hidden">
+              <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3582.7936477867934!2d28.047826!3d-26.101898!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1e950db5a3f4ae31%3A0x9c2f85a7b5e6c0b0!2s180%20Katherine%20St%2C%20Barlow%20Park%2C%20Sandton%2C%202090%2C%20South%20Africa!5e0!3m2!1sen!2sus!4v1635777777777!5m2!1sen!2sus"
+                width="100%"
+                height="100%"
+                style={{ border: 0 }}
+                allowFullScreen
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+                title="Dear African Child Office Location"
+              />
             </div>
           </div>
         </div>
