@@ -1,4 +1,5 @@
 
+
 -- Remove all existing articles
 DELETE FROM articles;
 
@@ -29,7 +30,7 @@ Together, we can honour the wisdom of our ancestors, promote solutions born from
 To the young dreamers, determined activists, and guardians of our planet—this is your home to voice your thoughts, expand your understanding, and drive action. The future is not simply a legacy; it is a creation, built with intention and courage.',
   'Climate Action',
   CURRENT_DATE,
-  '/lovable-uploads/b03e9718-4732-470a-905b-16f0509d8699.png',
+  '/lovable-uploads/c7445401-4035-48dc-b4eb-5ed1f900fe3d.png',
   0
 );
 
@@ -48,3 +49,4 @@ SELECT id, 0 FROM articles;
 -- Enable realtime for article_likes table
 ALTER TABLE public.article_likes REPLICA IDENTITY FULL;
 ALTER PUBLICATION supabase_realtime ADD TABLE public.article_likes;
+
