@@ -5,8 +5,8 @@ import { Button } from '@/components/ui/button';
 import { ArrowRight, Calendar } from 'lucide-react';
 import type { Article } from '@/hooks/useArticles';
 import { format } from 'date-fns';
-import ShareButton from './ShareButton';
-import LikeButton from './LikeButton';
+import EnhancedShareButton from './EnhancedShareButton';
+import EnhancedLikeButton from './EnhancedLikeButton';
 
 interface ArticleCardProps {
   article: Article;
@@ -84,12 +84,8 @@ const ArticleCard = ({ article }: ArticleCardProps) => {
               <Calendar className="h-4 w-4 mr-1" />
               {format(new Date(article.date), 'MMM dd, yyyy')}
             </div>
-            <LikeButton
-              itemId={article.id}
-              itemType="article"
-              initialLikes={article.likes}
-            />
-            <ShareButton
+            <EnhancedLikeButton articleId={article.id} />
+            <EnhancedShareButton
               title={article.title}
               excerpt={article.excerpt}
               url={articleUrl}

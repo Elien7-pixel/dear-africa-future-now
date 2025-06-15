@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Facebook, Instagram, Linkedin, Mail, Phone } from 'lucide-react';
+import { Facebook, Instagram, Linkedin, Mail, Phone, MapPin } from 'lucide-react';
 
 const Footer = () => {
   return (
@@ -39,6 +39,10 @@ const Footer = () => {
               <p className="text-gray-300 flex items-center">
                 <Phone className="mr-2 h-4 w-4" />
                 +27 84 961 7485
+              </p>
+              <p className="text-gray-300 flex items-start">
+                <MapPin className="mr-2 h-4 w-4 mt-1" />
+                <span>180 Katherine Street, Barlow Park, Sandton, Gauteng, South Africa</span>
               </p>
             </div>
             <Link to="/contact" className="text-african-orange hover:underline transition-colors mt-2 block">

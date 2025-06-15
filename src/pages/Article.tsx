@@ -7,8 +7,8 @@ import { Link } from 'react-router-dom';
 import { useArticle } from '@/hooks/useArticles';
 import CommentSection from '@/components/CommentSection';
 import { format } from 'date-fns';
-import ShareButton from '@/components/ShareButton';
-import LikeButton from '@/components/LikeButton';
+import EnhancedShareButton from '@/components/EnhancedShareButton';
+import EnhancedLikeButton from '@/components/EnhancedLikeButton';
 
 const Article = () => {
   const { id } = useParams<{ id: string }>();
@@ -23,6 +23,57 @@ const Article = () => {
   }
 
   const { data: article, isLoading, error } = useArticle(id);
+
+  // Update meta tags for social sharing
+  useEffect(() => {
+    if (article) {
+      // Update title
+      document.title = `${article.title} - Dear African Child`;
+      
+      // Update or create meta tags
+      const updateMetaTag = (property: string, content: string) => {
+        let meta = document.querySelector(`meta[property="${property}"]`) as HTMLMetaElement;
+        if (!meta) {
+          meta = document.createElement('meta');
+          meta.setAttribute('property', property);
+          document.head.appendChild(meta);
+        }
+        meta.content = content;
+      };
+
+      const updateNameMetaTag = (name: string, content: string) => {
+        let meta = document.querySelector(`meta[name="${name}"]`) as HTMLMetaElement;
+        if (!meta) {
+          meta = document.createElement('meta');
+          meta.setAttribute('name', name);
+          document.head.appendChild(meta);
+        }
+        meta.content = content;
+      };
+
+      // Open Graph tags
+      updateMetaTag('og:title', article.title);
+      updateMetaTag('og:description', article.excerpt);
+      updateMetaTag('og:type', 'article');
+      updateMetaTag('og:url', window.location.href);
+      if (article.image_url) {
+        updateMetaTag('og:image', `${window.location.origin}${article.image_url}`);
+      }
+
+      // Twitter Card tags
+      updateNameMetaTag('twitter:card', 'summary_large_image');
+      updateNameMetaTag('twitter:title', article.title);
+      updateNameMetaTag('twitter:description', article.excerpt);
+      if (article.image_url) {
+        updateNameMetaTag('twitter:image', `${window.location.origin}${article.image_url}`);
+      }
+    }
+
+    // Cleanup function to reset title when component unmounts
+    return () => {
+      document.title = 'Dear African Child';
+    };
+  }, [article]);
 
   if (isLoading) {
     return (
@@ -65,7 +116,7 @@ const Article = () => {
     }
   };
 
-  const articleUrl = `${window.location.origin}/article/${article.id}`;
+  const articleUrl = window.location.href;
 
   return (
     <div className="min-h-screen">
@@ -78,7 +129,7 @@ const Article = () => {
           </Link>
           
           <div className="max-w-4xl">
-            <div className="flex items-center gap-4 mb-4">
+            <div className="flex flex-wrap items-center gap-4 mb-4">
               <span className={`px-3 py-1 rounded-full text-sm font-medium ${getCategoryColor(article.category)}`}>
                 {article.category}
               </span>
@@ -86,17 +137,15 @@ const Article = () => {
                 <Calendar className="h-4 w-4 mr-2" />
                 {format(new Date(article.date), 'MMMM dd, yyyy')}
               </div>
-              <ShareButton
-                title={article.title}
-                excerpt={article.excerpt}
-                url={articleUrl}
-                imageUrl={article.image_url}
-              />
-              <LikeButton
-                itemId={article.id}
-                itemType="article"
-                initialLikes={article.likes}
-              />
+              <div className="flex items-center gap-3">
+                <EnhancedLikeButton articleId={article.id} />
+                <EnhancedShareButton
+                  title={article.title}
+                  excerpt={article.excerpt}
+                  url={articleUrl}
+                  imageUrl={article.image_url}
+                />
+              </div>
             </div>
             
             <h1 className="text-4xl md:text-5xl font-bold text-african-green mb-6">{article.title}</h1>
@@ -114,7 +163,7 @@ const Article = () => {
                 <img 
                   src={article.image_url} 
                   alt={article.title}
-                  className="w-full h-96 object-contain rounded-lg shadow-md"
+                  className="w-full max-h-96 object-contain rounded-lg shadow-md mx-auto"
                 />
               </div>
             )}
