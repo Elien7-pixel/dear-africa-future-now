@@ -1,5 +1,6 @@
 
 
+
 -- Remove all existing articles
 DELETE FROM articles;
 
@@ -30,7 +31,7 @@ Together, we can honour the wisdom of our ancestors, promote solutions born from
 To the young dreamers, determined activists, and guardians of our planet—this is your home to voice your thoughts, expand your understanding, and drive action. The future is not simply a legacy; it is a creation, built with intention and courage.',
   'Climate Action',
   CURRENT_DATE,
-  '/lovable-uploads/c7445401-4035-48dc-b4eb-5ed1f900fe3d.png',
+  '/lovable-uploads/c2aa71b4-080a-444c-a87e-1bd455a074f1.png',
   0
 );
 
