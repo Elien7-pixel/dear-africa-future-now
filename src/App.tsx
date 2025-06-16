@@ -13,6 +13,7 @@ import Services from "./pages/Services";
 import Partners from "./pages/Partners";
 import Contact from "./pages/Contact";
 import NotFound from "./pages/NotFound";
+import UpdateArticleImage from "./pages/UpdateArticleImage";
 
 const queryClient = new QueryClient();
 
@@ -31,6 +32,7 @@ const App = () => (
             <Route path="/services" element={<Services />} />
             <Route path="/partners" element={<Partners />} />
             <Route path="/contact" element={<Contact />} />
+            <Route path="/update-image" element={<UpdateArticleImage />} />
           </Route>
           <Route path="*" element={<NotFound />} />
         </Routes>
