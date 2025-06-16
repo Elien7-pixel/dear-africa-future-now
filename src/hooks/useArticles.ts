@@ -19,20 +19,13 @@ export const useArticles = () => {
         throw error;
       }
       
-      // Add a random image to one of the articles if they don't have images
+      // Update image URLs to use the correct lovable-uploads path format
       if (data && data.length > 0) {
-        const randomImages = [
-          '/lovable-uploads/4beebcca-0f9d-43c6-aab8-9458e05e54a7.png',
-          '/lovable-uploads/2b0541c8-9ee8-420c-af46-779a21599afc.png',
-          '/lovable-uploads/dbce2d24-6a96-453a-9739-e19f644a6c00.png'
-        ];
-        
-        // Add random image to the first article that doesn't have one
-        const articlesWithImages = data.map((article, index) => {
-          if (!article.image_url && index === 0) {
+        const articlesWithImages = data.map((article) => {
+          if (article.image_url && !article.image_url.startsWith('/lovable-uploads/') && !article.image_url.startsWith('http')) {
             return {
               ...article,
-              image_url: randomImages[Math.floor(Math.random() * randomImages.length)]
+              image_url: `/lovable-uploads/${article.image_url}`
             };
           }
           return article;
@@ -61,17 +54,11 @@ export const useArticle = (id: string) => {
         throw error;
       }
       
-      // Add random image if article doesn't have one
-      if (data && !data.image_url) {
-        const randomImages = [
-          '/lovable-uploads/4beebcca-0f9d-43c6-aab8-9458e05e54a7.png',
-          '/lovable-uploads/2b0541c8-9ee8-420c-af46-779a21599afc.png',
-          '/lovable-uploads/dbce2d24-6a96-453a-9739-e19f644a6c00.png'
-        ];
-        
+      // Update image URL to use the correct lovable-uploads path format
+      if (data && data.image_url && !data.image_url.startsWith('/lovable-uploads/') && !data.image_url.startsWith('http')) {
         return {
           ...data,
-          image_url: randomImages[Math.floor(Math.random() * randomImages.length)]
+          image_url: `/lovable-uploads/${data.image_url}`
         };
       }
       
