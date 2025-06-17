@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
@@ -59,6 +58,20 @@ const ArticleCard = ({ article }: ArticleCardProps) => {
     }
   };
 
+  const handleImageError = (e: React.SyntheticEvent<HTMLImageElement, Event>) => {
+    console.error('Failed to load image:', article.image_url);
+    e.currentTarget.style.display = 'none';
+    // Show the category icon instead
+    const iconContainer = e.currentTarget.parentElement;
+    if (iconContainer) {
+      iconContainer.innerHTML = '';
+      const iconElement = document.createElement('div');
+      iconElement.className = 'flex items-center justify-center w-full h-full';
+      iconElement.innerHTML = getCategoryIcon(article.category).props.children;
+      iconContainer.appendChild(iconElement);
+    }
+  };
+
   const articleUrl = `${window.location.origin}/article/${article.id}`;
 
   return (
@@ -69,6 +82,8 @@ const ArticleCard = ({ article }: ArticleCardProps) => {
             src={article.image_url} 
             alt={article.title}
             className="w-full h-full object-cover"
+            onError={handleImageError}
+            onLoad={() => console.log('Image loaded successfully:', article.image_url)}
           />
         ) : (
           getCategoryIcon(article.category)

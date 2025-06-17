@@ -34,6 +34,7 @@ const About = () => {
                   className="w-full h-full object-cover rounded-full shadow-lg border-4 border-african-orange/20"
                 />
               </div>
+              <p className="text-sm text-gray-600 font-medium">Munya Touch (Founder)</p>
             </div>
             
             {/* About Text */}
