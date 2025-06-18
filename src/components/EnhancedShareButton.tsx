@@ -14,11 +14,10 @@ interface EnhancedShareButtonProps {
   title: string;
   excerpt?: string;
   url: string;
-  imageUrl?: string;
   className?: string;
 }
 
-const EnhancedShareButton = ({ title, excerpt, url, imageUrl, className = "" }: EnhancedShareButtonProps) => {
+const EnhancedShareButton = ({ title, excerpt, url, className = "" }: EnhancedShareButtonProps) => {
   const { toast } = useToast();
   const [copied, setCopied] = useState(false);
 

@@ -24,45 +24,10 @@ const Article = () => {
 
   const { data: article, isLoading, error } = useArticle(id);
 
-  // Update meta tags for social sharing
+  // Update title only (no social media meta tags)
   useEffect(() => {
     if (article) {
-      // Update title
       document.title = `${article.title} - Dear African Child`;
-      
-      // Update or create meta tags
-      const updateMetaTag = (property: string, content: string) => {
-        let meta = document.querySelector(`meta[property="${property}"]`) as HTMLMetaElement;
-        if (!meta) {
-          meta = document.createElement('meta');
-          meta.setAttribute('property', property);
-          document.head.appendChild(meta);
-        }
-        meta.content = content;
-      };
-
-      const updateNameMetaTag = (name: string, content: string) => {
-        let meta = document.querySelector(`meta[name="${name}"]`) as HTMLMetaElement;
-        if (!meta) {
-          meta = document.createElement('meta');
-          meta.setAttribute('name', name);
-          document.head.appendChild(meta);
-        }
-        meta.content = content;
-      };
-
-      // Open Graph tags
-      updateMetaTag('og:title', article.title);
-      updateMetaTag('og:description', article.excerpt);
-      updateMetaTag('og:type', 'article');
-      updateMetaTag('og:url', window.location.href);
-      updateMetaTag('og:image', '/lovable-uploads/13af3390-8eef-4513-b440-e895683dde4f.png');
-
-      // Twitter Card tags
-      updateNameMetaTag('twitter:card', 'summary_large_image');
-      updateNameMetaTag('twitter:title', article.title);
-      updateNameMetaTag('twitter:description', article.excerpt);
-      updateNameMetaTag('twitter:image', '/lovable-uploads/13af3390-8eef-4513-b440-e895683dde4f.png');
     }
 
     // Cleanup function to reset title when component unmounts
@@ -158,6 +123,11 @@ const Article = () => {
                 src="/lovable-uploads/83477a99-9f44-45e7-aa74-c0f577ebbde9.png" 
                 alt="African community discussion"
                 className="w-full max-h-96 object-cover rounded-lg shadow-md mx-auto"
+                onError={(e) => {
+                  console.error('Image failed to load:', e);
+                  e.currentTarget.style.display = 'none';
+                }}
+                onLoad={() => console.log('Image loaded successfully')}
               />
             </div>
             
