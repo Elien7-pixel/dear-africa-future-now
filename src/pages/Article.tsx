@@ -56,17 +56,13 @@ const Article = () => {
       updateMetaTag('og:description', article.excerpt);
       updateMetaTag('og:type', 'article');
       updateMetaTag('og:url', window.location.href);
-      if (article.image_url) {
-        updateMetaTag('og:image', `${window.location.origin}${article.image_url}`);
-      }
+      updateMetaTag('og:image', '/lovable-uploads/13af3390-8eef-4513-b440-e895683dde4f.png');
 
       // Twitter Card tags
       updateNameMetaTag('twitter:card', 'summary_large_image');
       updateNameMetaTag('twitter:title', article.title);
       updateNameMetaTag('twitter:description', article.excerpt);
-      if (article.image_url) {
-        updateNameMetaTag('twitter:image', `${window.location.origin}${article.image_url}`);
-      }
+      updateNameMetaTag('twitter:image', '/lovable-uploads/13af3390-8eef-4513-b440-e895683dde4f.png');
     }
 
     // Cleanup function to reset title when component unmounts
@@ -143,7 +139,6 @@ const Article = () => {
                   title={article.title}
                   excerpt={article.excerpt}
                   url={articleUrl}
-                  imageUrl={article.image_url}
                 />
               </div>
             </div>
@@ -158,15 +153,13 @@ const Article = () => {
       <section className="py-16">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto">
-            {article.image_url && (
-              <div className="mb-8">
-                <img 
-                  src={article.image_url} 
-                  alt={article.title}
-                  className="w-full max-h-96 object-contain rounded-lg shadow-md mx-auto"
-                />
-              </div>
-            )}
+            <div className="mb-8">
+              <img 
+                src="/lovable-uploads/83477a99-9f44-45e7-aa74-c0f577ebbde9.png" 
+                alt="African community discussion"
+                className="w-full max-h-96 object-cover rounded-lg shadow-md mx-auto"
+              />
+            </div>
             
             <div className="prose prose-lg max-w-none">
               <div className="text-gray-700 leading-relaxed whitespace-pre-wrap">
