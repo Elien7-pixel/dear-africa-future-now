@@ -1,4 +1,3 @@
-
 import React, { useEffect } from 'react';
 import { useParams, Navigate } from 'react-router-dom';
 import { Calendar, ArrowLeft } from 'lucide-react';
@@ -24,10 +23,73 @@ const Article = () => {
 
   const { data: article, isLoading, error } = useArticle(id);
 
-  // Update title only (no social media meta tags)
+  // Update meta tags for social sharing and SEO
   useEffect(() => {
     if (article) {
       document.title = `${article.title} - Dear African Child`;
+      
+      const updateMetaTag = (property: string, content: string) => {
+        let meta = document.querySelector(`meta[property="${property}"]`) as HTMLMetaElement;
+        if (!meta) {
+          meta = document.createElement('meta');
+          meta.setAttribute('property', property);
+          document.head.appendChild(meta);
+        }
+        meta.content = content;
+      };
+
+      const updateNameMetaTag = (name: string, content: string) => {
+        let meta = document.querySelector(`meta[name="${name}"]`) as HTMLMetaElement;
+        if (!meta) {
+          meta = document.createElement('meta');
+          meta.setAttribute('name', name);
+          document.head.appendChild(meta);
+        }
+        meta.content = content;
+      };
+
+      // Update description meta tag
+      updateNameMetaTag('description', article.excerpt);
+      
+      // Open Graph tags
+      updateMetaTag('og:title', article.title);
+      updateMetaTag('og:description', article.excerpt);
+      updateMetaTag('og:type', 'article');
+      updateMetaTag('og:url', window.location.href);
+      updateMetaTag('og:image', '/lovable-uploads/7dfb5ad9-690c-419d-b7f0-376e1d5ba627.png');
+
+      // Twitter Card tags
+      updateNameMetaTag('twitter:card', 'summary_large_image');
+      updateNameMetaTag('twitter:title', article.title);
+      updateNameMetaTag('twitter:description', article.excerpt);
+      updateNameMetaTag('twitter:image', '/lovable-uploads/7dfb5ad9-690c-419d-b7f0-376e1d5ba627.png');
+      
+      // Add structured data for the article
+      let structuredData = document.querySelector('script[type="application/ld+json"]#article-structured-data');
+      if (!structuredData) {
+        structuredData = document.createElement('script');
+        structuredData.setAttribute('type', 'application/ld+json');
+        structuredData.setAttribute('id', 'article-structured-data');
+        document.head.appendChild(structuredData);
+      }
+      
+      structuredData.textContent = JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "headline": article.title,
+        "description": article.excerpt,
+        "datePublished": article.date,
+        "author": {
+          "@type": "Person",
+          "name": "Munya Touch"
+        },
+        "publisher": {
+          "@type": "Organization",
+          "name": "Dear African Child"
+        },
+        "image": "/lovable-uploads/7dfb5ad9-690c-419d-b7f0-376e1d5ba627.png",
+        "url": window.location.href
+      });
     }
 
     // Cleanup function to reset title when component unmounts
@@ -120,7 +182,7 @@ const Article = () => {
           <div className="max-w-4xl mx-auto">
             <div className="mb-8">
               <img 
-                src="/lovable-uploads/83477a99-9f44-45e7-aa74-c0f577ebbde9.png" 
+                src="/lovable-uploads/7dfb5ad9-690c-419d-b7f0-376e1d5ba627.png" 
                 alt="African community discussion"
                 className="w-full max-h-96 object-cover rounded-lg shadow-md mx-auto"
                 onError={(e) => {
