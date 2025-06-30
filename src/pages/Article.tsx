@@ -1,6 +1,7 @@
+
 import React, { useEffect } from 'react';
 import { useParams, Navigate } from 'react-router-dom';
-import { Calendar, ArrowLeft } from 'lucide-react';
+import { Calendar, ArrowLeft, Droplets } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
 import { useArticle } from '@/hooks/useArticles';
@@ -145,7 +146,7 @@ const Article = () => {
   };
 
   const articleUrl = window.location.href;
-  const articleImage = article.image_url || '/lovable-uploads/7dfb5ad9-690c-419d-b7f0-376e1d5ba627.png';
+  const isWaterCrisisArticle = article.title.toLowerCase().includes("water crisis");
 
   return (
     <div className="min-h-screen">
@@ -187,16 +188,24 @@ const Article = () => {
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto">
             <div className="mb-8">
-              <img 
-                src={articleImage}
-                alt={article.title}
-                className="w-full max-h-96 object-cover rounded-lg shadow-md mx-auto"
-                onError={(e) => {
-                  console.error('Article image failed to load:', e);
-                  e.currentTarget.src = '/lovable-uploads/7dfb5ad9-690c-419d-b7f0-376e1d5ba627.png';
-                }}
-                onLoad={() => console.log('Article image loaded successfully')}
-              />
+              {isWaterCrisisArticle ? (
+                <div className="flex justify-center">
+                  <div className="flex items-center justify-center bg-blue-100 rounded-lg shadow-md p-8">
+                    <Droplets className="h-24 w-24 text-blue-600" />
+                  </div>
+                </div>
+              ) : (
+                <img 
+                  src={article.image_url || '/lovable-uploads/7dfb5ad9-690c-419d-b7f0-376e1d5ba627.png'}
+                  alt={article.title}
+                  className="w-full max-h-96 object-cover rounded-lg shadow-md mx-auto"
+                  onError={(e) => {
+                    console.error('Article image failed to load:', e);
+                    e.currentTarget.src = '/lovable-uploads/7dfb5ad9-690c-419d-b7f0-376e1d5ba627.png';
+                  }}
+                  onLoad={() => console.log('Article image loaded successfully')}
+                />
+              )}
             </div>
             
             <div className="prose prose-lg max-w-none">

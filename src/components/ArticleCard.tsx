@@ -2,7 +2,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
-import { ArrowRight, Calendar } from 'lucide-react';
+import { ArrowRight, Calendar, Droplets } from 'lucide-react';
 import type { Article } from '@/hooks/useArticles';
 import { format } from 'date-fns';
 import EnhancedShareButton from './EnhancedShareButton';
@@ -30,21 +30,27 @@ const ArticleCard = ({ article }: ArticleCardProps) => {
   };
 
   const articleUrl = `${window.location.origin}/article/${article.id}`;
-  const articleImage = article.image_url || '/lovable-uploads/7dfb5ad9-690c-419d-b7f0-376e1d5ba627.png';
+  const isWaterCrisisArticle = article.title.toLowerCase().includes("water crisis");
 
   return (
     <article className="bg-white rounded-lg overflow-hidden shadow-md border hover:shadow-lg transition-shadow">
       <div className="p-6">
         <div className="flex items-center justify-center mb-4">
-          <img 
-            src={articleImage}
-            alt={article.title}
-            className="h-12 w-12 object-cover rounded"
-            onError={(e) => {
-              console.error('Article card image failed to load:', e);
-              e.currentTarget.src = '/lovable-uploads/7dfb5ad9-690c-419d-b7f0-376e1d5ba627.png';
-            }}
-          />
+          {isWaterCrisisArticle ? (
+            <div className="h-12 w-12 flex items-center justify-center bg-blue-100 rounded">
+              <Droplets className="h-8 w-8 text-blue-600" />
+            </div>
+          ) : (
+            <img 
+              src={article.image_url || '/lovable-uploads/7dfb5ad9-690c-419d-b7f0-376e1d5ba627.png'}
+              alt={article.title}
+              className="h-12 w-12 object-cover rounded"
+              onError={(e) => {
+                console.error('Article card image failed to load:', e);
+                e.currentTarget.src = '/lovable-uploads/7dfb5ad9-690c-419d-b7f0-376e1d5ba627.png';
+              }}
+            />
+          )}
         </div>
         <div className="flex justify-between items-center mb-3">
           <span className={`px-3 py-1 rounded-full text-sm font-medium ${getCategoryColor(article.category)}`}>
