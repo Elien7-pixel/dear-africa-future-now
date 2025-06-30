@@ -2,7 +2,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
-import { ArrowRight, Calendar, Droplets } from 'lucide-react';
+import { ArrowRight, Calendar } from 'lucide-react';
 import type { Article } from '@/hooks/useArticles';
 import { format } from 'date-fns';
 import EnhancedShareButton from './EnhancedShareButton';
@@ -37,9 +37,15 @@ const ArticleCard = ({ article }: ArticleCardProps) => {
       <div className="p-6">
         <div className="flex items-center justify-center mb-4">
           {isWaterCrisisArticle ? (
-            <div className="h-12 w-12 flex items-center justify-center bg-blue-100 rounded">
-              <Droplets className="h-8 w-8 text-blue-600" />
-            </div>
+            <img 
+              src="/lovable-uploads/50c344c1-e86b-4356-984f-3557ad5270a1.png"
+              alt={article.title}
+              className="h-12 w-12 object-cover rounded"
+              onError={(e) => {
+                console.error('Water crisis article card image failed to load:', e);
+                e.currentTarget.src = '/lovable-uploads/7dfb5ad9-690c-419d-b7f0-376e1d5ba627.png';
+              }}
+            />
           ) : (
             <img 
               src={article.image_url || '/lovable-uploads/7dfb5ad9-690c-419d-b7f0-376e1d5ba627.png'}

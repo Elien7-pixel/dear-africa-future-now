@@ -1,7 +1,7 @@
 
 import React, { useEffect } from 'react';
 import { useParams, Navigate } from 'react-router-dom';
-import { Calendar, ArrowLeft, Droplets } from 'lucide-react';
+import { Calendar, ArrowLeft } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
 import { useArticle } from '@/hooks/useArticles';
@@ -189,11 +189,16 @@ const Article = () => {
           <div className="max-w-4xl mx-auto">
             <div className="mb-8">
               {isWaterCrisisArticle ? (
-                <div className="flex justify-center">
-                  <div className="flex items-center justify-center bg-blue-100 rounded-lg shadow-md p-8">
-                    <Droplets className="h-24 w-24 text-blue-600" />
-                  </div>
-                </div>
+                <img 
+                  src="/lovable-uploads/50c344c1-e86b-4356-984f-3557ad5270a1.png"
+                  alt={article.title}
+                  className="w-full max-h-96 object-cover rounded-lg shadow-md mx-auto"
+                  onError={(e) => {
+                    console.error('Water crisis article image failed to load:', e);
+                    e.currentTarget.src = '/lovable-uploads/7dfb5ad9-690c-419d-b7f0-376e1d5ba627.png';
+                  }}
+                  onLoad={() => console.log('Water crisis article image loaded successfully')}
+                />
               ) : (
                 <img 
                   src={article.image_url || '/lovable-uploads/7dfb5ad9-690c-419d-b7f0-376e1d5ba627.png'}
