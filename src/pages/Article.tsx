@@ -49,7 +49,15 @@ const Article = () => {
         meta.content = content;
       };
 
-      const articleImage = article.image_url || '/lovable-uploads/7dfb5ad9-690c-419d-b7f0-376e1d5ba627.png';
+      // More robust detection for water crisis article
+      const isWaterCrisisArticle = article.title.toLowerCase().includes("water crisis") || 
+                                   article.title.toLowerCase().includes("blue gold") ||
+                                   (article.image_url && article.image_url.includes('50c344c1-e86b-4356-984f-3557ad5270a1'));
+
+      const articleImage = isWaterCrisisArticle 
+        ? '/lovable-uploads/50c344c1-e86b-4356-984f-3557ad5270a1.png'
+        : (article.image_url || '/lovable-uploads/7dfb5ad9-690c-419d-b7f0-376e1d5ba627.png');
+      
       const fullImageUrl = articleImage.startsWith('http') ? articleImage : `${window.location.origin}${articleImage}`;
 
       // Update description meta tag
@@ -146,7 +154,19 @@ const Article = () => {
   };
 
   const articleUrl = window.location.href;
-  const isWaterCrisisArticle = article.title.toLowerCase().includes("water crisis");
+  
+  // More robust detection for water crisis article
+  const isWaterCrisisArticle = article.title.toLowerCase().includes("water crisis") || 
+                               article.title.toLowerCase().includes("blue gold") ||
+                               (article.image_url && article.image_url.includes('50c344c1-e86b-4356-984f-3557ad5270a1'));
+
+  // Determine the correct image to use
+  const getArticleImage = () => {
+    if (isWaterCrisisArticle) {
+      return '/lovable-uploads/50c344c1-e86b-4356-984f-3557ad5270a1.png';
+    }
+    return article.image_url || '/lovable-uploads/7dfb5ad9-690c-419d-b7f0-376e1d5ba627.png';
+  };
 
   return (
     <div className="min-h-screen">
@@ -188,29 +208,25 @@ const Article = () => {
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto">
             <div className="mb-8">
-              {isWaterCrisisArticle ? (
-                <img 
-                  src="/lovable-uploads/50c344c1-e86b-4356-984f-3557ad5270a1.png"
-                  alt={article.title}
-                  className="w-full max-h-96 object-cover rounded-lg shadow-md mx-auto"
-                  onError={(e) => {
-                    console.error('Water crisis article image failed to load:', e);
-                    e.currentTarget.src = '/lovable-uploads/7dfb5ad9-690c-419d-b7f0-376e1d5ba627.png';
-                  }}
-                  onLoad={() => console.log('Water crisis article image loaded successfully')}
-                />
-              ) : (
-                <img 
-                  src={article.image_url || '/lovable-uploads/7dfb5ad9-690c-419d-b7f0-376e1d5ba627.png'}
-                  alt={article.title}
-                  className="w-full max-h-96 object-cover rounded-lg shadow-md mx-auto"
-                  onError={(e) => {
-                    console.error('Article image failed to load:', e);
-                    e.currentTarget.src = '/lovable-uploads/7dfb5ad9-690c-419d-b7f0-376e1d5ba627.png';
-                  }}
-                  onLoad={() => console.log('Article image loaded successfully')}
-                />
-              )}
+              <img 
+                src={getArticleImage()}
+                alt={article.title}
+                className="w-full max-h-96 object-cover rounded-lg shadow-md mx-auto"
+                onError={(e) => {
+                  console.error(`Article page image failed to load for: ${article.title}`, e);
+                  console.log(`Attempted to load: ${getArticleImage()}`);
+                  console.log(`Is water crisis article: ${isWaterCrisisArticle}`);
+                  console.log(`Article image_url from DB: ${article.image_url}`);
+                  // Fallback to default image
+                  e.currentTarget.src = '/lovable-uploads/7dfb5ad9-690c-419d-b7f0-376e1d5ba627.png';
+                }}
+                onLoad={() => {
+                  console.log(`Article page image loaded successfully for: ${article.title}`);
+                  console.log(`Loaded image: ${getArticleImage()}`);
+                  console.log(`Is water crisis article: ${isWaterCrisisArticle}`);
+                  console.log(`Article image_url from DB: ${article.image_url}`);
+                }}
+              />
             </div>
             
             <div className="prose prose-lg max-w-none">

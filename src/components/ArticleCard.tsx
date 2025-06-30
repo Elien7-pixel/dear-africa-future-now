@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
@@ -30,33 +29,41 @@ const ArticleCard = ({ article }: ArticleCardProps) => {
   };
 
   const articleUrl = `${window.location.origin}/article/${article.id}`;
-  const isWaterCrisisArticle = article.title.toLowerCase().includes("water crisis");
+  
+  // More robust detection for water crisis article
+  const isWaterCrisisArticle = article.title.toLowerCase().includes("water crisis") || 
+                               article.title.toLowerCase().includes("blue gold") ||
+                               (article.image_url && article.image_url.includes('50c344c1-e86b-4356-984f-3557ad5270a1'));
+
+  // Determine the correct image to use
+  const getArticleImage = () => {
+    if (isWaterCrisisArticle) {
+      return '/lovable-uploads/50c344c1-e86b-4356-984f-3557ad5270a1.png';
+    }
+    return article.image_url || '/lovable-uploads/7dfb5ad9-690c-419d-b7f0-376e1d5ba627.png';
+  };
 
   return (
     <article className="bg-white rounded-lg overflow-hidden shadow-md border hover:shadow-lg transition-shadow">
       <div className="p-6">
         <div className="flex items-center justify-center mb-4">
-          {isWaterCrisisArticle ? (
-            <img 
-              src="/lovable-uploads/50c344c1-e86b-4356-984f-3557ad5270a1.png"
-              alt={article.title}
-              className="h-12 w-12 object-cover rounded"
-              onError={(e) => {
-                console.error('Water crisis article card image failed to load:', e);
-                e.currentTarget.src = '/lovable-uploads/7dfb5ad9-690c-419d-b7f0-376e1d5ba627.png';
-              }}
-            />
-          ) : (
-            <img 
-              src={article.image_url || '/lovable-uploads/7dfb5ad9-690c-419d-b7f0-376e1d5ba627.png'}
-              alt={article.title}
-              className="h-12 w-12 object-cover rounded"
-              onError={(e) => {
-                console.error('Article card image failed to load:', e);
-                e.currentTarget.src = '/lovable-uploads/7dfb5ad9-690c-419d-b7f0-376e1d5ba627.png';
-              }}
-            />
-          )}
+          <img 
+            src={getArticleImage()}
+            alt={article.title}
+            className="h-12 w-12 object-cover rounded"
+            onError={(e) => {
+              console.error(`Article card image failed to load for: ${article.title}`, e);
+              console.log(`Attempted to load: ${getArticleImage()}`);
+              console.log(`Is water crisis article: ${isWaterCrisisArticle}`);
+              // Fallback to default image
+              e.currentTarget.src = '/lovable-uploads/7dfb5ad9-690c-419d-b7f0-376e1d5ba627.png';
+            }}
+            onLoad={() => {
+              console.log(`Article card image loaded successfully for: ${article.title}`);
+              console.log(`Loaded image: ${getArticleImage()}`);
+              console.log(`Is water crisis article: ${isWaterCrisisArticle}`);
+            }}
+          />
         </div>
         <div className="flex justify-between items-center mb-3">
           <span className={`px-3 py-1 rounded-full text-sm font-medium ${getCategoryColor(article.category)}`}>
