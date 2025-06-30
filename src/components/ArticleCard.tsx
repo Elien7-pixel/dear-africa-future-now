@@ -13,58 +13,38 @@ interface ArticleCardProps {
 
 const ArticleCard = ({ article }: ArticleCardProps) => {
   const getCategoryColor = (category: string) => {
-    switch (category.toLowerCase()) {
-      case 'mental health':
-        return 'bg-emerald-100 text-emerald-700';
-      case 'climate action':
-        return 'bg-green-100 text-green-700';
-      case 'equity and equality':
-      case 'social equality':
-        return 'bg-blue-100 text-blue-700';
-      case 'inspirational':
-        return 'bg-purple-100 text-purple-700';
-      default:
-        return 'bg-african-beige/60 text-african-brown';
-    }
+    const colors = {
+      'mental health': 'bg-emerald-100 text-emerald-700',
+      'climate action': 'bg-green-100 text-green-700',
+      'equity and equality': 'bg-blue-100 text-blue-700',
+      'social equality': 'bg-blue-100 text-blue-700',
+      'inspirational': 'bg-purple-100 text-purple-700'
+    };
+    
+    return colors[category.toLowerCase()] || 'bg-african-beige/60 text-african-brown';
   };
 
   const articleUrl = `${window.location.origin}/article/${article.id}`;
-  
-  // More robust detection for water crisis article
-  const isWaterCrisisArticle = article.title.toLowerCase().includes("water crisis") || 
-                               article.title.toLowerCase().includes("blue gold") ||
-                               (article.image_url && article.image_url.includes('50c344c1-e86b-4356-984f-3557ad5270a1'));
-
-  // Determine the correct image to use
-  const getArticleImage = () => {
-    if (isWaterCrisisArticle) {
-      return '/lovable-uploads/50c344c1-e86b-4356-984f-3557ad5270a1.png';
-    }
-    return article.image_url || '/lovable-uploads/7dfb5ad9-690c-419d-b7f0-376e1d5ba627.png';
-  };
+  const imageUrl = article.image_url;
 
   return (
-    <article className="bg-white rounded-lg overflow-hidden shadow-md border hover:shadow-lg transition-shadow">
+    <article className="bg-white rounded-lg overflow-hidden shadow-md border hover:shadow-lg transition-shadow group">
       <div className="p-6">
-        <div className="flex items-center justify-center mb-4">
+        {/* Image with enhanced error handling */}
+        <div className="flex items-center justify-center mb-4 h-48 overflow-hidden rounded-lg bg-gray-100">
           <img 
-            src={getArticleImage()}
-            alt={article.title}
-            className="h-12 w-12 object-cover rounded"
+            src={imageUrl}
+            alt={`Featured image for ${article.title}`}
+            className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
             onError={(e) => {
-              console.error(`Article card image failed to load for: ${article.title}`, e);
-              console.log(`Attempted to load: ${getArticleImage()}`);
-              console.log(`Is water crisis article: ${isWaterCrisisArticle}`);
-              // Fallback to default image
+              console.error('Image failed to load:', imageUrl);
               e.currentTarget.src = '/lovable-uploads/7dfb5ad9-690c-419d-b7f0-376e1d5ba627.png';
+              e.currentTarget.classList.add('object-contain', 'p-4');
             }}
-            onLoad={() => {
-              console.log(`Article card image loaded successfully for: ${article.title}`);
-              console.log(`Loaded image: ${getArticleImage()}`);
-              console.log(`Is water crisis article: ${isWaterCrisisArticle}`);
-            }}
+            loading="lazy"
           />
         </div>
+
         <div className="flex justify-between items-center mb-3">
           <span className={`px-3 py-1 rounded-full text-sm font-medium ${getCategoryColor(article.category)}`}>
             {article.category}
@@ -82,11 +62,16 @@ const ArticleCard = ({ article }: ArticleCardProps) => {
             />
           </div>
         </div>
-        <h3 className="text-xl font-bold mb-2 text-african-dark line-clamp-2">{article.title}</h3>
-        <p className="text-gray-600 mb-4 line-clamp-3">{article.excerpt}</p>
+
+        <h3 className="text-xl font-bold mb-2 text-african-dark line-clamp-2">
+          {article.title}
+        </h3>
+        <p className="text-gray-600 mb-4 line-clamp-3">
+          {article.excerpt}
+        </p>
         <Link 
           to={`/article/${article.id}`}
-          className="inline-flex items-center text-african-blue hover:text-african-blue/90 transition-colors"
+          className="inline-flex items-center text-african-blue hover:text-african-blue/90 transition-colors font-medium"
           onClick={() => window.scrollTo(0, 0)}
         >
           Read More <ArrowRight className="ml-2 h-4 w-4" />
