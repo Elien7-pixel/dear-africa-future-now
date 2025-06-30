@@ -1,4 +1,3 @@
-
 import React, { useEffect } from 'react';
 import { useParams, Navigate } from 'react-router-dom';
 import { Calendar, ArrowLeft } from 'lucide-react';
@@ -12,105 +11,50 @@ import EnhancedLikeButton from '@/components/EnhancedLikeButton';
 
 const Article = () => {
   const { id } = useParams<{ id: string }>();
-  
-  // Scroll to top when component mounts
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
-  
-  if (!id) {
-    return <Navigate to="/blog" replace />;
-  }
-
   const { data: article, isLoading, error } = useArticle(id);
 
-  // Update meta tags for social sharing and SEO
+  // Scroll to top and set meta tags
   useEffect(() => {
-    if (article) {
-      document.title = `${article.title} - Dear African Child`;
-      
-      const updateMetaTag = (property: string, content: string) => {
-        let meta = document.querySelector(`meta[property="${property}"]`) as HTMLMetaElement;
-        if (!meta) {
-          meta = document.createElement('meta');
-          meta.setAttribute('property', property);
-          document.head.appendChild(meta);
-        }
-        meta.content = content;
-      };
+    if (!article) return;
 
-      const updateNameMetaTag = (name: string, content: string) => {
-        let meta = document.querySelector(`meta[name="${name}"]`) as HTMLMetaElement;
-        if (!meta) {
-          meta = document.createElement('meta');
-          meta.setAttribute('name', name);
-          document.head.appendChild(meta);
-        }
-        meta.content = content;
-      };
+    window.scrollTo(0, 0);
+    document.title = `${article.title} - Dear African Child`;
 
-      // More robust detection for water crisis article
-      const isWaterCrisisArticle = article.title.toLowerCase().includes("water crisis") || 
-                                   article.title.toLowerCase().includes("blue gold") ||
-                                   (article.image_url && article.image_url.includes('50c344c1-e86b-4356-984f-3557ad5270a1'));
-
-      const articleImage = isWaterCrisisArticle 
-        ? '/lovable-uploads/50c344c1-e86b-4356-984f-3557ad5270a1.png'
-        : (article.image_url || '/lovable-uploads/7dfb5ad9-690c-419d-b7f0-376e1d5ba627.png');
-      
-      const fullImageUrl = articleImage.startsWith('http') ? articleImage : `${window.location.origin}${articleImage}`;
-
-      // Update description meta tag
-      updateNameMetaTag('description', article.excerpt);
-      
-      // Open Graph tags
-      updateMetaTag('og:title', article.title);
-      updateMetaTag('og:description', article.excerpt);
-      updateMetaTag('og:type', 'article');
-      updateMetaTag('og:url', window.location.href);
-      updateMetaTag('og:image', fullImageUrl);
-      updateMetaTag('og:image:width', '1200');
-      updateMetaTag('og:image:height', '630');
-
-      // Twitter Card tags
-      updateNameMetaTag('twitter:card', 'summary_large_image');
-      updateNameMetaTag('twitter:title', article.title);
-      updateNameMetaTag('twitter:description', article.excerpt);
-      updateNameMetaTag('twitter:image', fullImageUrl);
-      
-      // Add structured data for the article
-      let structuredData = document.querySelector('script[type="application/ld+json"]#article-structured-data');
-      if (!structuredData) {
-        structuredData = document.createElement('script');
-        structuredData.setAttribute('type', 'application/ld+json');
-        structuredData.setAttribute('id', 'article-structured-data');
-        document.head.appendChild(structuredData);
+    // Update social meta tags
+    const setMetaTag = (property: string, content: string) => {
+      let tag = document.querySelector(`meta[property="${property}"]`) as HTMLMetaElement;
+      if (!tag) {
+        tag = document.createElement('meta');
+        tag.setAttribute('property', property);
+        document.head.appendChild(tag);
       }
-      
-      structuredData.textContent = JSON.stringify({
-        "@context": "https://schema.org",
-        "@type": "Article",
-        "headline": article.title,
-        "description": article.excerpt,
-        "datePublished": article.date,
-        "author": {
-          "@type": "Person",
-          "name": "Munya Touch"
-        },
-        "publisher": {
-          "@type": "Organization",
-          "name": "Dear African Child"
-        },
-        "image": fullImageUrl,
-        "url": window.location.href
-      });
-    }
+      tag.content = content;
+    };
 
-    // Cleanup function to reset title when component unmounts
+    const fullImageUrl = article.image_url.startsWith('http') 
+      ? article.image_url 
+      : `${window.location.origin}${article.image_url}`;
+
+    setMetaTag('og:title', article.title);
+    setMetaTag('og:description', article.excerpt);
+    setMetaTag('og:image', fullImageUrl);
+    setMetaTag('og:url', window.location.href);
+
     return () => {
       document.title = 'Dear African Child';
     };
   }, [article]);
+
+  const getCategoryColor = (category: string) => {
+    const colors = {
+      'mental health': 'bg-emerald-100 text-emerald-700',
+      'climate action': 'bg-green-100 text-green-700',
+      'equity and equality': 'bg-blue-100 text-blue-700',
+      'social equality': 'bg-blue-100 text-blue-700',
+      'inspirational': 'bg-purple-100 text-purple-700'
+    };
+    return colors[category.toLowerCase()] || 'bg-african-beige/60 text-african-brown';
+  };
 
   if (isLoading) {
     return (
@@ -125,7 +69,6 @@ const Article = () => {
       <div className="min-h-screen flex items-center justify-center">
         <div className="text-center">
           <h1 className="text-2xl font-bold text-gray-800 mb-4">Article Not Found</h1>
-          <p className="text-gray-600 mb-6">The article you're looking for doesn't exist.</p>
           <Link to="/blog">
             <Button className="bg-african-orange hover:bg-african-orange/90">
               <ArrowLeft className="mr-2 h-4 w-4" />
@@ -137,49 +80,23 @@ const Article = () => {
     );
   }
 
-  const getCategoryColor = (category: string) => {
-    switch (category.toLowerCase()) {
-      case 'mental health':
-        return 'bg-emerald-100 text-emerald-700';
-      case 'climate action':
-        return 'bg-green-100 text-green-700';
-      case 'equity and equality':
-      case 'social equality':
-        return 'bg-blue-100 text-blue-700';
-      case 'inspirational':
-        return 'bg-purple-100 text-purple-700';
-      default:
-        return 'bg-african-beige/60 text-african-brown';
-    }
-  };
-
   const articleUrl = window.location.href;
-  
-  // More robust detection for water crisis article
-  const isWaterCrisisArticle = article.title.toLowerCase().includes("water crisis") || 
-                               article.title.toLowerCase().includes("blue gold") ||
-                               (article.image_url && article.image_url.includes('50c344c1-e86b-4356-984f-3557ad5270a1'));
-
-  // Determine the correct image to use
-  const getArticleImage = () => {
-    if (isWaterCrisisArticle) {
-      return '/lovable-uploads/50c344c1-e86b-4356-984f-3557ad5270a1.png';
-    }
-    return article.image_url || '/lovable-uploads/7dfb5ad9-690c-419d-b7f0-376e1d5ba627.png';
-  };
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen bg-gray-50">
       {/* Article Header */}
-      <section className="bg-african-blue/10 py-16">
-        <div className="container mx-auto px-4">
-          <Link to="/blog" className="inline-flex items-center text-african-blue hover:text-african-blue/90 mb-6 transition-colors">
+      <section className="bg-african-blue/5 py-16 border-b border-gray-200">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <Link 
+            to="/blog" 
+            className="inline-flex items-center text-african-blue hover:text-african-blue/90 mb-6 transition-colors"
+          >
             <ArrowLeft className="mr-2 h-4 w-4" />
             Back to Blog
           </Link>
           
-          <div className="max-w-4xl">
-            <div className="flex flex-wrap items-center gap-4 mb-4">
+          <div className="max-w-4xl mx-auto">
+            <div className="flex flex-wrap items-center gap-3 mb-4">
               <span className={`px-3 py-1 rounded-full text-sm font-medium ${getCategoryColor(article.category)}`}>
                 {article.category}
               </span>
@@ -187,7 +104,7 @@ const Article = () => {
                 <Calendar className="h-4 w-4 mr-2" />
                 {format(new Date(article.date), 'MMMM dd, yyyy')}
               </div>
-              <div className="flex items-center gap-3">
+              <div className="flex items-center gap-3 ml-auto">
                 <EnhancedLikeButton articleId={article.id} />
                 <EnhancedShareButton
                   title={article.title}
@@ -197,36 +114,36 @@ const Article = () => {
               </div>
             </div>
             
-            <h1 className="text-4xl md:text-5xl font-bold text-african-green mb-6">{article.title}</h1>
-            <p className="text-xl text-gray-700">{article.excerpt}</p>
+            <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-african-dark mb-6">
+              {article.title}
+            </h1>
+            <p className="text-lg text-gray-700">
+              {article.excerpt}
+            </p>
           </div>
         </div>
       </section>
 
       {/* Article Content */}
       <section className="py-16">
-        <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto">
-            <div className="mb-8">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="max-w-4xl mx-auto bg-white rounded-xl shadow-sm p-8">
+            <div className="mb-12">
               <img 
-                src={getArticleImage()}
+                src={article.image_url}
                 alt={article.title}
-                className="w-full max-h-96 object-cover rounded-lg shadow-md mx-auto"
+                className="w-full h-auto max-h-[32rem] object-cover rounded-lg mx-auto"
                 onError={(e) => {
-                  console.error(`Article page image failed to load for: ${article.title}`, e);
-                  console.log(`Attempted to load: ${getArticleImage()}`);
-                  console.log(`Is water crisis article: ${isWaterCrisisArticle}`);
-                  console.log(`Article image_url from DB: ${article.image_url}`);
-                  // Fallback to default image
+                  console.error('Article image failed to load:', article.image_url);
                   e.currentTarget.src = '/lovable-uploads/7dfb5ad9-690c-419d-b7f0-376e1d5ba627.png';
-                }}
-                onLoad={() => {
-                  console.log(`Article page image loaded successfully for: ${article.title}`);
-                  console.log(`Loaded image: ${getArticleImage()}`);
-                  console.log(`Is water crisis article: ${isWaterCrisisArticle}`);
-                  console.log(`Article image_url from DB: ${article.image_url}`);
+                  e.currentTarget.classList.add('object-contain', 'p-8');
                 }}
               />
+              {article.image_caption && (
+                <p className="mt-2 text-sm text-gray-500 text-center italic">
+                  {article.image_caption}
+                </p>
+              )}
             </div>
             
             <div className="prose prose-lg max-w-none">
