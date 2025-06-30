@@ -48,6 +48,9 @@ const Article = () => {
         meta.content = content;
       };
 
+      const articleImage = article.image_url || '/lovable-uploads/7dfb5ad9-690c-419d-b7f0-376e1d5ba627.png';
+      const fullImageUrl = articleImage.startsWith('http') ? articleImage : `${window.location.origin}${articleImage}`;
+
       // Update description meta tag
       updateNameMetaTag('description', article.excerpt);
       
@@ -56,13 +59,15 @@ const Article = () => {
       updateMetaTag('og:description', article.excerpt);
       updateMetaTag('og:type', 'article');
       updateMetaTag('og:url', window.location.href);
-      updateMetaTag('og:image', '/lovable-uploads/7dfb5ad9-690c-419d-b7f0-376e1d5ba627.png');
+      updateMetaTag('og:image', fullImageUrl);
+      updateMetaTag('og:image:width', '1200');
+      updateMetaTag('og:image:height', '630');
 
       // Twitter Card tags
       updateNameMetaTag('twitter:card', 'summary_large_image');
       updateNameMetaTag('twitter:title', article.title);
       updateNameMetaTag('twitter:description', article.excerpt);
-      updateNameMetaTag('twitter:image', '/lovable-uploads/7dfb5ad9-690c-419d-b7f0-376e1d5ba627.png');
+      updateNameMetaTag('twitter:image', fullImageUrl);
       
       // Add structured data for the article
       let structuredData = document.querySelector('script[type="application/ld+json"]#article-structured-data');
@@ -87,7 +92,7 @@ const Article = () => {
           "@type": "Organization",
           "name": "Dear African Child"
         },
-        "image": "/lovable-uploads/7dfb5ad9-690c-419d-b7f0-376e1d5ba627.png",
+        "image": fullImageUrl,
         "url": window.location.href
       });
     }
@@ -140,6 +145,7 @@ const Article = () => {
   };
 
   const articleUrl = window.location.href;
+  const articleImage = article.image_url || '/lovable-uploads/7dfb5ad9-690c-419d-b7f0-376e1d5ba627.png';
 
   return (
     <div className="min-h-screen">
@@ -182,14 +188,14 @@ const Article = () => {
           <div className="max-w-4xl mx-auto">
             <div className="mb-8">
               <img 
-                src="/lovable-uploads/7dfb5ad9-690c-419d-b7f0-376e1d5ba627.png" 
-                alt="African community discussion"
+                src={articleImage}
+                alt={article.title}
                 className="w-full max-h-96 object-cover rounded-lg shadow-md mx-auto"
                 onError={(e) => {
-                  console.error('Image failed to load:', e);
-                  e.currentTarget.style.display = 'none';
+                  console.error('Article image failed to load:', e);
+                  e.currentTarget.src = '/lovable-uploads/7dfb5ad9-690c-419d-b7f0-376e1d5ba627.png';
                 }}
-                onLoad={() => console.log('Image loaded successfully')}
+                onLoad={() => console.log('Article image loaded successfully')}
               />
             </div>
             

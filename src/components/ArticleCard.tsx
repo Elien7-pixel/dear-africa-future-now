@@ -30,18 +30,19 @@ const ArticleCard = ({ article }: ArticleCardProps) => {
   };
 
   const articleUrl = `${window.location.origin}/article/${article.id}`;
+  const articleImage = article.image_url || '/lovable-uploads/7dfb5ad9-690c-419d-b7f0-376e1d5ba627.png';
 
   return (
     <article className="bg-white rounded-lg overflow-hidden shadow-md border hover:shadow-lg transition-shadow">
       <div className="p-6">
         <div className="flex items-center justify-center mb-4">
           <img 
-            src="/lovable-uploads/7dfb5ad9-690c-419d-b7f0-376e1d5ba627.png" 
-            alt="African community discussion"
+            src={articleImage}
+            alt={article.title}
             className="h-12 w-12 object-cover rounded"
             onError={(e) => {
               console.error('Article card image failed to load:', e);
-              e.currentTarget.style.display = 'none';
+              e.currentTarget.src = '/lovable-uploads/7dfb5ad9-690c-419d-b7f0-376e1d5ba627.png';
             }}
           />
         </div>
