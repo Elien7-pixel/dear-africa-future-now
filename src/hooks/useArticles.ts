@@ -99,9 +99,25 @@ export const useArticleLikes = () => {
   
   return useMutation({
     mutationFn: async ({ articleId, increment }: { articleId: string; increment: boolean }) => {
-      const { data, error } = await supabase.rpc(increment ? 'increment_likes' : 'decrement_likes', {
-        article_id: articleId
-      });
+      // Direct database update instead of RPC call to avoid TypeScript issues
+      const { data: currentArticle, error: fetchError } = await supabase
+        .from('articles')
+        .select('likes')
+        .eq('id', articleId)
+        .single();
+
+      if (fetchError) throw fetchError;
+
+      const newLikes = increment 
+        ? (currentArticle.likes || 0) + 1 
+        : Math.max((currentArticle.likes || 0) - 1, 0);
+
+      const { data, error } = await supabase
+        .from('articles')
+        .update({ likes: newLikes })
+        .eq('id', articleId)
+        .select()
+        .single();
 
       if (error) throw error;
       return data;
