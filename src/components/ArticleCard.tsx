@@ -36,11 +36,11 @@ const ArticleCard = ({ article }: ArticleCardProps) => {
       return '/lovable-uploads/50c344c1-e86b-4356-984f-3557ad5270a1.png';
     }
     
-    // Climate advocacy article uses default icon
+    // Climate advocacy article uses the uploaded protest image
     if (title.includes("power of voices") || 
         title.includes("activists, influencers, and innovators") ||
         title.includes("climate change advocacy")) {
-      return '/lovable-uploads/7dfb5ad9-690c-419d-b7f0-376e1d5ba627.png';
+      return '/lovable-uploads/47876403-bc33-4a8f-aee5-faa8c47d4090.png';
     }
     
     // Use article's image_url or default
@@ -60,8 +60,8 @@ const ArticleCard = ({ article }: ArticleCardProps) => {
             className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
             onError={(e) => {
               console.error('Image failed to load:', imageUrl);
-              e.currentTarget.src = '/lovable-uploads/7dfb5ad9-690c-419d-b7f0-376e1d5ba627.png';
-              e.currentTarget.classList.add('object-contain', 'p-4');
+              // Hide the image if it fails to load, don't show fallback
+              e.currentTarget.style.display = 'none';
             }}
             loading="lazy"
           />
