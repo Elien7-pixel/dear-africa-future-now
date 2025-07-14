@@ -25,7 +25,28 @@ const ArticleCard = ({ article }: ArticleCardProps) => {
   };
 
   const articleUrl = `${window.location.origin}/article/${article.id}`;
-  const imageUrl = article.image_url;
+
+  // Enhanced image URL handling with specific article detection
+  const getImageUrl = (article: Article): string => {
+    const title = article.title.toLowerCase();
+    
+    // Water crisis article gets river/boat image
+    if (title.includes("water crisis") || title.includes("blue gold")) {
+      return '/lovable-uploads/50c344c1-e86b-4356-984f-3557ad5270a1.png';
+    }
+    
+    // Climate advocacy article gets the uploaded image
+    if (title.includes("power of voices") || 
+        title.includes("activists, influencers, and innovators") ||
+        title.includes("climate change advocacy")) {
+      return '/lovable-uploads/39b0c7b5-ccdc-44c6-a6c2-7c6bc5583f89.png';
+    }
+    
+    // Use article's image_url or default
+    return article.image_url || '/lovable-uploads/7dfb5ad9-690c-419d-b7f0-376e1d5ba627.png';
+  };
+
+  const imageUrl = getImageUrl(article);
 
   return (
     <article className="bg-white rounded-lg overflow-hidden shadow-md border hover:shadow-lg transition-shadow group">

@@ -1,3 +1,4 @@
+
 import React, { useEffect } from 'react';
 import { useParams, Navigate } from 'react-router-dom';
 import { Calendar, ArrowLeft } from 'lucide-react';
@@ -12,6 +13,28 @@ import EnhancedLikeButton from '@/components/EnhancedLikeButton';
 const Article = () => {
   const { id } = useParams<{ id: string }>();
   const { data: article, isLoading, error } = useArticle(id);
+
+  // Enhanced image URL handling with specific article detection
+  const getImageUrl = (article: any): string => {
+    if (!article) return '/lovable-uploads/7dfb5ad9-690c-419d-b7f0-376e1d5ba627.png';
+    
+    const title = article.title.toLowerCase();
+    
+    // Water crisis article gets river/boat image
+    if (title.includes("water crisis") || title.includes("blue gold")) {
+      return '/lovable-uploads/50c344c1-e86b-4356-984f-3557ad5270a1.png';
+    }
+    
+    // Climate advocacy article gets the uploaded image
+    if (title.includes("power of voices") || 
+        title.includes("activists, influencers, and innovators") ||
+        title.includes("climate change advocacy")) {
+      return '/lovable-uploads/39b0c7b5-ccdc-44c6-a6c2-7c6bc5583f89.png';
+    }
+    
+    // Use article's image_url or default
+    return article.image_url || '/lovable-uploads/7dfb5ad9-690c-419d-b7f0-376e1d5ba627.png';
+  };
 
   // Scroll to top and set meta tags
   useEffect(() => {
@@ -31,9 +54,10 @@ const Article = () => {
       tag.content = content;
     };
 
-    const fullImageUrl = article.image_url.startsWith('http') 
-      ? article.image_url 
-      : `${window.location.origin}${article.image_url}`;
+    const imageUrl = getImageUrl(article);
+    const fullImageUrl = imageUrl.startsWith('http') 
+      ? imageUrl 
+      : `${window.location.origin}${imageUrl}`;
 
     setMetaTag('og:title', article.title);
     setMetaTag('og:description', article.excerpt);
@@ -81,6 +105,7 @@ const Article = () => {
   }
 
   const articleUrl = window.location.href;
+  const imageUrl = getImageUrl(article);
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -130,11 +155,11 @@ const Article = () => {
           <div className="max-w-4xl mx-auto bg-white rounded-xl shadow-sm p-8">
             <div className="mb-12">
               <img 
-                src={article.image_url}
+                src={imageUrl}
                 alt={article.title}
                 className="w-full h-auto max-h-[32rem] object-cover rounded-lg mx-auto"
                 onError={(e) => {
-                  console.error('Article image failed to load:', article.image_url);
+                  console.error('Article image failed to load:', imageUrl);
                   e.currentTarget.src = '/lovable-uploads/7dfb5ad9-690c-419d-b7f0-376e1d5ba627.png';
                   e.currentTarget.classList.add('object-contain', 'p-8');
                 }}
