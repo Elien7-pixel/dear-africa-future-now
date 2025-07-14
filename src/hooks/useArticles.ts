@@ -11,7 +11,6 @@ export type Article = Tables<'articles'> & {
 const formatImageUrl = (url: string | null, title: string = ''): string => {
   const DEFAULT_IMAGE = '/lovable-uploads/7dfb5ad9-690c-419d-b7f0-376e1d5ba627.png';
   const WATER_CRISIS_IMAGE = '/lovable-uploads/50c344c1-e86b-4356-984f-3557ad5270a1.png';
-  const CLIMATE_ADVOCACY_IMAGE = '/lovable-uploads/39b0c7b5-ccdc-44c6-a6c2-7c6bc5583f89.png';
 
   // Return default if no URL provided
   if (!url || url.trim() === '') return DEFAULT_IMAGE;
@@ -22,11 +21,11 @@ const formatImageUrl = (url: string | null, title: string = ''): string => {
     return WATER_CRISIS_IMAGE;
   }
 
-  // Special case for climate advocacy article - more specific matching
+  // Climate advocacy article now uses default icon instead of uploaded image
   if (title.toLowerCase().includes("power of voices") || 
       title.toLowerCase().includes("activists, influencers, and innovators") ||
       title.toLowerCase().includes("climate change advocacy")) {
-    return CLIMATE_ADVOCACY_IMAGE;
+    return DEFAULT_IMAGE;
   }
 
   // Ensure URL has correct prefix

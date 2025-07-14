@@ -25,11 +25,11 @@ const Article = () => {
       return '/lovable-uploads/50c344c1-e86b-4356-984f-3557ad5270a1.png';
     }
     
-    // Climate advocacy article gets the uploaded image - more specific matching
+    // Climate advocacy article uses default icon
     if (title.includes("power of voices") || 
         title.includes("activists, influencers, and innovators") ||
         title.includes("climate change advocacy")) {
-      return '/lovable-uploads/39b0c7b5-ccdc-44c6-a6c2-7c6bc5583f89.png';
+      return '/lovable-uploads/7dfb5ad9-690c-419d-b7f0-376e1d5ba627.png';
     }
     
     // Use article's image_url or default
