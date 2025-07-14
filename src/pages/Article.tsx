@@ -25,7 +25,7 @@ const Article = () => {
       return '/lovable-uploads/50c344c1-e86b-4356-984f-3557ad5270a1.png';
     }
     
-    // Climate advocacy article gets the uploaded image
+    // Climate advocacy article gets the uploaded image - more specific matching
     if (title.includes("power of voices") || 
         title.includes("activists, influencers, and innovators") ||
         title.includes("climate change advocacy")) {
@@ -164,11 +164,6 @@ const Article = () => {
                   e.currentTarget.classList.add('object-contain', 'p-8');
                 }}
               />
-              {article.image_caption && (
-                <p className="mt-2 text-sm text-gray-500 text-center italic">
-                  {article.image_caption}
-                </p>
-              )}
             </div>
             
             <div className="prose prose-lg max-w-none">

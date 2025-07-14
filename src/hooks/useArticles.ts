@@ -22,7 +22,7 @@ const formatImageUrl = (url: string | null, title: string = ''): string => {
     return WATER_CRISIS_IMAGE;
   }
 
-  // Special case for climate advocacy article
+  // Special case for climate advocacy article - more specific matching
   if (title.toLowerCase().includes("power of voices") || 
       title.toLowerCase().includes("activists, influencers, and innovators") ||
       title.toLowerCase().includes("climate change advocacy")) {
@@ -64,10 +64,12 @@ export const useArticles = () => {
   });
 };
 
-export const useArticle = (id: string) => {
+export const useArticle = (id: string | undefined) => {
   return useQuery({
     queryKey: ['article', id],
     queryFn: async () => {
+      if (!id) throw new Error('Article ID is required');
+      
       console.log(`Fetching article ${id} from Supabase...`);
       const { data, error } = await supabase
         .from('articles')
@@ -87,7 +89,8 @@ export const useArticle = (id: string) => {
 
       console.log(`Processed article ${id} with image URL:`, processed?.image_url);
       return processed;
-    }
+    },
+    enabled: !!id
   });
 };
 
@@ -95,7 +98,7 @@ export const useArticleLikes = () => {
   const queryClient = useQueryClient();
   
   return useMutation({
-    mutationFn: async ({ articleId, increment }: { articleId: string, increment: boolean }) => {
+    mutationFn: async ({ articleId, increment }: { articleId: string; increment: boolean }) => {
       const { data, error } = await supabase.rpc(increment ? 'increment_likes' : 'decrement_likes', {
         article_id: articleId
       });
@@ -103,9 +106,9 @@ export const useArticleLikes = () => {
       if (error) throw error;
       return data;
     },
-    onSuccess: (_, vars) => {
-      queryClient.invalidateQueries(['articles']);
-      queryClient.invalidateQueries(['article', vars.articleId]);
+    onSuccess: (_, variables) => {
+      queryClient.invalidateQueries({ queryKey: ['articles'] });
+      queryClient.invalidateQueries({ queryKey: ['article', variables.articleId] });
     }
   });
 };
