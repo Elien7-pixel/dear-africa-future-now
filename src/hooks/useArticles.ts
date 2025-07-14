@@ -1,4 +1,3 @@
-
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { supabase } from '@/integrations/supabase/client';
 import type { Tables } from '@/integrations/supabase/types';
@@ -12,6 +11,7 @@ const formatImageUrl = (url: string | null, title: string = ''): string => {
   const DEFAULT_IMAGE = '/lovable-uploads/7dfb5ad9-690c-419d-b7f0-376e1d5ba627.png';
   const WATER_CRISIS_IMAGE = '/lovable-uploads/50c344c1-e86b-4356-984f-3557ad5270a1.png';
   const CLIMATE_ADVOCACY_IMAGE = '/lovable-uploads/47876403-bc33-4a8f-aee5-faa8c47d4090.png';
+  const EMBRACING_CHANGE_IMAGE = '/lovable-uploads/1e400cbe-7f12-44b4-b2a0-111642b17d08.png';
 
   // Return default if no URL provided
   if (!url || url.trim() === '') return DEFAULT_IMAGE;
@@ -27,6 +27,12 @@ const formatImageUrl = (url: string | null, title: string = ''): string => {
       title.toLowerCase().includes("activists, influencers, and innovators") ||
       title.toLowerCase().includes("climate change advocacy")) {
     return CLIMATE_ADVOCACY_IMAGE;
+  }
+
+  // Embracing Change article uses the new uploaded image
+  if (title.toLowerCase().includes("embracing change") || 
+      title.toLowerCase().includes("call to action")) {
+    return EMBRACING_CHANGE_IMAGE;
   }
 
   // Ensure URL has correct prefix

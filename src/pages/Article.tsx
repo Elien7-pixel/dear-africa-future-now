@@ -1,4 +1,3 @@
-
 import React, { useEffect } from 'react';
 import { useParams, Navigate } from 'react-router-dom';
 import { Calendar, ArrowLeft } from 'lucide-react';
@@ -30,6 +29,12 @@ const Article = () => {
         title.includes("activists, influencers, and innovators") ||
         title.includes("climate change advocacy")) {
       return '/lovable-uploads/47876403-bc33-4a8f-aee5-faa8c47d4090.png';
+    }
+
+    // Embracing Change article uses the new uploaded image
+    if (title.includes("embracing change") || 
+        title.includes("call to action")) {
+      return '/lovable-uploads/1e400cbe-7f12-44b4-b2a0-111642b17d08.png';
     }
     
     // Use article's image_url or default
