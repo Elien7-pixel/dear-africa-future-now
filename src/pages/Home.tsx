@@ -7,7 +7,7 @@ import NewsletterSubscription from '@/components/NewsletterSubscription';
 import { useArticles } from '@/hooks/useArticles';
 import ArticleCard from '@/components/ArticleCard';
 import ImageModal from '@/components/ImageModal';
-import { ImageUploadButton } from '@/components/ImageUploadButton';
+
 
 const Home = () => {
   const { data: articles, isLoading } = useArticles();
@@ -16,7 +16,7 @@ const Home = () => {
 
   return (
     <div className="min-h-screen">
-      <ImageUploadButton />
+      
       {/* Hero Section */}
       <section className="relative bg-gradient-to-br from-african-blue/20 via-african-green/10 to-african-beige/30 py-20 overflow-hidden min-h-[80vh] flex items-center">
         <div className="absolute inset-0 bg-[url('/lovable-uploads/13af3390-8eef-4513-b440-e895683dde4f.png')] bg-cover bg-center"></div>
