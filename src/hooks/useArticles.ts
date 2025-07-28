@@ -13,12 +13,16 @@ const formatImageUrl = (url: string | null, title: string = ''): string => {
   const WATER_CRISIS_IMAGE = `${SUPABASE_STORAGE_URL}/50c344c1-e86b-4356-984f-3557ad5270a1.png`;
   const CLIMATE_ADVOCACY_IMAGE = `${SUPABASE_STORAGE_URL}/47876403-bc33-4a8f-aee5-faa8c47d4090.png`;
   const EMBRACING_CHANGE_IMAGE = `${SUPABASE_STORAGE_URL}/1e400cbe-7f12-44b4-b2a0-111642b17d08.png`;
-  const LAUDATO_SI_IMAGE = `${SUPABASE_STORAGE_URL}/561f4c7e-ebc5-49b6-bcca-0707ad33c4c2.png`;
 
   // Return default if no URL provided
   if (!url || url.trim() === '') return DEFAULT_IMAGE;
 
-  // Special case for water crisis articles
+  // If URL starts with /src/assets/, it's a local asset - return as is
+  if (url.startsWith('/src/assets/')) {
+    return url;
+  }
+
+  // Special case for water crisis articles (only if not already a local asset)
   if (title.toLowerCase().includes("water crisis") || 
       title.toLowerCase().includes("blue gold")) {
     return WATER_CRISIS_IMAGE;
@@ -35,12 +39,6 @@ const formatImageUrl = (url: string | null, title: string = ''): string => {
   if (title.toLowerCase().includes("embracing change") || 
       title.toLowerCase().includes("call to action")) {
     return EMBRACING_CHANGE_IMAGE;
-  }
-
-  // Laudato Si' article uses the specific uploaded image
-  if (title.toLowerCase().includes("laudato si") || 
-      title.toLowerCase().includes("caring for our common home")) {
-    return LAUDATO_SI_IMAGE;
   }
 
   // If URL is a Supabase Storage URL, return as is
