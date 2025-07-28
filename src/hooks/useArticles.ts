@@ -1,6 +1,7 @@
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { supabase } from '@/integrations/supabase/client';
 import type { Tables } from '@/integrations/supabase/types';
+import laudatoSiImage from '@/assets/laudato-si-image.jpg';
 
 export type Article = Tables<'articles'> & {
   image_url: string;
@@ -17,6 +18,11 @@ const formatImageUrl = (url: string | null, title: string = ''): string => {
   // Return default if no URL provided
   if (!url || url.trim() === '') return DEFAULT_IMAGE;
 
+  // Handle local assets for specific articles
+  if (url === '/src/assets/laudato-si-image.jpg') {
+    return laudatoSiImage;
+  }
+  
   // If URL starts with /src/assets/, it's a local asset - return as is
   if (url.startsWith('/src/assets/')) {
     return url;
