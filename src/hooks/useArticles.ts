@@ -52,10 +52,9 @@ const formatImageUrl = (url: string | null, title: string = ''): string => {
     return url;
   }
 
-  // If URL starts with /lovable-uploads/, convert to Supabase Storage URL
+  // If URL starts with /lovable-uploads/, treat as public asset path and return as-is
   if (url.startsWith('/lovable-uploads/')) {
-    const filename = url.replace('/lovable-uploads/', '');
-    return `${SUPABASE_STORAGE_URL}/${filename}`;
+    return url;
   }
 
   // If it's just a filename, assume it's in Supabase Storage
