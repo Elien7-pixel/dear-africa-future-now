@@ -7,6 +7,7 @@ import NewsletterSubscription from '@/components/NewsletterSubscription';
 import { useArticles } from '@/hooks/useArticles';
 import ArticleCard from '@/components/ArticleCard';
 import ImageModal from '@/components/ImageModal';
+import QuickArticlePublisher from '@/components/QuickArticlePublisher';
 
 
 const Home = () => {
@@ -174,6 +175,8 @@ const Home = () => {
         isOpen={isImageModalOpen}
         onClose={() => setIsImageModalOpen(false)}
       />
+      
+      <QuickArticlePublisher />
     </div>
   );
 };
