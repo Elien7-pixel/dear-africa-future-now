@@ -14,6 +14,7 @@ import Partners from "./pages/Partners";
 import Contact from "./pages/Contact";
 import NotFound from "./pages/NotFound";
 import UpdateArticleImage from "./pages/UpdateArticleImage";
+import AddNarrativeSovereignty from "./pages/AddNarrativeSovereignty";
 
 const queryClient = new QueryClient();
 
@@ -33,6 +34,7 @@ const App = () => (
             <Route path="/partners" element={<Partners />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/update-image" element={<UpdateArticleImage />} />
+            <Route path="/admin/add-narrative-sovereignty" element={<AddNarrativeSovereignty />} />
           </Route>
           <Route path="*" element={<NotFound />} />
         </Routes>
