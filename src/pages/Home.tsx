@@ -18,13 +18,6 @@ const Home = () => {
   return (
     <div className="min-h-screen">
       
-      {/* Temporary Admin Button - Remove after use */}
-      <div className="fixed top-4 right-4 z-50">
-        <Button asChild className="bg-red-600 hover:bg-red-700 text-white">
-          <Link to="/update-article-image">Fix Article Image</Link>
-        </Button>
-      </div>
-
       {/* Hero Section */}
       <section className="relative bg-gradient-to-br from-african-blue/20 via-african-green/10 to-african-beige/30 py-20 overflow-hidden min-h-[80vh] flex items-center">
         <div className="absolute inset-0 bg-[url('/lovable-uploads/13af3390-8eef-4513-b440-e895683dde4f.png')] bg-cover bg-center"></div>

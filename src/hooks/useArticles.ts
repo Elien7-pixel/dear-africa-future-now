@@ -41,6 +41,11 @@ const formatImageUrl = (url: string | null, title: string = ''): string => {
     return CLIMATE_ADVOCACY_IMAGE;
   }
 
+  // Narrative Sovereignty article uses the direct public path
+  if (title.toLowerCase().includes("narrative sovereignty")) {
+    return '/lovable-uploads/2e8b0e1e-b094-4c3d-aab4-50ef1e874eb4.png';
+  }
+
   // Embracing Change article uses the new uploaded image
   if (title.toLowerCase().includes("embracing change") || 
       title.toLowerCase().includes("call to action")) {
