@@ -26,7 +26,7 @@ const EnhancedLikeButton = ({ articleId, className = "" }: EnhancedLikeButtonPro
     const fetchLikes = async () => {
       try {
         const { data, error } = await supabase
-          .from('article_likes')
+          .from('articles')
           .select('likes')
           .eq('id', articleId)
           .single();
@@ -34,7 +34,7 @@ const EnhancedLikeButton = ({ articleId, className = "" }: EnhancedLikeButtonPro
         if (error) {
           console.error('Error fetching likes:', error);
         } else if (data) {
-          setLikes(data.likes);
+          setLikes(data.likes || 0);
         }
       } catch (error) {
         console.error('Error fetching likes:', error);
@@ -53,7 +53,7 @@ const EnhancedLikeButton = ({ articleId, className = "" }: EnhancedLikeButtonPro
         {
           event: 'UPDATE',
           schema: 'public',
-          table: 'article_likes',
+          table: 'articles',
           filter: `id=eq.${articleId}`
         },
         (payload) => {
@@ -89,7 +89,7 @@ const EnhancedLikeButton = ({ articleId, className = "" }: EnhancedLikeButtonPro
     try {
       // Increment like count in database
       const { error } = await supabase
-        .from('article_likes')
+        .from('articles')
         .update({ likes: likes + 1, updated_at: new Date().toISOString() })
         .eq('id', articleId);
 
