@@ -81,6 +81,8 @@ const EnhancedLikeButton = ({ articleId, className = "" }: EnhancedLikeButtonPro
     // Update local state immediately for smooth UX
     setIsLiked(true);
     setIsAnimating(true);
+    const newLikes = likes + 1;
+    setLikes(newLikes);
     
     // Update localStorage
     likedArticles[articleId] = true;
@@ -90,13 +92,14 @@ const EnhancedLikeButton = ({ articleId, className = "" }: EnhancedLikeButtonPro
       // Increment like count in database
       const { error } = await supabase
         .from('articles')
-        .update({ likes: likes + 1, updated_at: new Date().toISOString() })
+        .update({ likes: newLikes, updated_at: new Date().toISOString() })
         .eq('id', articleId);
 
       if (error) {
         console.error('Error updating likes:', error);
         // Revert local state on error
         setIsLiked(false);
+        setLikes(likes);
         likedArticles[articleId] = false;
         localStorage.setItem('likedArticles', JSON.stringify(likedArticles));
       }
@@ -104,6 +107,7 @@ const EnhancedLikeButton = ({ articleId, className = "" }: EnhancedLikeButtonPro
       console.error('Error updating likes:', error);
       // Revert local state on error
       setIsLiked(false);
+      setLikes(likes);
       likedArticles[articleId] = false;
       localStorage.setItem('likedArticles', JSON.stringify(likedArticles));
     }
