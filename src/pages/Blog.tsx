@@ -5,9 +5,6 @@ import { Search } from 'lucide-react';
 import { useArticles } from '@/hooks/useArticles';
 import ArticleCard from '@/components/ArticleCard';
 import NewsletterSubscription from '@/components/NewsletterSubscription';
-import { PushNotificationButton } from '@/components/PushNotificationButton';
-import { sendArticleNotification } from '@/hooks/useArticleNotifications';
-import { toast } from '@/hooks/use-toast';
 
 const Blog = () => {
   const [searchTerm, setSearchTerm] = useState('');
@@ -36,33 +33,6 @@ const Blog = () => {
     return matchesSearch && matchesCategory;
   });
 
-  const handleSendTestNotification = async () => {
-    if (!articles || articles.length === 0) {
-      toast({
-        title: "No Articles",
-        description: "No articles available to send notifications for.",
-        variant: "destructive"
-      });
-      return;
-    }
-
-    try {
-      const latestArticle = articles[0]; // Articles are ordered by created_at desc
-      await sendArticleNotification(latestArticle);
-      toast({
-        title: "Notification Sent!",
-        description: `Push notification sent for: ${latestArticle.title}`
-      });
-    } catch (error) {
-      console.error('Error sending test notification:', error);
-      toast({
-        title: "Error",
-        description: "Failed to send notification. Please try again.",
-        variant: "destructive"
-      });
-    }
-  };
-
   return (
     <div className="min-h-screen" id="top">
       {/* Hero Section */}
@@ -70,19 +40,9 @@ const Blog = () => {
         <div className="container mx-auto px-4 text-center">
           <h1 className="text-4xl md:text-5xl font-bold text-african-green mb-6">Our Blog</h1>
           <div className="w-20 h-1 bg-african-orange mx-auto mb-8"></div>
-          <p className="text-xl max-w-3xl mx-auto mb-6">
+          <p className="text-xl max-w-3xl mx-auto">
             Explore articles on mental health, social equality, climate change, and inspirational stories from African communities.
           </p>
-          <div className="flex justify-center gap-4">
-            <PushNotificationButton />
-            <Button 
-              onClick={handleSendTestNotification}
-              variant="outline"
-              className="flex items-center gap-2"
-            >
-              Send Test Notification
-            </Button>
-          </div>
         </div>
       </section>
 
