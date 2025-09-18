@@ -5,6 +5,7 @@ import { Search } from 'lucide-react';
 import { useArticles } from '@/hooks/useArticles';
 import ArticleCard from '@/components/ArticleCard';
 import NewsletterSubscription from '@/components/NewsletterSubscription';
+import { PushNotificationButton } from '@/components/PushNotificationButton';
 
 const Blog = () => {
   const [searchTerm, setSearchTerm] = useState('');
@@ -40,9 +41,12 @@ const Blog = () => {
         <div className="container mx-auto px-4 text-center">
           <h1 className="text-4xl md:text-5xl font-bold text-african-green mb-6">Our Blog</h1>
           <div className="w-20 h-1 bg-african-orange mx-auto mb-8"></div>
-          <p className="text-xl max-w-3xl mx-auto">
+          <p className="text-xl max-w-3xl mx-auto mb-6">
             Explore articles on mental health, social equality, climate change, and inspirational stories from African communities.
           </p>
+          <div className="flex justify-center">
+            <PushNotificationButton />
+          </div>
         </div>
       </section>
 
@@ -122,9 +126,9 @@ const Blog = () => {
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto">
             <div className="text-center mb-8">
-              <h2 className="text-3xl font-bold mb-4 text-african-green">Subscribe to Our Newsletter</h2>
+              <h2 className="text-3xl font-bold mb-4 text-african-green">Stay Updated</h2>
               <p className="mb-6 max-w-2xl mx-auto text-gray-700">
-                Get the latest articles, resources, and updates delivered directly to your inbox.
+                Get the latest articles, resources, and updates delivered directly to your inbox or as push notifications.
               </p>
             </div>
             <div className="flex justify-center">

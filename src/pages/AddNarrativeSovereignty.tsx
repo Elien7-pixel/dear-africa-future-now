@@ -3,6 +3,7 @@ import { Button } from '@/components/ui/button';
 import { supabase } from '@/integrations/supabase/client';
 import { toast } from 'sonner';
 import { Link } from 'react-router-dom';
+import { sendArticleNotification } from '@/hooks/useArticleNotifications';
 
 const AddNarrativeSovereignty = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -51,7 +52,19 @@ const AddNarrativeSovereignty = () => {
       if (error) throw error;
 
       setCreatedId(data.id);
-      toast.success('Article created successfully');
+      
+      // Send push notification for new article
+      try {
+        await sendArticleNotification({
+          title: data.title,
+          excerpt: data.excerpt,
+          id: data.id
+        });
+        toast.success('Article created and notifications sent successfully');
+      } catch (notificationError) {
+        console.error('Failed to send push notification:', notificationError);
+        toast.success('Article created successfully (notification failed)');
+      }
     } catch (err: any) {
       console.error(err);
       toast.error(err?.message || 'Failed to create article');
