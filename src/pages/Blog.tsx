@@ -6,6 +6,8 @@ import { useArticles } from '@/hooks/useArticles';
 import ArticleCard from '@/components/ArticleCard';
 import NewsletterSubscription from '@/components/NewsletterSubscription';
 import { PushNotificationButton } from '@/components/PushNotificationButton';
+import { sendArticleNotification } from '@/hooks/useArticleNotifications';
+import { toast } from '@/hooks/use-toast';
 
 const Blog = () => {
   const [searchTerm, setSearchTerm] = useState('');
@@ -34,6 +36,33 @@ const Blog = () => {
     return matchesSearch && matchesCategory;
   });
 
+  const handleSendTestNotification = async () => {
+    if (!articles || articles.length === 0) {
+      toast({
+        title: "No Articles",
+        description: "No articles available to send notifications for.",
+        variant: "destructive"
+      });
+      return;
+    }
+
+    try {
+      const latestArticle = articles[0]; // Articles are ordered by created_at desc
+      await sendArticleNotification(latestArticle);
+      toast({
+        title: "Notification Sent!",
+        description: `Push notification sent for: ${latestArticle.title}`
+      });
+    } catch (error) {
+      console.error('Error sending test notification:', error);
+      toast({
+        title: "Error",
+        description: "Failed to send notification. Please try again.",
+        variant: "destructive"
+      });
+    }
+  };
+
   return (
     <div className="min-h-screen" id="top">
       {/* Hero Section */}
@@ -44,8 +73,15 @@ const Blog = () => {
           <p className="text-xl max-w-3xl mx-auto mb-6">
             Explore articles on mental health, social equality, climate change, and inspirational stories from African communities.
           </p>
-          <div className="flex justify-center">
+          <div className="flex justify-center gap-4">
             <PushNotificationButton />
+            <Button 
+              onClick={handleSendTestNotification}
+              variant="outline"
+              className="flex items-center gap-2"
+            >
+              Send Test Notification
+            </Button>
           </div>
         </div>
       </section>
