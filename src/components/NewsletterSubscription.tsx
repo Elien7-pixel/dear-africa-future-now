@@ -4,6 +4,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { useToast } from '@/hooks/use-toast';
 import { supabase } from '@/integrations/supabase/client';
+import { useArticles } from '@/hooks/useArticles';
 
 const VAPID_PUBLIC_KEY = 'BKlFdCKPQvU_Z9-SrdXAvNq1YjuJ-YO8wz-ZvVr-YI0mLRbyRZnH0RI3oFJqZaOgMWF6fOAFL9gW5Z9f5F6DY8g';
 
@@ -27,6 +28,7 @@ const NewsletterSubscription = () => {
   const [email, setEmail] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const { toast } = useToast();
+  const { data: articles } = useArticles();
 
   const subscribeToPushNotifications = async () => {
     if (!('serviceWorker' in navigator && 'PushManager' in window)) {
@@ -92,10 +94,28 @@ const NewsletterSubscription = () => {
         // Automatically subscribe to push notifications
         const pushSubscribed = await subscribeToPushNotifications();
         
+        // Send test notification about latest article if push notifications are subscribed
+        if (pushSubscribed && articles && articles.length > 0) {
+          try {
+            const latestArticle = articles[0];
+            await supabase.functions.invoke('send-push-notification', {
+              body: {
+                title: `Welcome! Check out our latest: ${latestArticle.title}`,
+                body: latestArticle.excerpt?.length > 100 
+                  ? latestArticle.excerpt.substring(0, 100) + '...' 
+                  : latestArticle.excerpt || 'Read our latest article!',
+                url: `/article/${latestArticle.id}`
+              }
+            });
+          } catch (error) {
+            console.error('Error sending welcome notification:', error);
+          }
+        }
+        
         toast({
           title: "Successfully subscribed!",
           description: pushSubscribed 
-            ? "Thank you for subscribing to our newsletter and push notifications!" 
+            ? "Thank you for subscribing! You should receive a welcome notification shortly." 
             : "Thank you for subscribing to our newsletter!",
         });
         setName('');
