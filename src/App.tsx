@@ -45,7 +45,7 @@ const App = () => {
               <Route path="/update-image" element={<UpdateArticleImage />} />
               <Route path="/admin/add-narrative-sovereignty" element={<AddNarrativeSovereignty />} />
               <Route path="/admin/add-narrative-sovereignty-static" element={<AddNarrativeSovereigntyStatic />} />
-              <Route path="/admin/add-bee-farmer-article" element={<AddBeeFarmerArticle />} />
+              <Route path="/admin/bee-farmer" element={<AddBeeFarmerArticle />} />
             </Route>
             <Route path="*" element={<NotFound />} />
           </Routes>

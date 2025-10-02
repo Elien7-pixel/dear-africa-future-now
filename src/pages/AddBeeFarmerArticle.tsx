@@ -5,8 +5,12 @@ import { toast } from 'sonner';
 import { sendArticleNotification } from '@/hooks/useArticleNotifications';
 
 const AddBeeFarmerArticle = () => {
-  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(true);
   const [createdId, setCreatedId] = useState<string | null>(null);
+
+  React.useEffect(() => {
+    handleInsert();
+  }, []);
 
   const handleInsert = async () => {
     setIsSubmitting(true);
