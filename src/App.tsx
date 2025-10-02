@@ -6,6 +6,8 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { useEffect } from "react";
 import { registerServiceWorker } from "@/utils/serviceWorker";
+import { supabase } from "@/integrations/supabase/client";
+import { sendArticleNotification } from "@/hooks/useArticleNotifications";
 import Layout from "./components/Layout";
 import Home from "./pages/Home";
 import About from "./pages/About";
@@ -25,6 +27,30 @@ const queryClient = new QueryClient();
 const App = () => {
   useEffect(() => {
     registerServiceWorker();
+
+    const seedArticle = async () => {
+      try {
+        const { data, error } = await supabase.functions.invoke('ensure-bee-farmer-article');
+        if (error) {
+          console.error('Seed function error:', error);
+          return;
+        }
+        if (data?.id && data?.created) {
+          await sendArticleNotification({
+            title: data.title,
+            excerpt: data.excerpt,
+            id: data.id,
+          });
+          console.log('Article ensured and notification sent');
+        } else if (data?.id) {
+          console.log('Article already existed with id:', data.id);
+        }
+      } catch (e) {
+        console.error('Failed to ensure article:', e);
+      }
+    };
+
+    seedArticle();
   }, []);
 
   return (
