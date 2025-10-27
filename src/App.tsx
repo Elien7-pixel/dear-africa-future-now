@@ -28,29 +28,39 @@ const App = () => {
   useEffect(() => {
     registerServiceWorker();
 
-    const seedArticle = async () => {
+    const seedArticles = async () => {
       try {
-        const { data, error } = await supabase.functions.invoke('ensure-bee-farmer-article');
-        if (error) {
-          console.error('Seed function error:', error);
-          return;
-        }
-        if (data?.id && data?.created) {
+        // Seed bee farmer article
+        const { data: beeData, error: beeError } = await supabase.functions.invoke('ensure-bee-farmer-article');
+        if (beeError) {
+          console.error('Bee farmer seed error:', beeError);
+        } else if (beeData?.id && beeData?.created) {
           await sendArticleNotification({
-            title: data.title,
-            excerpt: data.excerpt,
-            id: data.id,
+            title: beeData.title,
+            excerpt: beeData.excerpt,
+            id: beeData.id,
           });
-          console.log('Article ensured and notification sent');
-        } else if (data?.id) {
-          console.log('Article already existed with id:', data.id);
+          console.log('Bee farmer article ensured and notification sent');
+        }
+
+        // Seed Al Salam article
+        const { data: salamData, error: salamError } = await supabase.functions.invoke('ensure-alsalam-article');
+        if (salamError) {
+          console.error('Al Salam seed error:', salamError);
+        } else if (salamData?.id && salamData?.created) {
+          await sendArticleNotification({
+            title: salamData.title,
+            excerpt: salamData.excerpt,
+            id: salamData.id,
+          });
+          console.log('Al Salam article ensured and notification sent');
         }
       } catch (e) {
-        console.error('Failed to ensure article:', e);
+        console.error('Failed to ensure articles:', e);
       }
     };
 
-    seedArticle();
+    seedArticles();
   }, []);
 
   return (
