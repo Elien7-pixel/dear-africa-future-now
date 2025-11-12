@@ -8,3 +8,6 @@ verify_jwt = false
 
 [functions.ensure-alsalam-article]
 verify_jwt = false
+
+[functions.ensure-africa-child-article]
+verify_jwt = false

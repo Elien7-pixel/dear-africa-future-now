@@ -55,6 +55,19 @@ const App = () => {
           });
           console.log('Al Salam article ensured and notification sent');
         }
+
+        // Seed Africa Child article
+        const { data: africaData, error: africaError } = await supabase.functions.invoke('ensure-africa-child-article');
+        if (africaError) {
+          console.error('Africa Child seed error:', africaError);
+        } else if (africaData?.id && africaData?.created) {
+          await sendArticleNotification({
+            title: africaData.title,
+            excerpt: africaData.excerpt,
+            id: africaData.id,
+          });
+          console.log('Africa Child article ensured and notification sent');
+        }
       } catch (e) {
         console.error('Failed to ensure articles:', e);
       }
