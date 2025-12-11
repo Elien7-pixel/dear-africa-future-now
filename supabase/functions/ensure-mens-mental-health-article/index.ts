@@ -5,7 +5,6 @@ const corsHeaders = {
   'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type',
 };
 
-const ARTICLE_ID = 'mens-mental-health-nigeria';
 const ARTICLE_TITLE = 'Navigating Emotional Storms: Men, Mental Health, and Climate Challenges in Nigeria';
 const ARTICLE_EXCERPT = 'A broadcast journalist explores the intersection of men\'s mental health and climate change in Nigeria, advocating for breaking harmful cultural expectations and building support systems for vulnerable men.';
 const ARTICLE_CATEGORY = 'Mental Health & Climate';
@@ -52,11 +51,11 @@ Deno.serve(async (req) => {
 
     console.log('Checking if mens mental health article exists...');
 
-    // Check if the article already exists
+    // Check if the article already exists by title
     const { data: existing, error: selectError } = await supabase
       .from('articles')
       .select('id')
-      .eq('id', ARTICLE_ID)
+      .eq('title', ARTICLE_TITLE)
       .maybeSingle();
 
     if (selectError) {
@@ -65,20 +64,19 @@ Deno.serve(async (req) => {
     }
 
     if (existing) {
-      console.log('Mens mental health article already exists');
+      console.log('Mens mental health article already exists with id:', existing.id);
       return new Response(
-        JSON.stringify({ id: ARTICLE_ID, created: false, message: 'Article already exists' }),
+        JSON.stringify({ id: existing.id, created: false, message: 'Article already exists' }),
         { headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
       );
     }
 
     console.log('Inserting mens mental health article...');
 
-    // Insert the article
+    // Insert the article - let Supabase generate the UUID
     const { data: inserted, error: insertError } = await supabase
       .from('articles')
       .insert({
-        id: ARTICLE_ID,
         title: ARTICLE_TITLE,
         excerpt: ARTICLE_EXCERPT,
         content: ARTICLE_CONTENT,
@@ -94,7 +92,7 @@ Deno.serve(async (req) => {
       throw insertError;
     }
 
-    console.log('Mens mental health article created successfully');
+    console.log('Mens mental health article created successfully with id:', inserted.id);
 
     return new Response(
       JSON.stringify({ 
