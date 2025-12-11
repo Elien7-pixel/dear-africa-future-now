@@ -68,6 +68,19 @@ const App = () => {
           });
           console.log('Africa Child article ensured and notification sent');
         }
+
+        // Seed Men's Mental Health article
+        const { data: mentalHealthData, error: mentalHealthError } = await supabase.functions.invoke('ensure-mens-mental-health-article');
+        if (mentalHealthError) {
+          console.error('Men\'s Mental Health seed error:', mentalHealthError);
+        } else if (mentalHealthData?.id && mentalHealthData?.created) {
+          await sendArticleNotification({
+            title: mentalHealthData.title,
+            excerpt: mentalHealthData.excerpt,
+            id: mentalHealthData.id,
+          });
+          console.log('Men\'s Mental Health article ensured and notification sent');
+        }
       } catch (e) {
         console.error('Failed to ensure articles:', e);
       }
