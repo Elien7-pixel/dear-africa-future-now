@@ -172,9 +172,10 @@ const Article = () => {
             </div>
             
             <div className="prose prose-lg max-w-none">
-              <div className="text-gray-700 leading-relaxed whitespace-pre-wrap">
-                {article.content}
-              </div>
+              <div 
+                className="text-foreground/80 leading-relaxed"
+                dangerouslySetInnerHTML={{ __html: article.content }}
+              />
             </div>
 
             <CommentSection articleId={article.id} />
