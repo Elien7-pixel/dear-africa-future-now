@@ -73,13 +73,26 @@ const App = () => {
         const { data: mentalHealthData, error: mentalHealthError } = await supabase.functions.invoke('ensure-mens-mental-health-article');
         if (mentalHealthError) {
           console.error('Men\'s Mental Health seed error:', mentalHealthError);
-        } else if (mentalHealthData?.id && mentalHealthData?.created) {
+        } else if (mentalHealthData?.articleId && mentalHealthData?.created) {
           await sendArticleNotification({
             title: mentalHealthData.title,
-            excerpt: mentalHealthData.excerpt,
-            id: mentalHealthData.id,
+            excerpt: "Climate change impacts on men's mental health in Nigeria",
+            id: mentalHealthData.articleId,
           });
           console.log('Men\'s Mental Health article ensured and notification sent');
+        }
+
+        // Seed Women Gardening article
+        const { data: gardeningData, error: gardeningError } = await supabase.functions.invoke('ensure-women-gardening-article');
+        if (gardeningError) {
+          console.error('Women Gardening seed error:', gardeningError);
+        } else if (gardeningData?.articleId && gardeningData?.created) {
+          await sendArticleNotification({
+            title: gardeningData.title,
+            excerpt: "Women leading community gardening initiatives in Malawi",
+            id: gardeningData.articleId,
+          });
+          console.log('Women Gardening article ensured and notification sent');
         }
       } catch (e) {
         console.error('Failed to ensure articles:', e);
