@@ -17,3 +17,6 @@ verify_jwt = false
 
 [functions.ensure-women-gardening-article]
 verify_jwt = false
+
+[functions.ensure-hesed-water-article]
+verify_jwt = false

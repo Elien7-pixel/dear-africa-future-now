@@ -94,6 +94,19 @@ const App = () => {
           });
           console.log('Women Gardening article ensured and notification sent');
         }
+
+        // Seed Hesed Water article
+        const { data: hesedData, error: hesedError } = await supabase.functions.invoke('ensure-hesed-water-article');
+        if (hesedError) {
+          console.error('Hesed Water seed error:', hesedError);
+        } else if (hesedData?.articleId && hesedData?.created) {
+          await sendArticleNotification({
+            title: hesedData.title,
+            excerpt: "Empowering African communities through water sustainability",
+            id: hesedData.articleId,
+          });
+          console.log('Hesed Water article ensured and notification sent');
+        }
       } catch (e) {
         console.error('Failed to ensure articles:', e);
       }
