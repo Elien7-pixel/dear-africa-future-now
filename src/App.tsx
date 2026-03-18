@@ -107,6 +107,19 @@ const App = () => {
           });
           console.log('Hesed Water article ensured and notification sent');
         }
+
+        // Seed Marshmallow Rainbow article
+        const { data: marshmallowData, error: marshmallowError } = await supabase.functions.invoke('ensure-marshmallow-rainbow-article');
+        if (marshmallowError) {
+          console.error('Marshmallow Rainbow seed error:', marshmallowError);
+        } else if (marshmallowData?.id && marshmallowData?.created) {
+          await sendArticleNotification({
+            title: marshmallowData.title,
+            excerpt: marshmallowData.excerpt,
+            id: marshmallowData.id,
+          });
+          console.log('Marshmallow Rainbow article ensured and notification sent');
+        }
       } catch (e) {
         console.error('Failed to ensure articles:', e);
       }
