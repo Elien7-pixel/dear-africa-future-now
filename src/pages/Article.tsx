@@ -171,9 +171,9 @@ const Article = () => {
               />
             </div>
             
-            <div className="prose prose-lg max-w-none">
+            <div className="prose prose-lg max-w-none prose-p:mb-4 prose-p:mt-0 prose-headings:mt-8 prose-headings:mb-4 prose-ul:my-4 prose-li:my-1">
               <div 
-                className="text-foreground/80 leading-relaxed"
+                className="text-foreground/80 leading-relaxed [&>p]:mb-5 [&>ul]:mb-5 [&>ul]:ml-6 [&>ul>li]:mb-2 [&>hr]:my-8"
                 dangerouslySetInnerHTML={{ __html: article.content }}
               />
             </div>
