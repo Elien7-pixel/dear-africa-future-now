@@ -143,6 +143,46 @@
   .fade-in-element.visible {
     @apply opacity-100 translate-y-0;
   }
+
+  .article-wrapper {
+    @apply text-foreground/85 leading-relaxed;
+  }
+
+  .article-wrapper p {
+    @apply mt-0 mb-5 text-foreground/85 leading-8;
+  }
+
+  .article-wrapper ul {
+    @apply my-5 ml-6 list-disc;
+  }
+
+  .article-wrapper ol {
+    @apply my-5 ml-6 list-decimal;
+  }
+
+  .article-wrapper li {
+    @apply mb-2 text-foreground/85 leading-8;
+  }
+
+  .article-wrapper hr {
+    @apply my-8 border-border;
+  }
+
+  .article-wrapper .article-subtitle {
+    @apply mb-2 text-base italic text-muted-foreground leading-7;
+  }
+
+  .article-wrapper .article-byline {
+    @apply mb-8 text-sm uppercase tracking-wide text-muted-foreground;
+  }
+
+  .article-wrapper .article-closing {
+    @apply mt-8 border-l-4 border-primary pl-4 text-lg font-semibold text-foreground;
+  }
+
+  .article-wrapper .article-bio {
+    @apply mt-6 rounded-lg bg-muted p-4 text-sm leading-7 text-muted-foreground;
+  }
 }
 
 @keyframes fadeIn {
