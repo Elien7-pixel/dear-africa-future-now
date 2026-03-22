@@ -8,6 +8,7 @@ import CommentSection from '@/components/CommentSection';
 import { format } from 'date-fns';
 import EnhancedShareButton from '@/components/EnhancedShareButton';
 import EnhancedLikeButton from '@/components/EnhancedLikeButton';
+import ArticleRenderer from '@/components/ArticleRenderer';
 
 const Article = () => {
   const { id } = useParams<{ id: string }>();
@@ -171,11 +172,8 @@ const Article = () => {
               />
             </div>
             
-            <div className="prose prose-lg max-w-none prose-p:mb-4 prose-p:mt-0 prose-headings:mt-8 prose-headings:mb-4 prose-ul:my-4 prose-li:my-1">
-              <div 
-                className="text-foreground/80 leading-relaxed [&>p]:mb-5 [&>ul]:mb-5 [&>ul]:ml-6 [&>ul>li]:mb-2 [&>hr]:my-8"
-                dangerouslySetInnerHTML={{ __html: article.content }}
-              />
+            <div className="prose prose-lg max-w-none prose-headings:mt-8 prose-headings:mb-4">
+              <ArticleRenderer htmlContent={article.content} />
             </div>
 
             <CommentSection articleId={article.id} />
