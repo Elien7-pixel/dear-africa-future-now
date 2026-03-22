@@ -23,17 +23,7 @@ serve(async (req) => {
       .eq('title', 'From Township Stages to Community Systems: Building Marshmallow Rainbow')
       .single()
 
-    if (existing) {
-      return new Response(
-        JSON.stringify({ id: existing.id, created: false }),
-        { headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
-      )
-    }
-
-    const articleData = {
-      title: 'From Township Stages to Community Systems: Building Marshmallow Rainbow',
-      excerpt: 'How a journey through sport, theatre, youth media and entrepreneurship in Diepsloot inspired a community-led ecosystem for youth development and sustainability.',
-      content: `<p><em>How a journey through sport, theatre, youth media and entrepreneurship in Diepsloot inspired a community-led ecosystem for youth development and sustainability.</em></p>
+    const articleContent = `<p><em>How a journey through sport, theatre, youth media and entrepreneurship in Diepsloot inspired a community-led ecosystem for youth development and sustainability.</em></p>
 
 <p><strong>By Felicia Khumalo</strong></p>
 
@@ -115,7 +105,29 @@ serve(async (req) => {
 
 <hr />
 
-<p><strong>Author Bio:</strong> Felicia Khumalo is the founder of Marshmallow Rainbow Pty Ltd and Marshmallow Rainbow Societal NPC, a community-driven social enterprise focused on youth development, environmental sustainability, and creative industries in Diepsloot, Johannesburg. Her work bridges arts, entrepreneurship, and community-led solutions aimed at expanding opportunities for young people and underserved communities.</p>`,
+<p><strong>Author Bio:</strong> Felicia Khumalo is the founder of Marshmallow Rainbow Pty Ltd and Marshmallow Rainbow Societal NPC, a community-driven social enterprise focused on youth development, environmental sustainability, and creative industries in Diepsloot, Johannesburg. Her work bridges arts, entrepreneurship, and community-led solutions aimed at expanding opportunities for young people and underserved communities.</p>`;
+
+    if (existing) {
+      // Update existing article content to ensure proper formatting
+      const { error: updateError } = await supabaseClient
+        .from('articles')
+        .update({ content: articleContent })
+        .eq('id', existing.id)
+
+      if (updateError) {
+        console.error('Error updating article:', updateError)
+      }
+
+      return new Response(
+        JSON.stringify({ id: existing.id, created: false }),
+        { headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+      )
+    }
+
+    const articleData = {
+      title: 'From Township Stages to Community Systems: Building Marshmallow Rainbow',
+      excerpt: 'How a journey through sport, theatre, youth media and entrepreneurship in Diepsloot inspired a community-led ecosystem for youth development and sustainability.',
+      content: articleContent,
       category: 'Inspirational',
       date: new Date().toISOString().split('T')[0],
       image_url: '/lovable-uploads/marshmallow-rainbow-diepsloot.jpg'
