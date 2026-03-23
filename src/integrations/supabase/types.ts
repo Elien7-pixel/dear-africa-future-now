@@ -168,7 +168,10 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      normalize_article_plain_text: {
+        Args: { raw_content: string }
+        Returns: string
+      }
     }
     Enums: {
       [_ in never]: never
