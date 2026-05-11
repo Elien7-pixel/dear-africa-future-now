@@ -120,6 +120,19 @@ const App = () => {
           });
           console.log('Marshmallow Rainbow article ensured and notification sent');
         }
+
+        // Seed Just Energy Transition article
+        const { data: jetData, error: jetError } = await supabase.functions.invoke('ensure-just-energy-transition-article');
+        if (jetError) {
+          console.error('Just Energy Transition seed error:', jetError);
+        } else if (jetData?.id && jetData?.created) {
+          await sendArticleNotification({
+            title: jetData.title,
+            excerpt: jetData.excerpt,
+            id: jetData.id,
+          });
+          console.log('Just Energy Transition article ensured and notification sent');
+        }
       } catch (e) {
         console.error('Failed to ensure articles:', e);
       }
